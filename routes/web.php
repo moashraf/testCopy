@@ -248,6 +248,7 @@ Route::name('school_route.')->group(function () {
 
                     // Dashboard
                     Route::get('/dashboard', [DashboardCont::class, 'dashboard'])->name('dashboard');
+                    Route::get('/Committee_and_team_meetings', [DashboardCont::class, 'Committee_and_team_meetings'])->name('Committee_and_team_meetings');
                     //ajax for calander
                     Route::get('/calander_tasks_ajax/{month}/{year}', [DashboardCont::class, 'calander_tasks_ajax'])->name('calander_tasks_ajax');
                }
@@ -269,7 +270,7 @@ Route::name('school_route.')->group(function () {
 
 
 // -----------------------------------------
-//for Tripo system 
+//for Tripo system
 //multi languages
 Route::group(
      [
