@@ -59,61 +59,86 @@
 
         <div class="row">
 
+            <div class="row main_cot_bg p-2 align-items-center mb-4" style=" font-size: .9rem;  background-color: #0A3A81;">
+
+                <div class="col-12 col-xl-12">
+                    <h5 class="  text-s2" style="     margin-top: 0.5rem;   color: white;">
+                        إجتماعات اللجان والفرق
+                    </h5>
+
+                </div>
+
+            </div>
+
+
+
             <div class="col-12 mb-3 mb-md-0">
                 <div class="main_cot_bg p-3 py-3 h-100">
-                    <h5 class="fw-bold text-s2">الوصول السريع</h5>
-                    <p class="text-gray-300 text-xs">يمكنك الذهاب مباشرة للمنصات التي تهمك</p>
+
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active tabcontent_active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+                                    role="tab" aria-controls="pills-home" aria-selected="true">
+                                إجتماعات اللجان
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button"
+                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                إجتماعات الفرق
+                            </button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <div style="    margin-top: 10%;" class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Accordion Item #1
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Accordion Item #2
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Accordion Item #3
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">3...</div>
+                     </div>
 
 
-                    <div class="row">
-                        <div class="col-12 col-md-3 mb-3 mb-md-0">
-                            <div
-                                class="d-flex justify-content-between border_radius_10 border-gray-600 align-items-center p-2">
-                                <img class="me-2" alt="school" src="{{ URL::asset('img/external_systems/system_1.png') }}">
-                                <a href="#" target="__blank">
-                                    <button type="button" class="main_btn border_radius_5 text-xxs px-2 py-1 mb-0" style="height: 40px;font-size: 12px;
-                                "><i class="fas fa-share-square me-1"></i>
-                                        الذهاب الآن</button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-3 mb-md-0">
-                            <div
-                                class="d-flex justify-content-between border_radius_10 border-gray-600 align-items-center p-2">
-                                <img class="me-2" width="60" alt="school"
-                                     src="{{ URL::asset('img/external_systems/system_2.png') }}">
-                                <a href="#" target="__blank">
-                                    <button type="button" class="main_btn border_radius_5 text-xxs px-2 py-1 mb-0" style="height: 40px;font-size: 12px;
-                                "><i class="fas fa-share-square me-1"></i>
-                                        الذهاب الآن</button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-3 mb-md-0">
-                            <div
-                                class="d-flex justify-content-between border_radius_10 border-gray-600 align-items-center p-2">
-                                <img class="me-2" width="95" alt="school"
-                                     src="{{ URL::asset('img/external_systems/system_3.png') }}">
-                                <a href="#" target="__blank">
-                                    <button type="button" class="main_btn border_radius_5 text-xxs px-2 py-1 mb-0" style="height: 40px;font-size: 12px;
-                                "><i class="fas fa-share-square me-1"></i>
-                                        الذهاب الآن</button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div
-                                class="d-flex justify-content-between border_radius_10 border-gray-600 align-items-center p-2">
-                                <img class="me-2" alt="school" width="95"
-                                     src="{{ URL::asset('img/external_systems/system_4.png') }}">
-                                <a href="#" target="__blank">
-                                    <button type="button" class="main_btn border_radius_5 text-xxs px-2 py-1 mb-0" style="height: 40px;font-size: 12px;
-                                "><i class="fas fa-share-square me-1"></i>
-                                        الذهاب الآن</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
+
 
                 </div>
             </div>
