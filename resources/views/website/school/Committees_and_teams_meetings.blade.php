@@ -121,10 +121,10 @@
                                                     </thead>
 
                                                     <tbody id="admin_table_cont_tr">
-                                                    @foreach ($Committees_and_teams as $key => $item)
+                                                    @foreach ($item->get_meetings as $key_val => $item_val)
                                                     <tr id="row_cod11">
                                                         <td class="">
-                                                            1111
+                                                            {{ $item_val->title   }}
                                                         </td>
                                                         <td class="">
                                                             222

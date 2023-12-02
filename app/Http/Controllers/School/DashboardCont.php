@@ -183,8 +183,8 @@ class DashboardCont extends Controller
 
         $current_school = Auth::guard('school')->user()->current_working_school_id;
         $school = School::find($current_school);
-        $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->get();
-        Carbon::setLocale('ar');
+        $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->with('get_meetings')->get();
+         Carbon::setLocale('ar');
         //Carbon::now()->translatedFormat('l j F Y H:i:s');
         $today_date_ar = Carbon::now()->translatedFormat('j F Y');
         https: //api.aladhan.com/v1/gToH/10-10-2002
