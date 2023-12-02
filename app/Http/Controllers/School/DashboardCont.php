@@ -164,21 +164,6 @@ class DashboardCont extends Controller
         return view('website.school.dashboard', compact('current_school', 'school', 'today_date_ar', 'hijri_date', 'sliders', 'video_tutorial'));
     }
 
-    public function new_meeting()
-    {
-        $current_school = Auth::guard('school')->user()->current_working_school_id;
-
-        $school = School::find($current_school);
-
-
-        $sliders = Slider::where('type', 1)->get();
-
-        // video tutorial
-        $video_tutorial = Video_tutorial::where('type', 2)->first();
-
-        return view('website.school.new_meeting',
-            compact('current_school', 'school', 'sliders', 'video_tutorial'));
-    }
     public function meeting_store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $this->validate($request, [
@@ -225,20 +210,6 @@ class DashboardCont extends Controller
         ]);
 
         $form = meeting_agenda::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
-        ]);
-
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
-    }
-    public function Committees_and_teams_meetings_store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $this->validate($request, [
-            'title' => 'required',
-            'school_id' => 'required',
-        ]);
-
-        $form = Committees_and_teams::create([
             'meeting_id'=>$request->input('meeting_id'),
             'Item'=>$request->input('Item'),
         ]);

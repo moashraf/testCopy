@@ -55,7 +55,7 @@
                 إنشاء اجتماع اللجنة الإدارية
             </div>
             <div class="card-body custom-card-body">
-                <form action="{{ route('school_route.meeting_store') }}" method="POST" enctype="multipart/form-data"> class="custom-form">
+                <form action="{{ route('school.Committees_and_teams_meetings.store') }}" method="POST" enctype="multipart/form-data"> class="custom-form">
                     @csrf <!-- CSRF Token for Laravel protection -->
 
                     <div class="row form-group">
