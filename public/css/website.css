@@ -5590,5 +5590,15 @@ body.sidebar-toggled footer.sticky-footer {
 .accordion-button:not(.collapsed), .accordion-body {     background-color: #e9e9e9; }
 
 .accordion-button:focus{  box-shadow: none; }
+.accordion-button{  background-color: #e9e9e9; }
 .table_title_color{background:#eab977!important}
 .add_border_radius{border-radius: 7px!important;}
+.no_arrows_data_to_show >.accordion-button::after{    width: 0!important;}
+
+.background_button_body{background-color: #e9e9e9; }
+.no-margin-left-right{margin-left: 0;  margin-right: 0;}
+.no-padding-left-right{padding-left: 0!important; padding-right: 0!important;}
+@media only screen and (max-width: 600px) {
+    .no_show_on_map {     display: none; }
+}
+

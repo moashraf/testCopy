@@ -96,13 +96,38 @@
                             <div style="    margin-top: 10%;" class="accordion" id="accordionExample">
                                 @foreach ($Committees_and_teams as $key => $item)
                                  @if($item->classification ==1 )
-                                <div class="accordion-item">
+                                <div class="accordion-item" style=" margin-bottom: 35px; ">
+
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
-                                                aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
-                                            {{ $item->title   }}
-                                        </button>
+
+                            <div class="row background_button_body no-margin-left-right ">
+                                <div class="col-8 no_arrows_data_to_show ">
+                                    <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
+                                            aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
+                                        {{ $item->title   }}
+                                    </button>
+                                </div>
+                                <div class="col-2   ">
+                                    <div class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs" style="  margin-top: 5px; "
+                                         data-bs-toggle="modal" data-bs-target="#add_new_administrator"> <i class="fas fa-plus"></i>
+                                        <span class="no_show_on_map">
+                                        انشاء اجتماع جديد
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
+                                            aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
+
+                                    </button>
+                                </div>
+                            </div>
+
+
+
                                     </h2>
+
+
                                     <div id="collapse_{{$item->id}}" class="accordion-collapse collapse  @if($key ==0 )  show @endif  "
                                          data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
@@ -184,7 +209,7 @@
                                                                             <!-- Modal content -->
                                                                             <div class="modal-body px-4">
                                                                                 <div class="modal-body delete-conf-input text-center py-0">
-                                                                                    <p class="mb-0">هل انت متاكد من حذف الاداري</p>
+                                                                                    <p class="mb-0">هل انت متاكد من حذف  الاجتماع</p>
                                                                                     <br>
                                                                                     <input type="hidden" name="item_id"
                                                                                            value="cod11">
@@ -317,7 +342,7 @@
                                                                                         <!-- Modal content -->
                                                                                         <div class="modal-body px-4">
                                                                                             <div class="modal-body delete-conf-input text-center py-0">
-                                                                                                <p class="mb-0">هل انت متاكد من حذف الاداري</p>
+                                                                                                <p class="mb-0">هل انت متاكد من حذف  الاجتماع</p>
                                                                                                 <br>
                                                                                                 <input type="hidden" name="item_id"
                                                                                                        value="cod11">
