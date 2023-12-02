@@ -264,6 +264,7 @@ Route::name('school_route.')->group(function () {
 
      // send email form
      Route::post('send_email_from', [HomepageController::class, 'send_email_from'])->name('send_email_from')->middleware("throttle:10,2");
+     Route::post('meeting_store', [DashboardCont::class, 'meeting_store'])->name('meeting_store');;
 
      // articales
      Route::get('articles', [HomepageController::class, 'articles'])->name('articles');

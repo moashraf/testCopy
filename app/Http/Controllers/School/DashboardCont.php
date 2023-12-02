@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
+use App\Models\School\Meetings\Meetings;
 use App\Models\Basic\Video_tutorial;
 use App\Models\Branch\Slider;
 use App\Models\School\Management\Edu_department;
@@ -176,6 +177,30 @@ class DashboardCont extends Controller
         return view('website.school.new_meeting',
             compact('current_school', 'school', 'sliders', 'video_tutorial'));
     }
+    public function meeting_store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $this->validate($request, [
+            'committees_and_teams_id' => 'required',
+            'status' => 'required',
+        ]);
+
+        $form = Meetings::create([
+            'committees_and_teams_id'=>$request->input('committees_and_teams_id'),
+            'Number_of_attendees' => $request->input('number_of_attendees'),
+            'Meeting_end_date' => $request->input('Meeting_end_date'),
+            'Target_group' => $request->input('Target_group'),
+            'status' => $request->input('status'),
+            'location' => $request->input('location'),
+            'start_date' => $request->input('start_date'),
+            'start_time' => $request->input('start_time'),
+            'type' => $request->input('type'),
+            'end_date' => $request->input('end_date'),
+            'end_time' => $request->input('end_time'),
+        ]);
+
+        return redirect()->back()->with('success', 'Your form has been sent successfully');
+    }
+
 
     public function Committees_and_teams_meetings()
     {
