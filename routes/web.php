@@ -265,6 +265,9 @@ Route::name('school_route.')->group(function () {
      // send email form
      Route::post('send_email_from', [HomepageController::class, 'send_email_from'])->name('send_email_from')->middleware("throttle:10,2");
      Route::post('meeting_store', [DashboardCont::class, 'meeting_store'])->name('meeting_store');;
+     Route::post('meeting_recommendations_store', [DashboardCont::class, 'meeting_recommendations_store'])->name('meeting_recommendations_store');;
+     Route::post('meeting_agenda_store', [DashboardCont::class, 'meeting_agenda_store'])->name('meeting_agenda_store');;
+     Route::post('Committees_and_teams_meetings_store', [DashboardCont::class, 'Committees_and_teams_meetings_store'])->name('Committees_and_teams_meetings_store');;
 
      // articales
      Route::get('articles', [HomepageController::class, 'articles'])->name('articles');

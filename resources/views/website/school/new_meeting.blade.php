@@ -69,13 +69,11 @@
                     </div>
                     <div class="row form-group">
                         <label for="date" class="col-md-3 form-label">تاريخ الاجتماع:</label>
-                        <input type="date" id="date" name="committee" class="col-md-3 form-control">
+                        <input type="date" id="date" name="start_date" class="col-md-3 form-control">
                     </div>
                     <div class="row form-group">
                         <label for="time" class="form-label col-md-3">موعد الاجتماع:</label>
-                        <input type="time" id="time" name="time" class="col-md-3 form-control">
-                        <input type="hidden" id="status" name="status" value="0" class="col-md-3 form-control">
-
+                        <input type="time" id="time" name="start_time" class="col-md-3 form-control">
                     </div>
                     <div class="row form-group">
                         <label for="time" class="form-label col-md-3">مكان  الاجتماع:</label>
