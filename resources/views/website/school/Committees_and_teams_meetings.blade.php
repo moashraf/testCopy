@@ -149,7 +149,7 @@
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                                      aria-labelledby="dropdownMenuLink">
-                                                                    <a class="dropdown-item text-green update_admin" href="#"
+                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"
                                                                        data-code="cod11" data-name="rr"
                                                                        data-identification_number="ff"
                                                                        data-phone_number="asdf"
@@ -192,9 +192,9 @@
 
                                                                             <div class="modal-footer">
                                                                                 <div class="right-side">
-                                                                                    <button type="button" data-code="cod11"
+                                                                                    <a type="button" data-code="cod11" href="{{url('/school/meetings/'.$item_val->id .'/destroy')}}"
                                                                                             class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
-                                                                                    </button>
+                                                                                    </a>
                                                                                 </div>
                                                                                 <div class="divider"></div>
                                                                                 <div class="left-side">

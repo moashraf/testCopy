@@ -89,11 +89,23 @@ class meeting extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(int $id)
     {
-        //
+        $current_school = Auth::guard('school')->user()->current_working_school_id;
+
+        $school = School::find($current_school);
+
+
+        $sliders = Slider::where('type', 1)->get();
+        $item_val = meetings::find($id);
+
+        // video tutorial
+        $video_tutorial = Video_tutorial::where('type', 2)->first();
+
+        return view('website.school.new_meeting',
+            compact('current_school', 'school','item_val', 'sliders', 'video_tutorial'));
     }
 
     /**
