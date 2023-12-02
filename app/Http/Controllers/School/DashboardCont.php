@@ -4,6 +4,8 @@ namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
 use App\Models\School\Meetings\Meetings;
+use App\Models\School\Meetings\meeting_recommendations;
+use App\Models\School\Meetings\meeting_agenda;
 use App\Models\Basic\Video_tutorial;
 use App\Models\Branch\Slider;
 use App\Models\School\Management\Edu_department;
@@ -181,7 +183,6 @@ class DashboardCont extends Controller
     {
         $this->validate($request, [
             'committees_and_teams_id' => 'required',
-            'status' => 'required',
         ]);
 
         $form = Meetings::create([
@@ -196,6 +197,50 @@ class DashboardCont extends Controller
             'type' => $request->input('type'),
             'end_date' => $request->input('end_date'),
             'end_time' => $request->input('end_time'),
+        ]);
+
+        return redirect()->back()->with('success', 'Your form has been sent successfully');
+    }
+    public function meeting_recommendations_store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $this->validate($request, [
+            'meeting_id' => 'required',
+        ]);
+
+        $form = meeting_recommendations::create([
+            'meeting_id'=>$request->input('meeting_id'),
+            'Item'=>$request->input('Item'),
+            'status'=>$request->input('status'),
+            'reason'=>$request->input('reason'),
+
+        ]);
+
+        return redirect()->back()->with('success', 'Your form has been sent successfully');
+    }
+    public function meeting_agenda_store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $this->validate($request, [
+            'meeting_id' => 'required',
+            'Item' => 'required',
+        ]);
+
+        $form = meeting_agenda::create([
+            'meeting_id'=>$request->input('meeting_id'),
+            'Item'=>$request->input('Item'),
+        ]);
+
+        return redirect()->back()->with('success', 'Your form has been sent successfully');
+    }
+    public function Committees_and_teams_meetings_store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'school_id' => 'required',
+        ]);
+
+        $form = Committees_and_teams::create([
+            'meeting_id'=>$request->input('meeting_id'),
+            'Item'=>$request->input('Item'),
         ]);
 
         return redirect()->back()->with('success', 'Your form has been sent successfully');
