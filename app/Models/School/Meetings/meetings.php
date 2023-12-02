@@ -16,7 +16,6 @@ class meetings extends Model
         'id',
         'committees_and_teams_id',
         'Number_of_attendees',
-        'Meeting_end_date',
         'Target_group',
         'Semester',
         'status',
@@ -27,6 +26,7 @@ class meetings extends Model
         'type',
         'end_date',
         'end_time',
+        'title',
     ];
 
     public $timestamps = true;

@@ -99,7 +99,7 @@
                                     <h2 class="accordion-header">
                                         <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
                                                 aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
-                                            Accordion Item #1
+                                            {{ $item->title   }}
                                         </button>
                                     </h2>
                                     <div id="collapse_{{$item->id}}" class="accordion-collapse collapse  @if($key ==0 )  show @endif  "
@@ -127,19 +127,19 @@
                                                             {{ $item_val->title   }}
                                                         </td>
                                                         <td class="">
-                                                            222
+                                                            {{ $item_val->start_date   }}
                                                         </td>
                                                         <td class="">
-                                                            333
+                                                            {{ $item_val->type   }}
                                                         </td>
                                                         <td class="">
-                                                            444
+                                                            {{ $item_val->Semester   }}
                                                         </td>
                                                         <td class="">
-                                                            555
+                                                            {{ $item_val->status   }}
                                                         </td>
                                                         <td class="">
-                                                            6666
+                                                            {{ $item_val->created_at   }}
                                                         </td>
                                                         <td>
                                                             <div class="dropdown no-arrow">
