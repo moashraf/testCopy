@@ -253,7 +253,6 @@ Route::name('school_route.')->group(function () {
 
                    Route::get('/new_meeting', [DashboardCont::class, 'new_meeting'])->name('new_meeting');
 
-                   Route::get('/Committees_and_teams_meetings', [DashboardCont::class, 'Committees_and_teams_meetings'])->name('Committees_and_teams_meetings');
                     //ajax for calander
                     Route::get('/calander_tasks_ajax/{month}/{year}', [DashboardCont::class, 'calander_tasks_ajax'])->name('calander_tasks_ajax');
                }
