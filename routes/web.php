@@ -104,6 +104,9 @@ use App\Http\Controllers\School\TripWebController;
 use App\Http\Controllers\School\AirlineWebController;
 use App\Http\Controllers\School\DashboardCont;
 use App\Http\Controllers\CommitteesAndTeamsMeetingsController;
+use App\Http\Controllers\meetingRecommendations;
+use App\Http\Controllers\meetingAgenda;
+use App\Http\Controllers\meeting;
 use App\Http\Controllers\School\RoadmapCont;
 use App\Http\Controllers\School\Teacher\School_jobsCont;
 use App\Http\Controllers\School\Teacher\Teacher_specialityCont;
@@ -244,6 +247,9 @@ Route::name('school_route.')->group(function () {
                     Route::get('/choose_school', [DashboardCont::class, 'choose_school'])->name('choose_school');
                     Route::post('/choose_school_start_store', [DashboardCont::class, 'choose_school_start_store'])->name('choose_school_start_store');
                     Route::resource('/Committees_and_teams_meetings',CommitteesAndTeamsMeetingsController::class);
+                    Route::resource('/meeting_recommendations',meetingRecommendations::class);
+                    Route::resource('/meeting_agenda',meetingAgenda::class);
+                    Route::resource('/meetings',meeting::class);
 
                     // Change school
                     Route::post('/change_school_sidebar', [DashboardCont::class, 'change_school_sidebar'])->name('change_school_sidebar');
@@ -265,9 +271,6 @@ Route::name('school_route.')->group(function () {
 
      // send email form
      Route::post('send_email_from', [HomepageController::class, 'send_email_from'])->name('send_email_from')->middleware("throttle:10,2");
-     Route::post('meeting_store', [DashboardCont::class, 'meeting_store'])->name('meeting_store');;
-     Route::post('meeting_recommendations_store', [DashboardCont::class, 'meeting_recommendations_store'])->name('meeting_recommendations_store');;
-     Route::post('meeting_agenda_store', [DashboardCont::class, 'meeting_agenda_store'])->name('meeting_agenda_store');;
      // articales
      Route::get('articles', [HomepageController::class, 'articles'])->name('articles');
      Route::get('article/{slug}', [HomepageController::class, 'article_show'])->name('article_show');

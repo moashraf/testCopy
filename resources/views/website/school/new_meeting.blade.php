@@ -55,8 +55,7 @@
                 إنشاء اجتماع اللجنة الإدارية
             </div>
             <div class="card-body custom-card-body">
-                <form action="{{ route('school.Committees_and_teams_meetings.store') }}" method="POST" enctype="multipart/form-data"> class="custom-form">
-                <form action="http://127.0.0.1:8000/school/Committees_and_teams_meetings" method="POST" enctype="multipart/form-data" class="custom-form">
+                <form action="http://127.0.0.1:8000/school/meetings" method="POST" enctype="multipart/form-data" class="custom-form">
                     @csrf <!-- CSRF Token for Laravel protection -->
 
                     <div class="row form-group">
@@ -69,9 +68,11 @@
                         </select>
                     </div>
                     <div class="row form-group">
-                        <label for="date" class="col-md-3 form-label">تاريخ الاجتماع:</label>
-                        <input type="date" id="date" name="start_date" class="col-md-3 form-control">
+                        <label for="date" class="col-md-3 form-label">عنوان  الاجتماع:</label>
+                        <input type="text" id="title" name="title" value="toz fe khaled yousef" class="col-md-3 form-control">
+                        <input type="text" id="status" name="status" value="1" class="col-md-3 form-control">
                     </div>
+
                     <div class="row form-group">
                         <label for="time" class="form-label col-md-3">موعد الاجتماع:</label>
                         <input type="time" id="time" name="start_time" class="col-md-3 form-control">

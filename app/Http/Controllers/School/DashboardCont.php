@@ -164,58 +164,7 @@ class DashboardCont extends Controller
         return view('website.school.dashboard', compact('current_school', 'school', 'today_date_ar', 'hijri_date', 'sliders', 'video_tutorial'));
     }
 
-    public function meeting_store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $this->validate($request, [
-            'committees_and_teams_id' => 'required',
-        ]);
 
-        $form = Meetings::create([
-            'committees_and_teams_id'=>$request->input('committees_and_teams_id'),
-            'Number_of_attendees' => $request->input('number_of_attendees'),
-            'Meeting_end_date' => $request->input('Meeting_end_date'),
-            'Target_group' => $request->input('Target_group'),
-            'status' => $request->input('status'),
-            'location' => $request->input('location'),
-            'start_date' => $request->input('start_date'),
-            'start_time' => $request->input('start_time'),
-            'type' => $request->input('type'),
-            'end_date' => $request->input('end_date'),
-            'end_time' => $request->input('end_time'),
-        ]);
-
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
-    }
-    public function meeting_recommendations_store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $this->validate($request, [
-            'meeting_id' => 'required',
-        ]);
-
-        $form = meeting_recommendations::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
-            'status'=>$request->input('status'),
-            'reason'=>$request->input('reason'),
-
-        ]);
-
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
-    }
-    public function meeting_agenda_store(Request $request): \Illuminate\Http\RedirectResponse
-    {
-        $this->validate($request, [
-            'meeting_id' => 'required',
-            'Item' => 'required',
-        ]);
-
-        $form = meeting_agenda::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
-        ]);
-
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
-    }
 
 
     public function Committees_and_teams_meetings()
