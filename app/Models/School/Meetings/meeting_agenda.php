@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class meeting_agenda extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'id',
+        'Item',
+        'meeting_id',
+    ];
+
+    public $timestamps = true;
 }

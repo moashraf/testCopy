@@ -22,6 +22,14 @@ class Committees_and_teams extends Model
 
     public $timestamps = true;
 
+
+
+        public function get_meetings()
+    {
+        return $this->hasMany(meetings::class, 'committees_and_teams_id', 'id');
+    }
+
+
 //    public function manager()
 //    {
 //        return $this->belongsTo(Manager::class, 'manager_id', 'id');

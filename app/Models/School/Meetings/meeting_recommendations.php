@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class meeting_recommendations extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
+    protected $fillable = [
+        'id',
+        'Item',
+        'reason',
+        'status',
+        'meeting_id',
+    ];
+
+    public $timestamps = true;
 }

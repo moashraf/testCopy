@@ -14,10 +14,19 @@ class meetings extends Model
 
     protected $fillable = [
         'id',
-        'title',
-        'author',
-        'school_id',
-        'classification',
+        'committees_and_teams_id',
+        'Number_of_attendees',
+        'Meeting_end_date',
+        'Target_group',
+        'Semester',
+        'status',
+        'location',
+        'stage',
+        'start_date',
+        'start_time',
+        'type',
+        'end_date',
+        'end_time',
     ];
 
     public $timestamps = true;
