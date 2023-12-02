@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\School\Meetings;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class meeting_recommendations extends Model
 {
