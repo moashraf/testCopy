@@ -96,14 +96,14 @@
         <div id="meetings_sidebar" class="collapse collapse-side-admin" aria-labelledby="headingPages"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner">
-{{--                <a class="collapse-item" href="{{ route('school.Committees_and_teams_meetings.index') }}">--}}
-{{--                    <div class="icon_square" style="background-color:#BCD7F5;"></div>--}}
-{{--                    إجتماعات اللجان--}}
-{{--                </a>--}}
-{{--                <a class="collapse-item" href="{{ route('school.Committees_and_teams_meetings.index') }}">--}}
-{{--                    <div class="icon_square" style="background-color:#F5CBBC;"></div>--}}
-{{--                    إجتماعات الفرق--}}
-{{--                </a>--}}
+                <a class="collapse-item" href="{{ url('school\Committees_and_teams_meetings') }}">
+                    <div class="icon_square" style="background-color:#BCD7F5;"></div>
+                    إجتماعات اللجان
+                </a>
+                <a class="collapse-item" href="{{ url('school\Committees_and_teams_meetings') }}">
+                    <div class="icon_square" style="background-color:#F5CBBC;"></div>
+                    إجتماعات الفرق
+                </a>
 
 
             </div>

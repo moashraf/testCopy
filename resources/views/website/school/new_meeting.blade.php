@@ -55,7 +55,7 @@
                 إنشاء اجتماع اللجنة الإدارية
             </div>
             <div class="card-body custom-card-body">
-                <form action="http://127.0.0.1:8000/school/meetings" method="POST" enctype="multipart/form-data" class="custom-form">
+                <form action="{{url('school/meetings')}}" method="POST" enctype="multipart/form-data" class="custom-form">
                     @csrf <!-- CSRF Token for Laravel protection -->
 
                     <div class="row form-group">
