@@ -150,19 +150,11 @@
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                                      aria-labelledby="dropdownMenuLink">
-                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"
-                                                                       data-code="cod11" data-name="rr"
-                                                                       data-identification_number="ff"
-                                                                       data-phone_number="asdf"
-                                                                       data-email="adf"
-                                                                       data-school_job_id="sdf"
-                                                                       data-teacher_speciality_id="sdfsd"><i
-                                                                            class="fas fa-trash-alt me-1"></i>
-                                                                        تعديل</a>
-                                                                    <a class="dropdown-item text-red" href="#" data-bs-toggle="modal"
-                                                                       data-bs-target="#delete_admin_modalcod11"><i
-                                                                            class="fas fa-trash-alt me-1"></i>
-                                                                        حذف</a>
+                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
+
+                                                                    <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-bs-target="#delete_admin_modalcod11"><i class="fas fa-trash-alt me-1"></i>حذف</a>
+                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
+                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/downloadPdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
                                                                 </div>
                                                             </div>
 

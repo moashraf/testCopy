@@ -11,6 +11,7 @@ use App\Models\School\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Mpdf\Mpdf;
 
 class meeting extends Controller
 {
@@ -152,6 +153,32 @@ class meeting extends Controller
             'Item'=>$request->input('Item'),
         ]);
         return redirect()->back()->with('success', 'Your meeting details has been saved successfully');
+    }
+
+
+    public function downloadPDF($id)
+    {
+        $meeting = meetings::findOrFail($id);
+
+        $pdf = new Mpdf();
+        $current_school = Auth::guard('school')->user()->current_working_school_id;
+
+        $school = School::find($current_school);
+
+
+        $sliders = Slider::where('type', 1)->get();
+        $item_val = meetings::find($id);
+
+        // video tutorial
+        $video_tutorial = Video_tutorial::where('type', 2)->first();
+        // Load a view for the PDF content and convert it to HTML
+        $html =view('website.school.new_meeting',
+            compact('current_school', 'school', 'sliders', 'video_tutorial'))->render();
+
+        $pdf->WriteHTML($html);
+
+        // Output the PDF as download
+        return $pdf->Output('meeting_'.$id.'.pdf', 'D');
     }
 
     /**
