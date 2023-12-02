@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Basic\Video_tutorial;
 use App\Models\Branch\Slider;
+use App\Models\School\Meetings\meeting_agenda;
+use App\Models\School\Meetings\meeting_recommendations;
 use App\Models\School\Meetings\meetings;
 use App\Models\School\School;
 use Illuminate\Http\Request;
@@ -119,22 +121,37 @@ class meeting extends Controller
     public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $this->validate($request, [
-            'committees_and_teams_id' => 'committees_and_teams_id',
+            'committees_and_teams_id' => 'required',
         ]);
-        $meetings = meetings::find($id);
-        $meetings->committees_and_teams_id = $request->input('committees_and_teams_id');
-        $meetings->number_of_attendees = $request->input('number_of_attendees');
-        $meetings->Target_group = $request->input('Target_group');
-        $meetings->title = $request->input('title');
-        $meetings->status = $request->input('status');
-        $meetings->location = $request->input('location');
-        $meetings->start_date = $request->input('start_date');
-        $meetings->start_time = $request->input('start_time');
-        $meetings->type = $request->input('type');
-        $meetings->end_date = $request->input('end_date');
-        $meetings->end_time = $request->input('end_time');
-        $meetings->save();
+        $this->updatebyid($id, $request);
         return redirect()->back()->with('success', 'Your form has been sent successfully');
+    }    /**
+     * updateAllData the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws ValidationException
+     */
+    public function updateAllData(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        $this->validate($request, [
+            'committees_and_teams_id' => 'required',
+            'meeting_id' => 'required',
+            'Item' => 'required',
+        ]);
+        $this->updatebyid($id, $request);
+        $meeting_recommendations = meeting_recommendations::create([
+            'meeting_id'=>$request->input('meeting_id'),
+            'Item'=>$request->input('Item'),
+            'status'=>$request->input('status'),
+            'reason'=>$request->input('reason'),
+        ]);
+        $meeting_agenda = meeting_agenda::create([
+            'meeting_id'=>$request->input('meeting_id'),
+            'Item'=>$request->input('Item'),
+        ]);
+        return redirect()->back()->with('success', 'Your meeting details has been saved successfully');
     }
 
     /**
@@ -153,5 +170,27 @@ class meeting extends Controller
         }
 
         return redirect()->back()->with('error', 'Record not found');
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return void
+     */
+    public function updatebyid(int $id, Request $request): void
+    {
+        $meetings = meetings::find($id);
+        $meetings->committees_and_teams_id = $request->input('committees_and_teams_id');
+        $meetings->number_of_attendees = $request->input('number_of_attendees');
+        $meetings->Target_group = $request->input('Target_group');
+        $meetings->title = $request->input('title');
+        $meetings->status = $request->input('status');
+        $meetings->location = $request->input('location');
+        $meetings->start_date = $request->input('start_date');
+        $meetings->start_time = $request->input('start_time');
+        $meetings->type = $request->input('type');
+        $meetings->end_date = $request->input('end_date');
+        $meetings->end_time = $request->input('end_time');
+        $meetings->save();
     }
 }
