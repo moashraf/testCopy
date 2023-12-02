@@ -55,32 +55,36 @@
                 إنشاء اجتماع اللجنة الإدارية
             </div>
             <div class="card-body custom-card-body">
-                <form action="" method="POST" class="custom-form">
+                <form action="{{url('school/meetings')}}" method="POST" enctype="multipart/form-data" class="custom-form">
                     @csrf <!-- CSRF Token for Laravel protection -->
 
                     <div class="row form-group">
                         <label  for="committee" class="form-label col-md-3">نوع الاجتماع:</label>
-                        <select name="committee" id="committee" class="col-md-4 form-control custom-select">
-                            <option value="">اختر نوع الاحتماع</option>
-                            <option value="">طارئ</option>
-                            <option value="">عمومي</option>
+                        <select name="committees_and_teams_id" id="committee"  class="col-md-4 form-control custom-select">
+                            <option value="0">اختر نوع الاحتماع</option>
+                            <option value="1" selected>طارئ</option>
+                            <option value="2">عمومي</option>
                             <!-- Other options -->
                         </select>
                     </div>
                     <div class="row form-group">
                         <label for="date" class="col-md-3 form-label">تاريخ الاجتماع:</label>
-                        <input type="date" id="date" name="date" class="col-md-3 form-control">
+                        <input type="date" id="date" name="start_date" class="col-md-3 form-control">
+                    </div>
+                    <div class="row form-group">
+                        <label for="date" class="col-md-3 form-label">عنوان  الاجتماع:</label>
+                        <input type="text" id="title" name="title" value="toz fe khaled yousef" class="col-md-3 form-control">
+                        <input type="text" id="status" name="status" value="1" class="col-md-3 form-control">
                     </div>
                     <div class="row form-group">
                         <label for="time" class="form-label col-md-3">موعد الاجتماع:</label>
-                        <input type="time" id="time" name="time" class="col-md-3 form-control">
-
+                        <input type="time" id="time" name="start_time" class="col-md-3 form-control">
                     </div>
                     <div class="row form-group">
-                        <label for="agenda" class="form-label col-md-3">جدول الأعمال:</label>
-                        <input type="agenda" id="agenda" name="agenda" class=" col-md-3 form-control">
-
+                        <label for="time" class="form-label col-md-3">مكان  الاجتماع:</label>
+                        <input type="text" id="committee_place" name="committee_place" class="col-md-3 form-control">
                     </div>
+
 
                     <!-- Repeat for other fields with appropriate classes -->
 
