@@ -91,10 +91,11 @@
 
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="tab-pane fade  show active " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
                             <div style="    margin-top: 10%;" class="accordion" id="accordionExample">
                                 @foreach ($Committees_and_teams as $key => $item)
+                                 @if($item->classification ==1 )
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
@@ -219,11 +220,143 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 @endforeach
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">3...</div>
+                        <div class="tab-pane fade   " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div style="    margin-top: 10%;" class="accordion" id="accordionExample">
+                                @foreach ($Committees_and_teams as $key => $item)
+                                    @if($item->classification ==2 )
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
+                                                        aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
+                                                    {{ $item->title   }}
+                                                </button>
+                                            </h2>
+                                            <div id="collapse_{{$item->id}}" class="accordion-collapse collapse  @if($key ==0 )  show @endif  "
+                                                 data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+
+                                                    <div class=" add_border_radius table-responsive" id="admin_table_cont" style="display: block"   >
+                                                        <table class="table display datatable-modal"   id="p_3-table" width="100%"  cellspacing="0">
+                                                            <thead>
+                                                            <tr>
+                                                                <th  class=" table_title_color text-xs fw-bold">الاجتماع  </th>
+                                                                <th class="table_title_color  text-xs fw-bold">   تاريخ الاجتماع </th>
+                                                                <th class=" table_title_color  text-xs fw-bold">   نوع الاجتماع </th>
+                                                                <th class=" table_title_color  text-xs fw-bold">   الفصل الدراسي </th>
+                                                                <th class=" table_title_color  text-xs fw-bold">حاله الاجتماع  </th>
+                                                                <th class=" table_title_color  text-xs fw-bold">   تاريخ الانشاء </th>
+                                                                <th class=" table_title_color  text-xs fw-bold"></th>
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody id="admin_table_cont_tr">
+                                                            @foreach ($item->get_meetings as $key_val => $item_val)
+                                                                <tr id="row_cod11">
+                                                                    <td class="">
+                                                                        {{ $item_val->title   }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{ $item_val->start_date   }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{ $item_val->type   }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{ $item_val->Semester   }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{ $item_val->status   }}
+                                                                    </td>
+                                                                    <td class="">
+                                                                        {{ $item_val->created_at   }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="dropdown no-arrow">
+                                                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-700"></i>
+                                                                            </a>
+                                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                                 aria-labelledby="dropdownMenuLink">
+                                                                                <a class="dropdown-item text-green update_admin" href="#"
+                                                                                   data-code="cod11" data-name="rr"
+                                                                                   data-identification_number="ff"
+                                                                                   data-phone_number="asdf"
+                                                                                   data-email="adf"
+                                                                                   data-school_job_id="sdf"
+                                                                                   data-teacher_speciality_id="sdfsd"><i
+                                                                                        class="fas fa-trash-alt me-1"></i>
+                                                                                    تعديل</a>
+                                                                                <a class="dropdown-item text-red" href="#" data-bs-toggle="modal"
+                                                                                   data-bs-target="#delete_admin_modalcod11"><i
+                                                                                        class="fas fa-trash-alt me-1"></i>
+                                                                                    حذف</a>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Delete Modal -->
+                                                                        <div class="modal fade" id="delete_admin_modalcod11" tabindex="-1"
+                                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+                                                                                <div class="modal-content b-r-s-cont border-0">
+
+                                                                                    <div class="modal-header">
+                                                                                        <div class="modal-title" id="exampleModalLabel"><i
+                                                                                                class="fas fa-trash me-1"></i>
+                                                                                            حذف الاداري </div>
+                                                                                        <button type="button" data-bs-dismiss="modal"
+                                                                                                aria-label="Close"><i class="fas fa-times"></i></button>
+                                                                                    </div>
+                                                                                    <form>
+
+                                                                                        <!-- Modal content -->
+                                                                                        <div class="modal-body px-4">
+                                                                                            <div class="modal-body delete-conf-input text-center py-0">
+                                                                                                <p class="mb-0">هل انت متاكد من حذف الاداري</p>
+                                                                                                <br>
+                                                                                                <input type="hidden" name="item_id"
+                                                                                                       value="cod11">
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="modal-footer">
+                                                                                            <div class="right-side">
+                                                                                                <button type="button" data-code="cod11"
+                                                                                                        class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="divider"></div>
+                                                                                            <div class="left-side">
+                                                                                                <button type="button" class="btn btn-default btn-link"
+                                                                                                        data-bs-dismiss="modal">غلق النافذة</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                      </div>
 
 

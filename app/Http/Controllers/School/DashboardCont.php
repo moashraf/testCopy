@@ -151,8 +151,6 @@ class DashboardCont extends Controller
         $hijri_month = $responseBody['data']['hijri']['month']['ar'];
         $hijri_year = $responseBody['data']['hijri']['year'];
         $hijri_date = $hijri_day . " " . $hijri_month . " " . $hijri_year;
-
-
         $sliders = Slider::where('type', 1)->get();
 
         // video tutorial
@@ -179,7 +177,6 @@ class DashboardCont extends Controller
 
     public function Committees_and_teams_meetings()
     {
-
 
         $current_school = Auth::guard('school')->user()->current_working_school_id;
         $school = School::find($current_school);
