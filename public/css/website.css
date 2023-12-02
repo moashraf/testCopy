@@ -5587,6 +5587,8 @@ body.sidebar-toggled footer.sticky-footer {
     border-bottom-left-radius: 0px;
     background-color: #e3e8f1; }
 
-.accordion-button:not(.collapsed){     background-color: #e9e9e9; }
+.accordion-button:not(.collapsed), .accordion-body {     background-color: #e9e9e9; }
 
 .accordion-button:focus{  box-shadow: none; }
+.table_title_color{background:#eab977!important}
+.add_border_radius{border-radius: 7px!important;}

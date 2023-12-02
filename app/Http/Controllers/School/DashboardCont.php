@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Basic\Video_tutorial;
 use App\Models\Branch\Slider;
 use App\Models\School\Management\Edu_department;
+use App\Models\School\Meetings\Committees_and_teams;
 use App\Models\School\Management\Edu_department_office;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -178,10 +179,14 @@ class DashboardCont extends Controller
 
     public function Committees_and_teams_meetings()
     {
-         $current_school = Auth::guard('school')->user()->current_working_school_id;
+
+
+        $current_school = Auth::guard('school')->user()->current_working_school_id;
 
         $school = School::find($current_school);
 
+        $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->get();
+        dd($Committees_and_teams);
         Carbon::setLocale('ar');
         //Carbon::now()->translatedFormat('l j F Y H:i:s');
         $today_date_ar = Carbon::now()->translatedFormat('j F Y');
@@ -205,13 +210,10 @@ class DashboardCont extends Controller
         $hijri_date = $hijri_day . " " . $hijri_month . " " . $hijri_year;
 
 
-        $sliders = Slider::where('type', 1)->get();
 
-        // video tutorial
-        $video_tutorial = Video_tutorial::where('type', 2)->first();
 
         return view('website.school.Committees_and_teams_meetings',
-            compact('current_school', 'school', 'today_date_ar', 'hijri_date', 'sliders', 'video_tutorial'));
+            compact('current_school', 'school', 'today_date_ar', 'hijri_date'));
     }
 
 
