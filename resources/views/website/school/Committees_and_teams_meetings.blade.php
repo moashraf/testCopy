@@ -154,7 +154,7 @@
 
                                                                     <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-bs-target="#delete_admin_modalcod11"><i class="fas fa-trash-alt me-1"></i>حذف</a>
                                                                     <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
-                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/downloadPdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
+                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
                                                                 </div>
                                                             </div>
 
