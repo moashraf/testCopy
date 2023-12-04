@@ -35,7 +35,7 @@ class meeting extends Controller
         $current_school = Auth::guard('school')->user()->current_working_school_id;
 
         $school = School::find($current_school);
-
+$item_val = [];
 
         $sliders = Slider::where('type', 1)->get();
 
@@ -43,7 +43,7 @@ class meeting extends Controller
         $video_tutorial = Video_tutorial::where('type', 2)->first();
 
         return view('website.school.new_meeting',
-            compact('current_school', 'school', 'sliders', 'video_tutorial'));
+            compact('current_school', 'school', 'sliders','item_val', 'video_tutorial'));
     }
 
     /**
@@ -74,8 +74,27 @@ class meeting extends Controller
             'end_time' => $request->input('end_time'),
             'Semester' => $request->input('Semester'),
         ]);
+        foreach ($request->input('recommendation_item') as $item) {
+            if ($item){
+                $meetingRecommendation = new meeting_recommendations;
+                $meetingRecommendation->meeting_id = $form->id;
+                $meetingRecommendation->item = $item; // item from the array
+                $meetingRecommendation->status = $request->input('status');
+                $meetingRecommendation->reason = $request->input('reason');
+                $meetingRecommendation->save();
+            }
+        }
+        foreach ($request->input('meeting_agenda_item') as $item) {
+            if ($item){
+                $meeting_agenda = new meeting_agenda;
+                $meeting_agenda->meeting_id = $form->id;
+                $meeting_agenda->item = $item; // item from the array
+                $meeting_agenda->save();
+            }
 
+        }
         return redirect()->back()->with('success', 'Your form has been sent successfully');
+
     }
 
     /**
@@ -123,38 +142,11 @@ class meeting extends Controller
     public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $this->validate($request, [
-            'committees_and_teams_id' => 'required',
+            'meeting_id' => 'required',
         ]);
         $this->updatebyid($id, $request);
         return redirect()->back()->with('success', 'Your form has been sent successfully');
     }    /**
-     * updateAllData the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws ValidationException
-     */
-    public function updateAllData(Request $request, int $id): \Illuminate\Http\RedirectResponse
-    {
-        $this->validate($request, [
-            'committees_and_teams_id' => 'required',
-            'meeting_id' => 'required',
-            'Item' => 'required',
-        ]);
-        $this->updatebyid($id, $request);
-        $meeting_recommendations = meeting_recommendations::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
-            'status'=>$request->input('status'),
-            'reason'=>$request->input('reason'),
-        ]);
-        $meeting_agenda = meeting_agenda::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
-        ]);
-        return redirect()->back()->with('success', 'Your meeting details has been saved successfully');
-    }
 
 
     public function downloadPDF($id)
