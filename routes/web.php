@@ -258,7 +258,7 @@ Route::name('school_route.')->group(function () {
                     // Dashboard
                     Route::get('/dashboard', [DashboardCont::class, 'dashboard'])->name('dashboard');
 
-                   Route::get('/new_meeting', [DashboardCont::class, 'new_meeting'])->name('new_meeting');
+                 //  Route::get('/new_meeting', [DashboardCont::class, 'new_meeting'])->name('new_meeting');
 
                     //ajax for calander
                     Route::get('/calander_tasks_ajax/{month}/{year}', [DashboardCont::class, 'calander_tasks_ajax'])->name('calander_tasks_ajax');
