@@ -250,6 +250,7 @@ Route::name('school_route.')->group(function () {
                     Route::resource('/meeting_recommendations',meetingRecommendations::class);
                     Route::resource('/meeting_agenda',meetingAgenda::class);
                     Route::resource('/meetings',meeting::class);
+                    Route::get('/meetings/{id}/download-pdf', [meeting::class,'downloadPDF'])->name('meetings_downloadPDF');
 
                     // Change school
                     Route::post('/change_school_sidebar', [DashboardCont::class, 'change_school_sidebar'])->name('change_school_sidebar');
