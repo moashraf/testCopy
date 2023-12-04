@@ -80,6 +80,8 @@
                             <button class="nav-link active tabcontent_active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
                                     role="tab" aria-controls="pills-home" aria-selected="true">
                                 إجتماعات اللجان
+
+
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -108,12 +110,13 @@
                                     </button>
                                 </div>
                                 <div class="col-2   ">
-                                    <div class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs" style="  margin-top: 5px; "
-                                         data-bs-toggle="modal" data-bs-target="#add_new_administrator"> <i class="fas fa-plus"></i>
+
+                              <a  href="{{ route('school_route.Committees_and_teams_meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                                         style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
                                         <span class="no_show_on_map">
                                         انشاء اجتماع جديد
                                         </span>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="col-2">
                                     <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"

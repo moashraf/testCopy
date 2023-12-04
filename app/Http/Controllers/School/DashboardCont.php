@@ -162,46 +162,6 @@ class DashboardCont extends Controller
         return view('website.school.dashboard', compact('current_school', 'school', 'today_date_ar', 'hijri_date', 'sliders', 'video_tutorial'));
     }
 
-
-
-
-    public function Committees_and_teams_meetings()
-    {
-
-        $current_school = Auth::guard('school')->user()->current_working_school_id;
-        $school = School::find($current_school);
-        $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->with('get_meetings')->get();
-         Carbon::setLocale('ar');
-        //Carbon::now()->translatedFormat('l j F Y H:i:s');
-        $today_date_ar = Carbon::now()->translatedFormat('j F Y');
-        https: //api.aladhan.com/v1/gToH/10-10-2002
-        $client = new \GuzzleHttp\Client();
-        $apiURL = 'http://api.aladhan.com/v1/gToH';
-        $res = $client->request('GET', $apiURL, [
-            'json' => [
-                "date" => Carbon::now(),
-            ],
-        ]);
-
-        $statusCode = $res->getStatusCode();
-        $responseBody = json_decode($res->getBody(), true);
-        $hijri_day = $responseBody['data']['hijri']['day'];
-        $hijri_month = $responseBody['data']['hijri']['month']['ar'];
-        $hijri_year = $responseBody['data']['hijri']['year'];
-        $hijri_date = $hijri_day . " " . $hijri_month . " " . $hijri_year;
-
-        $video_tutorial = Video_tutorial::where('type', 2)->first();
-
-
-
-        return view('website.school.Committees_and_teams_meetings',
-            compact('current_school', 'school', 'today_date_ar', 'hijri_date','Committees_and_teams','video_tutorial'));
-    }
-
-
-
-
-
     //select the calendar data and funcation via ajax in creating
     public function calander_tasks_ajax($month, $year)
     {

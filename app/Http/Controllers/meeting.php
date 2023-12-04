@@ -72,6 +72,7 @@ class meeting extends Controller
             'type' => $request->input('type'),
             'end_date' => $request->input('end_date'),
             'end_time' => $request->input('end_time'),
+            'Semester' => $request->input('Semester'),
         ]);
 
         return redirect()->back()->with('success', 'Your form has been sent successfully');
