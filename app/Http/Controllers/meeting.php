@@ -8,6 +8,7 @@ use App\Models\School\Meetings\meeting_agenda;
 use App\Models\School\Meetings\meeting_recommendations;
 use App\Models\School\Meetings\meetings;
 use App\Models\School\School;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -35,7 +36,28 @@ class meeting extends Controller
         $current_school = Auth::guard('school')->user()->current_working_school_id;
 
         $school = School::find($current_school);
-$item_val = [];
+        $item_val = [
+            'committees_and_teams_id' => null,
+            'Number_of_attendees' => null,
+            'created_at' => null,
+            'Target_group' => null,
+            'deleted_at' => null,
+            'Semester' => null,
+            'status' => 1,
+            'location' => null,
+            'stage' => null,
+            'start_date' => null,
+            'start_time' => null,
+            'type' => null,
+            'id' => null,
+            'updated_at' => null,
+            'end_date' => null,
+            'end_time' => null,
+            'title' => null,
+            'meeting_agenda' => [],
+            'meeting_recommendations' => []
+        ];
+
 
         $sliders = Slider::where('type', 1)->get();
 
@@ -52,6 +74,7 @@ $item_val = [];
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws ValidationException
+     * @throws \Exception
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
@@ -59,19 +82,25 @@ $item_val = [];
             'committees_and_teams_id' => 'required',
             'title' => 'required',
         ]);
+        $startDate = $request->input('start_date'); // e.g., '2023-12-04'
+        $startTime = $request->input('start_time'); // e.g., '22:29:29'
+        $startDateTimeString = $startDate . ' ' . $startTime; // e.g., '2023-12-04 22:29:29'
+        $startDateTime = new DateTime($startDateTimeString);
+        $formattedStartDateTime = $startDateTime->format('Y-m-d H:i:s'); // Format for SQL timestamp
+        $endDateTimeString = $startDate . ' ' . $request->input('end_time'); // e.g., '2023-12-04 22:29:29'
+        $endDateTime = new DateTime($endDateTimeString);
+        $formattedEndDateTime = $endDateTime->format('Y-m-d H:i:s'); // Format for SQL timestamp
 
         $form = meetings::create([
             'committees_and_teams_id'=>$request->input('committees_and_teams_id'),
-            'Number_of_attendees' => $request->input('number_of_attendees'),
+            'Number_of_attendees' => (int) $request->input('Number_of_attendees'),
             'title' => $request->input('title'),
             'Target_group' => $request->input('Target_group'),
             'status' => $request->input('status'),
             'location' => $request->input('location'),
-            'start_date' => $request->input('start_date'),
-            'start_time' => $request->input('start_time'),
+            'start_date' => $formattedStartDateTime,
             'type' => $request->input('type'),
-            'end_date' => $request->input('end_date'),
-            'end_time' => $request->input('end_time'),
+            'end_time' => $formattedEndDateTime,
             'Semester' => $request->input('Semester'),
         ]);
         foreach ($request->input('recommendation_item') as $item) {
@@ -122,11 +151,20 @@ $item_val = [];
 
 
         $sliders = Slider::where('type', 1)->get();
-        $item_val = meetings::find($id);
-
+        $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
+            ->where('id', $id)
+            ->first();
         // video tutorial
         $video_tutorial = Video_tutorial::where('type', 2)->first();
-
+        if ($item_val->start_date){
+            $dateTime = new DateTime($item_val->start_date);
+            $item_val->start_date = $dateTime->format('Y-m-d');
+            $item_val->start_time = $dateTime->format('H:i:s');
+        }
+        if ($item_val->end_time){
+            $Time = new DateTime($item_val->end_time);
+            $item_val->end_time = $Time->format('H:i:s');
+        }
         return view('website.school.new_meeting',
             compact('current_school', 'school','item_val', 'sliders', 'video_tutorial'));
     }
@@ -145,6 +183,38 @@ $item_val = [];
             'meeting_id' => 'required',
         ]);
         $this->updatebyid($id, $request);
+        foreach ($request->input('recommendation_item') as $index =>$item) {
+            if ($item){
+                $meetingRecommendationModel = new meeting_recommendations;
+                if (is_array($request->input('recommendation_id')) && $request->input('recommendation_id')[$index]){
+                    $meetingRecommendation = $meetingRecommendationModel->find($request->input('recommendation_id')[$index]);
+                }else{
+                    $meetingRecommendation = $meetingRecommendationModel;
+                }
+                $meetingRecommendation->meeting_id = $request->input('meeting_id');
+                $meetingRecommendation->item = $item; // item from the array
+                $meetingRecommendation->status = $request->input('status');
+                $meetingRecommendation->reason = $request->input('reason');
+
+                $meetingRecommendation->save();
+            }
+        }
+
+        foreach ($request->input('meeting_agenda_item') as $index =>$item) {
+            if ($item){
+                $meetingAgendaModel = new meeting_agenda;
+                if (is_array($request->input('meeting_agenda_id')) && $request->input('meeting_agenda_id')[$index]){
+                    $meeting_agenda = $meetingAgendaModel->find($request->input('meeting_agenda_id')[$index]);
+                }else{
+                    $meeting_agenda = $meetingAgendaModel;
+                }
+                $meeting_agenda->item = $item; // item from the array
+                $meeting_agenda->meeting_id = $request->input('meeting_id');
+
+                $meeting_agenda->save();
+            }
+
+        }
         return redirect()->back()->with('success', 'Your form has been sent successfully');
     }    /**
 
@@ -196,21 +266,29 @@ $item_val = [];
      * @param int $id
      * @param Request $request
      * @return void
+     * @throws \Exception
      */
     public function updatebyid(int $id, Request $request): void
     {
+        $startDate = $request->input('start_date'); // e.g., '2023-12-04'
+        $startTime = $request->input('start_time'); // e.g., '22:29:29'
+        $startDateTimeString = $startDate . ' ' . $startTime; // e.g., '2023-12-04 22:29:29'
+        $startDateTime = new DateTime($startDateTimeString);
+        $formattedStartDateTime = $startDateTime->format('Y-m-d H:i:s'); // Format for SQL timestamp
+        $endDateTimeString = $startDate . ' ' .$request->input('end_time') ; // e.g., '2023-12-04 22:29:29'
+        $endDateTime = new DateTime($endDateTimeString);
+        $formattedEndDateTime = $endDateTime->format('Y-m-d H:i:s'); // Format for SQL timestamp
+
         $meetings = meetings::find($id);
         $meetings->committees_and_teams_id = $request->input('committees_and_teams_id');
-        $meetings->number_of_attendees = $request->input('number_of_attendees');
+        $meetings->number_of_attendees = (int) $request->input('Number_of_attendees');
         $meetings->Target_group = $request->input('Target_group');
         $meetings->title = $request->input('title');
         $meetings->status = $request->input('status');
         $meetings->location = $request->input('location');
-        $meetings->start_date = $request->input('start_date');
-        $meetings->start_time = $request->input('start_time');
+        $meetings->start_date = $formattedStartDateTime;
         $meetings->type = $request->input('type');
-        $meetings->end_date = $request->input('end_date');
-        $meetings->end_time = $request->input('end_time');
+        $meetings->end_time = $formattedEndDateTime;
         $meetings->save();
     }
 }
