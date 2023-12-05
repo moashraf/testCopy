@@ -335,15 +335,19 @@
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
 
-        import {styles} from "laravel-mix";
 
         add_meeting_agenda();
         function add_meeting_agenda(){
         if(typeof event != "undefined"){ event.preventDefault();}
           // var newElement=  $(".add_meeting_agenda_div").first();
-            let styles_val;
+            let styles_val="display: inline-block ;";
             var datacount=  $(".add_meeting_agenda_div").length+1
-            if (datacount <1){ styles_val="";}
+             //
+            // if ( $(".add_meeting_agenda_div").length == datacount+1)
+            // {
+            //     styles_val="display: none;";
+            // }
+
             var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
                                                                 <div class="col-md-1 add-padding-bottom">
                                                                       <span class="add_meeting_agenda_span_num"> ${datacount} </span>
@@ -360,7 +364,7 @@
                                                                         <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                                     </a>
 
-                                                                    <a href="#" onclick="add_meeting_agenda()" >
+                                                                    <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add" style=" ${styles_val}" >
                                                                         <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                                      </a>
 
@@ -369,11 +373,19 @@
                                                             </div>` ;
 
 
-              //  $('#myDiv').append(newElement.clone());
-              //  $('#myDiv').prepend(newElement.clone());
+
                 $('#myDiv').append(newElement);
 
+            let elements = document.querySelectorAll('.add_meeting_agenda_class_add');
 
+            // Remove all but the last element
+            if (elements.length > 1) {
+                for (let i = 0; i < elements.length - 1; i++) {
+                    elements[i].remove();
+                }
+            }
+            //  $('#myDiv').append(newElement.clone());
+            //  $('#myDiv').prepend(newElement.clone());
           //  newElement.find('input').val("");
            // newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
          }
