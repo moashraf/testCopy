@@ -213,7 +213,7 @@
 
                                                                             <div class="modal-footer">
                                                                                 <div class="right-side">
-                                                                                    <a type="button" data-code="cod11" href="{{url('/school/meetings/'.$item_val->id .'/destroy')}}"
+                                                                                    <a type="button" data-code="cod11" href="{{ route('school_route.meetings.destroy', $item_val['id']) }}"
                                                                                             class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
                                                                                     </a>
                                                                                 </div>
