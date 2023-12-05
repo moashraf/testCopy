@@ -79,7 +79,7 @@
 
                                                                 <select required name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
-                                                                    @foreach ([1=>'طارئ', 2=>'دوري'] as $index=>$value)
+                                                                    @foreach ([1=>'طارئ', 0=>'دوري'] as $index=>$value)
                                                                         <option value="{{ $index }}"
                                                                                 @isset($item_val)
                                                                                 @if($item_val['Target_group'] == $index) selected @endif
@@ -189,7 +189,7 @@
                                                                 <label  for="committee" class="form-label  ">   الفئه المستهدفه </label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <select required name="Target_group" id="Target_group" class="form-control custom-select">
+                                                                <select  name="Target_group" id="Target_group" class="form-control custom-select">
                                                                     <option value="">اختر نوع الفئه</option>
                                                                     @foreach ([1=>'المصريين', 2=>'الاجانب'] as $index=>$value)
                                                                         <option value="{{ $index }}"
@@ -210,7 +210,7 @@
                                                                 <label  for="committee" class="form-label  "> عدد الحاضرين    </label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <select required id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select">
+                                                                <select  id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select">
                                                                     <option value="">عدد الحاضرين</option>
                                                                     @foreach ([5, 10, 15, 20, 30] as $value)
                                                                         <option value="{{ $value }}"
@@ -229,9 +229,8 @@
 
                                                     <div class="  form-group">
                                                         <div class="row">
-                                                            <label  for="committee" class="form-label  " >    جدول اعمل الاجتماع  </label>
-                                                            @if(isset($item_val))
-
+                                                            <label  for="committee" class="form-label" >    جدول اعمل الاجتماع  </label>
+                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
                                                             @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
                                                                     <div class="col-md-1 add-padding-bottom">
                                                                         <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
@@ -289,17 +288,21 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @if(isset($item_val) && $item_val['meeting_recommendations'])
+                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
                                                                     <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation->Item }}">
                                                                     <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation->id }}">
+                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation->status }}">
+                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation->reason }}">
                                                                 </div>
                                                             @endforeach
                                                                   @else
                                                                 @for ($i = 0; $i < 3; $i++)
                                                                     <div class="col-md-3 add-padding-bottom">
                                                                         <input type="text" name="recommendation_item[]" class="form-control" value="">
+                                                                        <input type="hidden" name="recommendation_status[]" class="form-control" value="1">
+                                                                        <input type="hidden" name="recommendation_reason[]" class="form-control" value="">
                                                                     </div>
                                                                 @endfor
                                                          @endif
