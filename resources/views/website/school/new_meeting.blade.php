@@ -67,8 +67,8 @@
                                         <div class="col-md-8">
                                             <div class="card-body custom-card-body">
 
-                                                    <input type="hidden" id="committees_and_teams_id" name="committees_and_teams_id" value="{{ request('Committees_id') ?? ($item_val ?$item_val['committees_and_teams_id']:'')}}" class="  form-control">
-                                                    <input type="hidden" id="status" name="status" value="{{$item_val?$item_val['status']:''}}" class="  form-control">
+                                                    <input type="hidden" id="committees_and_teams_id" name="committees_and_teams_id" value="{{ request('Committees_id') ?? (  isset($item_val)  ?$item_val['committees_and_teams_id']:'')}}" class="  form-control">
+                                                    <input type="hidden" id="status" name="status" value="{{ isset($item_val)   ?$item_val['status']:0}}" class="  form-control">
 
                                                     <div class="form-group">
                                                         <div class="row">
@@ -80,7 +80,11 @@
                                                                 <select required name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
                                                                     @foreach ([1=>'طارئ', 2=>'دوري'] as $index=>$value)
-                                                                        <option value="{{ $index }}" @if($item_val['Target_group'] == $index) selected @endif>{{ $value }}</option>
+                                                                        <option value="{{ $index }}"
+                                                                                @isset($item_val)
+                                                                                @if($item_val['Target_group'] == $index) selected @endif
+                                                                                @endisset>
+                                                                            {{ $value }}</option>
                                                                     @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
@@ -93,7 +97,7 @@
                                                                 <label  for="committee" class="form-label  ">تاريخ الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="date" id="date" name="start_date"  value="{{$item_val? $item_val['start_date']: ''}}" class=" form-control">
+                                                                <input type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
 
                                                             </div>
                                                         </div>
@@ -107,7 +111,8 @@
                                                             </div>
                                                             <div class="col-md-9">
 
-                                                                <input type="text" id="title" name="title" value="{{$item_val ?$item_val['title']:''}}" class="  form-control">
+                                                                <input   required type="text" id="title" name="title" value="{{ isset($item_val)  ?$item_val['title']:''}}" class="  form-control">
+
 
                                                             </div>
                                                         </div>
@@ -120,7 +125,7 @@
                                                                 <label  for="committee" class="form-label  ">موعد الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="time" id="time" name="start_time" value="{{$item_val? $item_val['start_time']: ''}}" class="  form-control">
+                                                                <input type="time" id="time" name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -132,7 +137,7 @@
                                                                 <label  for="committee" class="form-label">مكان  الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" name="location" class="form-control" value="{{$item_val?$item_val['location']:''}}">
+                                                                <input type="text" name="location" class="form-control" value="{{ isset($item_val) ?$item_val['location']:''}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -145,7 +150,7 @@
                                                                 <label  for="committee" class="form-label  "> الفصل الدراسي    </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text"  name="Semester" value="{{$item_val? $item_val['Semester']: ''}}" class="  form-control">
+                                                                <input type="text"  name="Semester" value="{{ isset($item_val) ? $item_val['Semester']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -187,14 +192,18 @@
                                                                 <select required name="Target_group" id="Target_group" class="form-control custom-select">
                                                                     <option value="">اختر نوع الفئه</option>
                                                                     @foreach ([1=>'المصريين', 2=>'الاجانب'] as $index=>$value)
-                                                                        <option value="{{ $index }}" @if($item_val['Target_group'] == $index) selected @endif>{{ $value }}</option>
+                                                                        <option value="{{ $index }}"
+                                                                                @isset($item_val)
+                                                                                    @if($item_val['Target_group'] == $index) selected @endif
+                                                                                @endisset >
+                                                                            {{ $value }}</option>
                                                                     @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="meeting_id" id="meeting_id" value="{{$item_val ?$item_val['id']:''}}">
+                                                    <input type="hidden" name="meeting_id" id="meeting_id" value="{{ isset($item_val)  ?$item_val['id']:''}}">
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <div class="col-md-2 align-self-center ">
@@ -204,7 +213,11 @@
                                                                 <select required id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select">
                                                                     <option value="">عدد الحاضرين</option>
                                                                     @foreach ([5, 10, 15, 20, 30] as $value)
-                                                                        <option value="{{ $value }}" @if($item_val['Number_of_attendees'] == $value) selected @endif>{{ $value }}</option>
+                                                                        <option value="{{ $value }}"
+                                                                                @isset($item_val)
+                                                                                @if($item_val['Number_of_attendees'] == $value) selected @endif @endisset >
+                                                                            {{ $value }}
+                                                                        </option>
                                                                     @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
@@ -217,19 +230,58 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  " >    جدول اعمل الاجتماع  </label>
-                                                                @forelse ($item_val['meeting_agenda'] as $agenda)
-                                                                <div class="col-md-3 add-padding-bottom">
+                                                            @if(isset($item_val))
+
+                                                            @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
+                                                                    <div class="col-md-1 add-padding-bottom">
+                                                                        <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
+                                                                    </div>
+                                                                    <div class="col-md-8 add-padding-bottom">
                                                                     <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda->Item }}">
                                                                     <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda->id }}">
 
                                                                 </div>
-                                                            @empty
-                                                                @for ($i = 0; $i < 3; $i++)
-                                                                    <div class="col-md-3 add-padding-bottom">
-                                                                        <input type="text" name="meeting_agenda_item[]" class="form-control" value="">
+                                                                    <div class="col-md-3  align-self-center ">
+                                                                        <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                                                            <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                        </a>
+                                                                        <a href="#" onclick="add_meeting_agenda()" >
+                                                                            <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                        </a>
+
+
                                                                     </div>
-                                                                @endfor
-                                                            @endforelse
+
+
+
+                                                            @endforeach
+                                                            @else
+
+                                                        <div  id="myDiv">
+                                                            <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
+                                                                <div class="col-md-1 add-padding-bottom">
+                                                                      <span class="add_meeting_agenda_span_num"> 1 </span>
+                                                                </div>
+                                                               <div class="col-md-8 add-padding-bottom">
+
+                                                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+
+                                                                    </div>
+                                                                <div class="col-md-3  align-self-center ">
+                                                                    <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                    </a>
+                                                                    <a href="#" onclick="add_meeting_agenda()" >
+                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                     </a>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                            @endif
+
                                                         </div>
                                                     </div>
 
@@ -237,19 +289,20 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @forelse ($item_val['meeting_recommendations'] as $recommendation)
+                                                            @if(isset($item_val) && $item_val['meeting_recommendations'])
+                                                            @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
                                                                     <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation->Item }}">
                                                                     <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation->id }}">
                                                                 </div>
-                                                            @empty
+                                                            @endforeach
+                                                                  @else
                                                                 @for ($i = 0; $i < 3; $i++)
                                                                     <div class="col-md-3 add-padding-bottom">
                                                                         <input type="text" name="recommendation_item[]" class="form-control" value="">
                                                                     </div>
                                                                 @endfor
-                                                            @endforelse
-
+                                                         @endif
                                                         </div>
                                                     </div>
 
@@ -260,7 +313,7 @@
                                                                 <label  for="committee" class="form-label  ">  موعد انتهاء الاجتماع  </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="time"  name="end_time"  value="{{$item_val?$item_val['end_time']:''}}" class="  form-control">
+                                                                <input type="time"  name="end_time"  value="{{ isset($item_val) ?$item_val['end_time']:''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -300,6 +353,36 @@
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
+
+
+        function add_meeting_agenda(){
+debugger
+        event.preventDefault();
+          var newElement=  $(".add_meeting_agenda_div").first();
+
+         var datacount=  $(".add_meeting_agenda_div").length
+            if (2525 == 1){
+                $('#myDiv').prepend( newElement.clone());
+            }else {
+                $('#myDiv').append(newElement.clone());
+            }
+
+            newElement.find('input').val("");
+            newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
+         }
+
+
+        function delete_meeting_agenda(this_this){
+            event.preventDefault();
+
+            var datacount=  $(".add_meeting_agenda_div").length
+            if (datacount > 1){
+                this_this.parentElement.parentElement.remove();
+            }
+
+         }
+
+
         function goToSecondTab(){
             $('.nav-link.active').removeClass('active');
             $('#pills-home').removeClass('show active');
