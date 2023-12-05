@@ -199,8 +199,9 @@
                                                                             <button type="button" data-bs-dismiss="modal"
                                                                                     aria-label="Close"><i class="fas fa-times"></i></button>
                                                                         </div>
-                                                                        <form>
-
+                                                                        <form action="{{ route('school_route.meetings.destroy', $item_val['id']) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
                                                                             <!-- Modal content -->
                                                                             <div class="modal-body px-4">
                                                                                 <div class="modal-body delete-conf-input text-center py-0">
@@ -213,9 +214,8 @@
 
                                                                             <div class="modal-footer">
                                                                                 <div class="right-side">
-                                                                                    <a type="button" data-code="cod11" href="{{ route('school_route.meetings.destroy', $item_val['id']) }}"
-                                                                                            class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
-                                                                                    </a>
+                                                                                    <button type="submit" data-code="cod11" class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
+                                                                                    </button>
                                                                                 </div>
                                                                                 <div class="divider"></div>
                                                                                 <div class="left-side">
