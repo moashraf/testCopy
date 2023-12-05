@@ -11,17 +11,16 @@
             'label' => 'محضر الاجتماع',
         ],
     ];
+
+    $action = isset($item_val['id']) ? route('school_route.meetings.update', $item_val['id']) : route('school_route.meetings.store');
+    $method = isset($item_val['id']) ? 'PUT' : 'POST';
 @endphp
 @section('title', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
 @section('topbar', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
 
 <!-- css insert -->
 @section('css')
-    <!-- swiper -->
     <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-    <style>
-        /* Add your custom CSS styles here */
-    </style>
 @endsection
 
 @section('fixedcontent')
@@ -39,7 +38,11 @@
                     </h5>
                 </div>
             </div>
-            <form action="{{ route('school_route.meetings.store') }}" method="POST" enctype="multipart/form-data" class="custom-form">
+            <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="custom-form">
+                @csrf
+                @if(isset($item_val['id']))
+                    @method($method) <!-- Laravel's method spoofing for PUT request -->
+                @endif
                 @csrf <!-- CSRF Token for Laravel protection -->
             <div class="col-12 mb-3 mb-md-0">
                 <div class="main_cot_bg p-3 py-3 h-100">
@@ -65,7 +68,7 @@
                                             <div class="card-body custom-card-body">
 
                                                     <input type="hidden" id="committees_and_teams_id" name="committees_and_teams_id" value="{{ request('Committees_id') ?? ($item_val ?$item_val['committees_and_teams_id']:'')}}" class="  form-control">
-                                                    <input type="hidden" id="status" name="status" value="1" class="  form-control">
+                                                    <input type="hidden" id="status" name="status" value="{{$item_val?$item_val['status']:''}}" class="  form-control">
 
                                                     <div class="form-group">
                                                         <div class="row">
@@ -73,10 +76,12 @@
                                                                 <label for="type" class="form-label">نوع الاجتماع</label>
                                                             </div>
                                                             <div class="col-md-9">
+
                                                                 <select required name="type" id="type" class="form-control custom-select">
-                                                                    <option selected>اختر نوع الاجتماع</option>
-                                                                    <option value="1">طارئ</option>
-                                                                    <option value="2">دوري</option>
+                                                                    <option value="">اختر نوع الاجتماع</option>
+                                                                    @foreach ([1=>'طارئ', 2=>'دوري'] as $index=>$value)
+                                                                        <option value="{{ $index }}" @if($item_val['Target_group'] == $index) selected @endif>{{ $value }}</option>
+                                                                    @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
                                                             </div>
@@ -88,7 +93,7 @@
                                                                 <label  for="committee" class="form-label  ">تاريخ الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="date" id="date" name="start_date" class=" form-control">
+                                                                <input type="date" id="date" name="start_date"  value="{{$item_val? $item_val['start_date']: ''}}" class=" form-control">
 
                                                             </div>
                                                         </div>
@@ -115,7 +120,7 @@
                                                                 <label  for="committee" class="form-label  ">موعد الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="time" id="time" name="start_time" class="  form-control">
+                                                                <input type="time" id="time" name="start_time" value="{{$item_val? $item_val['start_time']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -127,7 +132,7 @@
                                                                 <label  for="committee" class="form-label">مكان  الاجتماع </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" id="committee_place" name="committee_place" class="form-control" value="{{$item_val?$item_val['location']:''}}">
+                                                                <input type="text" name="location" class="form-control" value="{{$item_val?$item_val['location']:''}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,7 +145,7 @@
                                                                 <label  for="committee" class="form-label  "> الفصل الدراسي    </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" id="Semester" name="Semester" class="  form-control">
+                                                                <input type="text"  name="Semester" value="{{$item_val? $item_val['Semester']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -179,28 +184,31 @@
                                                                 <label  for="committee" class="form-label  ">   الفئه المستهدفه </label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <select required name="committees_and_teams_id" id="committee"  class=" form-control custom-select">
-                                                                    <option   selected>اختر نوع الفئه</option>
-                                                                    <option value="1"  >1</option>
-                                                                    <option value="2">2</option>
+                                                                <select required name="Target_group" id="Target_group" class="form-control custom-select">
+                                                                    <option value="">اختر نوع الفئه</option>
+                                                                    @foreach ([1=>'المصريين', 2=>'الاجانب'] as $index=>$value)
+                                                                        <option value="{{ $index }}" @if($item_val['Target_group'] == $index) selected @endif>{{ $value }}</option>
+                                                                    @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
-<input type="hidden" name="meeting_id" id="meeting_id" value="{{$item_val ?$item_val['id']:''}}">
+                                                    <input type="hidden" name="meeting_id" id="meeting_id" value="{{$item_val ?$item_val['id']:''}}">
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <div class="col-md-2 align-self-center ">
                                                                 <label  for="committee" class="form-label  "> عدد الحاضرين    </label>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <select required name="committees_and_teams_id" id="committee"  class=" form-control custom-select">
-                                                                    <option   selected> عدد الحاضرين     </option>
-                                                                    <option value="1"  >1</option>
-                                                                    <option value="2">2</option>
+                                                                <select required id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select">
+                                                                    <option value="">عدد الحاضرين</option>
+                                                                    @foreach ([5, 10, 15, 20, 30] as $value)
+                                                                        <option value="{{ $value }}" @if($item_val['Number_of_attendees'] == $value) selected @endif>{{ $value }}</option>
+                                                                    @endforeach
                                                                     <!-- Other options -->
                                                                 </select>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -209,29 +217,19 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  " >    جدول اعمل الاجتماع  </label>
+                                                                @forelse ($item_val['meeting_agenda'] as $agenda)
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda->Item }}">
+                                                                    <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda->id }}">
 
-                                                            <div class="col-md-1 align-self-center ">
-                                                                <label  for="committee" class="form-label  " >    1 </label>
-                                                            </div>
-                                                            <div class="col-md-11 add-padding-bottom">
-                                                                <input type="text"  name="meeting_agenda_item[]" value=" " class="  form-control">
-                                                            </div>
-
-                                                            <div class="col-md-1 align-self-center ">
-                                                                <label  for="committee" class="form-label  " >    2 </label>
-                                                            </div>
-                                                            <div class="col-md-11 add-padding-bottom ">
-                                                                <input type="text"  name="meeting_agenda_item[]" value=" " class="  form-control">
-
-                                                            </div>
-                                                            <div class="col-md-1 align-self-center ">
-                                                                <label  for="committee" class="form-label  " >    3 </label>
-                                                            </div>
-                                                            <div class="col-md-11 add-padding-bottom">
-                                                                <input type="text"  name="meeting_agenda_item[]" value=" " class="  form-control">
-                                                            </div>
-
-
+                                                                </div>
+                                                            @empty
+                                                                @for ($i = 0; $i < 3; $i++)
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" name="meeting_agenda_item[]" class="form-control" value="">
+                                                                    </div>
+                                                                @endfor
+                                                            @endforelse
                                                         </div>
                                                     </div>
 
@@ -239,33 +237,18 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  "> التوصيات    </label>
-
-
-                                                            <div class="col-md-3 add-padding-bottom">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3 add-padding-bottom">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3 add-padding-bottom">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3 add-padding-bottom">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input type="text"  name="recommendation_item[]" class="  form-control">
-                                                            </div>
+                                                            @forelse ($item_val['meeting_recommendations'] as $recommendation)
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation->Item }}">
+                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation->id }}">
+                                                                </div>
+                                                            @empty
+                                                                @for ($i = 0; $i < 3; $i++)
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" name="recommendation_item[]" class="form-control" value="">
+                                                                    </div>
+                                                                @endfor
+                                                            @endforelse
 
                                                         </div>
                                                     </div>
@@ -277,7 +260,7 @@
                                                                 <label  for="committee" class="form-label  ">  موعد انتهاء الاجتماع  </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="date" id="committee_place" name="committee_place" class="  form-control">
+                                                                <input type="time"  name="end_time"  value="{{$item_val?$item_val['end_time']:''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>

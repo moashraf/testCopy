@@ -16,6 +16,10 @@ class meeting_agenda extends Model
         'Item',
         'meeting_id',
     ];
-
+    // Define inverse relationship to Meetings
+    public function meetings(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(meetings::class, 'meeting_id');
+    }
     public $timestamps = true;
 }

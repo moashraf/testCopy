@@ -2,6 +2,7 @@
 
 namespace App\Models\School\Meetings;
 
+use App\Http\Controllers\meetingRecommendations;
 use App\Models\School\Manager;
 use App\Models\School\School;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,7 +31,16 @@ class meetings extends Model
     ];
 
     public $timestamps = true;
+    public function meeting_agenda()
+    {
+        return $this->hasMany(meeting_agenda::class, 'meeting_id');
+    }
 
+    // Relationship to MeetingRecommendation
+    public function meeting_recommendations()
+    {
+        return $this->hasMany(meeting_recommendations::class, 'meeting_id');
+    }
 //    public function manager()
 //    {
 //        return $this->belongsTo(Manager::class, 'manager_id', 'id');
