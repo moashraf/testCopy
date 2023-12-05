@@ -161,7 +161,7 @@
                                                             <button style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="reset" class="col-md-3 btn btn-default custom-reset-button">إنهاء</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button style="background-color: #0A3A81; width: 50%;" type="button" class="col-md-3 float-end btn btn-primary custom-submit-button" onclick="goToSecondTab()">التالي</button>
+                                                            <button id="nextButton" style="background-color: #0A3A81; width: 50%;" type="button" class="btn btn-primary custom-submit-button">التالي</button>
                                                         </div>
                                                     </div>
 
@@ -307,7 +307,7 @@
 
                                                     <div class="row form-group " style="padding-top: 51px;" >
                                                         <div class="col-md-6">
-                                                            <button  style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="reset" class="col-md-3 btn btn-default  custom-reset-button">  السابق    </button>
+                                                            <button id="prevButton" style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="button" class="btn btn-default custom-reset-button">السابق</button>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ وانهاء </button>
@@ -337,11 +337,21 @@
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
+        $(document).ready(function() {
+            // Function to go to the next tab
+            $('#nextButton').click(function() {
+                $('.nav-pills .active').parent().next('li').find('button').trigger('click');
+            });
+
+            // Function to go to the previous tab
+            $('#prevButton').click(function() {
+                $('.nav-pills .active').parent().prev('li').find('button').trigger('click');
+            });
+        });
 
 
         add_meeting_agenda();
         function add_meeting_agenda(){
-            debugger
         if(typeof event != "undefined")
         {
             event.preventDefault();
@@ -404,13 +414,9 @@
          }
 
 
-        function goToSecondTab(){
-            $('.nav-link.active').removeClass('active');
-            $('#pills-home').removeClass('show active');
-            $('#pills-home-tab').removeClass('active');
-            $('#pills-profile').addClass('show active');
-            $('#pills-profile-tab').addClass('active');
-        }
+
+        // Call saveInputValues() before switching tabs
+        // Call restoreInputValues() after switching back to the tab
 
         var full_height_width_slider_swiper_weekly = new Swiper(".full_height_width_slider_swiper_weekly", {
             pagination: {
