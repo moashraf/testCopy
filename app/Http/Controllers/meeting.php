@@ -7,6 +7,7 @@ use App\Models\Branch\Slider;
 use App\Models\School\Meetings\meeting_agenda;
 use App\Models\School\Meetings\meeting_recommendations;
 use App\Models\School\Meetings\meetings;
+use App\Models\School\Meetings\Committees_and_teams;
 use App\Models\School\School;
 use DateTime;
 use Illuminate\Http\Request;
@@ -58,14 +59,16 @@ class meeting extends Controller
             'meeting_recommendations' => []
         ];
 
-
+        $Committee_id = request('Committees_id');
+        $Committees_and_teams_model = new Committees_and_teams;
+        $Committees_and_teams = $Committees_and_teams_model ->findOrFail((int)$Committee_id);
         $sliders = Slider::where('type', 1)->get();
 
         // video tutorial
         $video_tutorial = Video_tutorial::where('type', 2)->first();
 
         return view('website.school.new_meeting',
-            compact('current_school', 'school', 'sliders','item_val', 'video_tutorial'));
+            compact('current_school', 'school', 'Committees_and_teams','sliders','item_val', 'video_tutorial'));
     }
 
     /**
@@ -166,6 +169,9 @@ class meeting extends Controller
             ->where('id', $id)
             ->first();
         // video tutorial
+        $Committee_id =$item_val->committees_and_teams_id;
+        $Committees_and_teams = new Committees_and_teams;
+        $Committees_and_teams->findOrFail($Committee_id);
         $video_tutorial = Video_tutorial::where('type', 2)->first();
         if ($item_val->start_date){
             $dateTime = new DateTime($item_val->start_date);
@@ -178,7 +184,7 @@ class meeting extends Controller
         }
         $item_val = $item_val->toArray();
         return view('website.school.new_meeting',
-            compact('current_school', 'school','item_val', 'sliders', 'video_tutorial'));
+            compact('current_school', 'school','Committees_and_teams','item_val', 'sliders', 'video_tutorial'));
     }
 
     /**

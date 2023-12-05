@@ -54,6 +54,9 @@ body {
 .text-red {
     color: #CF637F !important;
 }
+.required-asterisk {
+    color: red;
+}
 
 .text-red-bg {
     background-color: #CF637F !important;
@@ -5601,7 +5604,8 @@ body.sidebar-toggled footer.sticky-footer {
 .Committees_and_teams_meetings_create_title{
     margin: 20px 20px;
     text-align: center;
-    font-weight: bold;}
+    font-weight: bold;
+}
 
 .add-padding-bottom{
     padding-bottom: 10px;
