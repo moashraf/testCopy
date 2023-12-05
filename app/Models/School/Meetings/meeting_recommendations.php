@@ -16,6 +16,9 @@ class meeting_recommendations extends Model
         'reason',
         'status',
         'meeting_id',
+        'entity_responsible_implementation',
+        'Implementation_period',
+        'entity_responsible_implementation_related',
     ];
     // Define inverse relationship to Meetings
     public function meetings(): \Illuminate\Database\Eloquent\Relations\BelongsTo
