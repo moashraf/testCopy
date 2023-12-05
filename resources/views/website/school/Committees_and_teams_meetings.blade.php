@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="col-2   ">
 
-                              <a  href="{{ route('school_route.Committees_and_teams_meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                              <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
                                          style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
                                         <span class="no_show_on_map">
                                         انشاء اجتماع جديد
@@ -180,53 +180,13 @@
                                                                      aria-labelledby="dropdownMenuLink">
                                                                     <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
 
-                                                                    <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-bs-target="#delete_admin_modalcod11"><i class="fas fa-trash-alt me-1"></i>حذف</a>
+                                                                    <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>حذف</a>
                                                                     <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
                                                                     <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
                                                                 </div>
                                                             </div>
 
-                                                            <!-- Delete Modal -->
-                                                            <div class="modal fade" id="delete_admin_modalcod11" tabindex="-1"
-                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-                                                                    <div class="modal-content b-r-s-cont border-0">
 
-                                                                        <div class="modal-header">
-                                                                            <div class="modal-title" id="exampleModalLabel"><i
-                                                                                    class="fas fa-trash me-1"></i>
-                                                                                حذف الاداري </div>
-                                                                            <button type="button" data-bs-dismiss="modal"
-                                                                                    aria-label="Close"><i class="fas fa-times"></i></button>
-                                                                        </div>
-                                                                        <form action="{{ route('school_route.meetings.destroy', $item_val['id']) }}" method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <!-- Modal content -->
-                                                                            <div class="modal-body px-4">
-                                                                                <div class="modal-body delete-conf-input text-center py-0">
-                                                                                    <p class="mb-0">هل انت متاكد من حذف  الاجتماع</p>
-                                                                                    <br>
-                                                                                    <input type="hidden" name="item_id"
-                                                                                           value="cod11">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="modal-footer">
-                                                                                <div class="right-side">
-                                                                                    <button type="submit" data-code="cod11" class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="divider"></div>
-                                                                                <div class="left-side">
-                                                                                    <button type="button" class="btn btn-default btn-link"
-                                                                                            data-bs-dismiss="modal">غلق النافذة</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
                                                         </td>
                                                     </tr>
@@ -303,63 +263,14 @@
                                                                             </a>
                                                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                                                  aria-labelledby="dropdownMenuLink">
-                                                                                <a class="dropdown-item text-green update_admin" href="#"
-                                                                                   data-code="cod11" data-name="rr"
-                                                                                   data-identification_number="ff"
-                                                                                   data-phone_number="asdf"
-                                                                                   data-email="adf"
-                                                                                   data-school_job_id="sdf"
-                                                                                   data-teacher_speciality_id="sdfsd"><i
+                                                                                <a class="dropdown-item text-green update_admin" href="#"><i
                                                                                         class="fas fa-trash-alt me-1"></i>
                                                                                     تعديل</a>
-                                                                                <a class="dropdown-item text-red" href="#" data-bs-toggle="modal"
-                                                                                   data-bs-target="#delete_admin_modalcod11"><i
-                                                                                        class="fas fa-trash-alt me-1"></i>
+                                                                                <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>
                                                                                     حذف</a>
                                                                             </div>
                                                                         </div>
 
-                                                                        <!-- Delete Modal -->
-                                                                        <div class="modal fade" id="delete_admin_modalcod11" tabindex="-1"
-                                                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-                                                                                <div class="modal-content b-r-s-cont border-0">
-
-                                                                                    <div class="modal-header">
-                                                                                        <div class="modal-title" id="exampleModalLabel"><i
-                                                                                                class="fas fa-trash me-1"></i>
-                                                                                            حذف الاداري </div>
-                                                                                        <button type="button" data-bs-dismiss="modal"
-                                                                                                aria-label="Close"><i class="fas fa-times"></i></button>
-                                                                                    </div>
-                                                                                    <form>
-
-                                                                                        <!-- Modal content -->
-                                                                                        <div class="modal-body px-4">
-                                                                                            <div class="modal-body delete-conf-input text-center py-0">
-                                                                                                <p class="mb-0">هل انت متاكد من حذف  الاجتماع</p>
-                                                                                                <br>
-                                                                                                <input type="hidden" name="item_id"
-                                                                                                       value="cod11">
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="modal-footer">
-                                                                                            <div class="right-side">
-                                                                                                <button type="button" data-code="cod11"
-                                                                                                        class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
-                                                                                                </button>
-                                                                                            </div>
-                                                                                            <div class="divider"></div>
-                                                                                            <div class="left-side">
-                                                                                                <button type="button" class="btn btn-default btn-link"
-                                                                                                        data-bs-dismiss="modal">غلق النافذة</button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
                                                                     </td>
                                                                 </tr>
@@ -387,7 +298,47 @@
             </div>
 
         </div>
+        <!-- Delete Modal -->
+        <div class="modal fade" id="delete_admin_modal" tabindex="-1"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+                <div class="modal-content b-r-s-cont border-0">
 
+                    <div class="modal-header">
+                        <div class="modal-title" id="exampleModalLabel"><i
+                                class="fas fa-trash me-1"></i>
+                            حذف الاداري </div>
+                        <button type="button" data-bs-dismiss="modal"
+                                aria-label="Close"><i class="fas fa-times"></i></button>
+                    </div>
+                    <form action="{{ route('school_route.meetings.destroy', $item_val['id']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <!-- Modal content -->
+                        <div class="modal-body px-4">
+                            <div class="modal-body delete-conf-input text-center py-0">
+                                <p class="mb-0">هل انت متاكد من حذف  الاجتماع</p>
+                                <br>
+                                <input type="hidden" name="meeting_id" id="modalMeetingId">
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="right-side">
+                                <button type="submit" data-code="cod11" class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
+                                </button>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="left-side">
+                                <button type="button" class="btn btn-default btn-link"
+                                        data-bs-dismiss="modal">غلق النافذة</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -408,7 +359,13 @@
             touchEventsTarget: 'container',
         });
 
+        $('#delete_admin_modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var meetingId = button.data('meeting-id');
 
+            var modal = $(this);
+            modal.find('#modalMeetingId').val(meetingId);
+        });
         // Calendar
         fetchCalander();
 

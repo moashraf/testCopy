@@ -1,5 +1,6 @@
 @extends('website.school.layouts.master', ['no_header' => true, 'no_transparent_header' => false])
 @php
+
     $initialTab = 'pills-home'; // Replace 'pills-home' with the actual tab ID you want to set from the backend
     $tabs = [
         [
@@ -230,23 +231,23 @@
                                                     <div class="  form-group">
                                                         <div class="row" id="container_of_all_meeting_agenda" >
                                                             <label  for="committee" class="form-label" >    جدول اعمل الاجتماع  </label>
-                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
+                                                            @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                             @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
+                                                                    <div class="col-md-1 add-padding-bottom">
+                                                                        <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
+                                                                    </div>
+                                                                    <div class="col-md-8 add-padding-bottom">
+                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                                                                    <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
 
-                                                                        <div class="col-md-1 add-padding-bottom">
-                                                                            <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
-                                                                        </div>
-                                                                        <div class="col-md-8 add-padding-bottom">
-                                                                                <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda->Item }}">
-                                                                                <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda->id }}">
-                                                                        </div>
-                                                                        <div class="col-md-3  align-self-center ">
-                                                                            <a href="#" onclick="delete_meeting_agenda(this)"  >
-                                                                                <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                            </a>
-                                                                            <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
-                                                                                <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                            </a>
+                                                                </div>
+                                                                    <div class="col-md-3  align-self-center ">
+                                                                        <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                                                            <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                        </a>
+                                                                        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
+                                                                            <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                        </a>
 
 
                                                                         </div>
@@ -266,13 +267,13 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
+                                                            @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
-                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation->Item }}">
-                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation->id }}">
-                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation->status }}">
-                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation->reason }}">
+                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
+                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
+                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation['status'] }}">
+                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation['reason'] }}">
                                                                 </div>
                                                             @endforeach
                                                                   @else
@@ -304,7 +305,7 @@
 
                                                     <div class="row form-group " style="padding-top: 51px;" >
                                                         <div class="col-md-6">
-                                                            <button  style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="reset" class="col-md-3 btn btn-default  custom-reset-button">  السابق    </button>
+                                                            <button id="prevButton" style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="button" class="btn btn-default custom-reset-button">السابق</button>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ وانهاء </button>
@@ -334,11 +335,22 @@
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
+        $(document).ready(function() {
+
+            // Function to go to the next tab
+            $('#nextButton').click(function() {
+                $('.nav-pills .active').parent().next('li').find('button').trigger('click');
+            });
+
+            // Function to go to the previous tab
+            $('#prevButton').click(function() {
+                $('.nav-pills .active').parent().prev('li').find('button').trigger('click');
+            });
+        });
 
 
         add_meeting_agenda();
         function add_meeting_agenda(){
-            debugger
         if(typeof event != "undefined")
         {
             event.preventDefault();
@@ -396,13 +408,9 @@
          }
 
 
-        function goToSecondTab(){
-            $('.nav-link.active').removeClass('active');
-            $('#pills-home').removeClass('show active');
-            $('#pills-home-tab').removeClass('active');
-            $('#pills-profile').addClass('show active');
-            $('#pills-profile-tab').addClass('active');
-        }
+
+        // Call saveInputValues() before switching tabs
+        // Call restoreInputValues() after switching back to the tab
 
         var full_height_width_slider_swiper_weekly = new Swiper(".full_height_width_slider_swiper_weekly", {
             pagination: {
