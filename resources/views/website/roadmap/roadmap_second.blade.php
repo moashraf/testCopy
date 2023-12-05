@@ -278,6 +278,8 @@
 
                             <div class="input-group">
 
+
+
                                 <input name="established_date" type="text" style="border-left: 0px;"
                                     class="form-control hasdatetimepicker clickable-item-pointer @error('established_date') is-invalid @enderror"
                                     placeholder="YYYY/MM/DD"

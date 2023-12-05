@@ -164,7 +164,11 @@
                                                             {{ $item_val->Semester   }}
                                                         </td>
                                                         <td class="">
-                                                            {{ $item_val->status   }}
+                                                            @if($item_val->status)
+                                                           مكتمل
+                                                            @else
+                                                                غير مكتمل
+                                                            @endif
                                                         </td>
                                                         <td class="">
                                                             {{ $item_val->created_at   }}

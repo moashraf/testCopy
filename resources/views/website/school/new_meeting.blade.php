@@ -69,7 +69,7 @@
                                             <div class="card-body custom-card-body">
 
                                                     <input type="hidden" id="committees_and_teams_id" name="committees_and_teams_id" value="{{ request('Committees_id') ?? (  isset($item_val)  ?$item_val['committees_and_teams_id']:'')}}" class="  form-control">
-                                                    <input type="hidden" id="status" name="status" value="{{ isset($item_val)   ?$item_val['status']:0}}" class="  form-control">
+                                                    <input type="hidden" id="status" name="status" value="@if(isset($item_val) && $item_val['status'] ){{$item_val['status']}} @endif" class="  form-control">
 
                                                     <div class="form-group">
                                                         <div class="row">
@@ -77,7 +77,6 @@
                                                                 <label for="type" class="form-label">نوع الاجتماع</label>
                                                             </div>
                                                             <div class="col-md-9">
-
                                                                 <select  name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
                                                                     @foreach ([1=>'طارئ', 0=>'دوري'] as $index=>$value)
@@ -177,9 +176,19 @@
                             <!-- Second tab content goes here -->
                             <div class="container form-container">
                                 <div class="card custom-card">
-                                    <div id="meeting_title" class="   Committees_and_teams_meetings_create_title ">
-                                        إنشاء اجتماع اللجنة الإدارية
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div id="meeting_title" class="   Committees_and_teams_meetings_create_title ">
+                                                إنشاء اجتماع اللجنة الإدارية
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit"
+                                                    class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ  كمسوده </button>
+
+                                        </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12" >
                                             <div class="card-body custom-card-body">
@@ -237,7 +246,7 @@
                                                                         <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
                                                                     </div>
                                                                     <div class="col-md-8 add-padding-bottom">
-                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                                                                    <input type="text" autocomplete="off"  name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
                                                                     <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
 
                                                                 </div>
@@ -265,21 +274,26 @@
 
 
                                                     <div class="  form-group">
+                                                        <div class="row meeting_recommendations_header_div ">
+                                                            <div class="col-md-3" style=" text-align: center; " >التوصيه</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >الجهه المكلفه بالتنفيذ</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >مده التنفيذ</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >الجهه التابعه للتنفيذ</div>
+                                                        </div>
                                                         <div class="row">
-                                                            <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
+                                                             @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
-                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
+                                                                    <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
                                                                     <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
                                                                     <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation['status'] }}">
                                                                     <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation['reason'] }}">
                                                                 </div>
                                                             @endforeach
                                                                   @else
-                                                                @for ($i = 0; $i < 3; $i++)
+                                                                @for ($i = 0; $i < 4; $i++)
                                                                     <div class="col-md-3 add-padding-bottom">
-                                                                        <input type="text" name="recommendation_item[]" class="form-control" value="">
+                                                                        <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="">
                                                                         <input type="hidden" name="recommendation_status[]" class="form-control" value="1">
                                                                         <input type="hidden" name="recommendation_reason[]" class="form-control" value="">
                                                                     </div>
@@ -287,6 +301,19 @@
                                                          @endif
                                                         </div>
                                                     </div>
+
+
+                                                <div class="  form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-3 align-self-center ">
+                                                            <label  for="committee" class="form-label  ">       ما لم يتم تنفيذه  </label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                        1
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
 
                                                     <div class="  form-group">
@@ -361,7 +388,7 @@
                                       <span class="add_meeting_agenda_span_num"> ${datacount} </span>
                                 </div>
                                <div class="col-md-8 add-padding-bottom">
-                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                                     <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
                                     </div>
 
                                 <div class="col-md-3  align-self-center ">
