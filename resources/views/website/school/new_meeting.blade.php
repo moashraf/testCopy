@@ -258,26 +258,7 @@
                                                             @else
 
                                                         <div  id="myDiv">
-                                                            <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
-                                                                <div class="col-md-1 add-padding-bottom">
-                                                                      <span class="add_meeting_agenda_span_num"> 1 </span>
-                                                                </div>
-                                                               <div class="col-md-8 add-padding-bottom">
 
-                                                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
-
-                                                                    </div>
-                                                                <div class="col-md-3  align-self-center ">
-                                                                    <a href="#" onclick="delete_meeting_agenda(this)"  >
-                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                    </a>
-                                                                    <a href="#" onclick="add_meeting_agenda()" >
-                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                     </a>
-
-
-                                                                </div>
-                                                            </div>
 
                                                         </div>
                                                             @endif
@@ -354,21 +335,42 @@
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
 
-
+        add_meeting_agenda();
         function add_meeting_agenda(){
-debugger
-        event.preventDefault();
-          var newElement=  $(".add_meeting_agenda_div").first();
+if(typeof event != "undefined"){ event.preventDefault();}
 
-         var datacount=  $(".add_meeting_agenda_div").length
+          // var newElement=  $(".add_meeting_agenda_div").first();
+            var datacount=  $(".add_meeting_agenda_div").length+1
+            var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
+                                                                <div class="col-md-1 add-padding-bottom">
+                                                                      <span class="add_meeting_agenda_span_num"> ${datacount} </span>
+                                                                </div>
+                                                               <div class="col-md-8 add-padding-bottom">
+
+                                                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+
+                                                                    </div>
+                                                                <div class="col-md-3  align-self-center ">
+                                                                    <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                    </a>
+                                                                    <a href="#" onclick="add_meeting_agenda()" >
+                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                     </a>
+
+
+                                                                </div>
+                                                            </div>` ;
+
             if (2525 == 1){
                 $('#myDiv').prepend( newElement.clone());
             }else {
-                $('#myDiv').append(newElement.clone());
+              //  $('#myDiv').append(newElement.clone());
+                $('#myDiv').append(newElement);
             }
 
-            newElement.find('input').val("");
-            newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
+          //  newElement.find('input').val("");
+           // newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
          }
 
 
