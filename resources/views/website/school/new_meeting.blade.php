@@ -69,7 +69,7 @@
                                             <div class="card-body custom-card-body">
 
                                                     <input type="hidden" id="committees_and_teams_id" name="committees_and_teams_id" value="{{ request('Committees_id') ?? (  isset($item_val)  ?$item_val['committees_and_teams_id']:'')}}" class="  form-control">
-                                                    <input type="hidden" id="status" name="status" value="{{ isset($item_val)   ?$item_val['status']:0}}" class="  form-control">
+                                                    <input type="hidden" id="status" name="status" value="@if(isset($item_val) && $item_val['status'] ){{$item_val['status']}} @endif" class="  form-control">
 
                                                     <div class="form-group">
                                                         <div class="row">
@@ -77,7 +77,6 @@
                                                                 <label for="type" class="form-label">نوع الاجتماع</label>
                                                             </div>
                                                             <div class="col-md-9">
-
                                                                 <select  name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
                                                                     @foreach ([1=>'طارئ', 0=>'دوري'] as $index=>$value)
@@ -302,6 +301,19 @@
                                                          @endif
                                                         </div>
                                                     </div>
+
+
+                                                <div class="  form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-3 align-self-center ">
+                                                            <label  for="committee" class="form-label  ">       ما لم يتم تنفيذه  </label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                        1
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
 
                                                     <div class="  form-group">

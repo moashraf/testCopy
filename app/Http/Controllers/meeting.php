@@ -43,7 +43,7 @@ class meeting extends Controller
             'Target_group' => null,
             'deleted_at' => null,
             'Semester' => null,
-            'status' => 1,
+            'status' => 0,
             'location' => null,
             'stage' => null,
             'start_date' => null,
@@ -78,6 +78,7 @@ class meeting extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
+
         $this->validate($request, [
             'committees_and_teams_id' => 'required',
             'title' => 'required',
@@ -90,19 +91,26 @@ class meeting extends Controller
         $endDateTimeString = $startDate . ' ' . $request->input('end_time'); // e.g., '2023-12-04 22:29:29'
         $endDateTime = new DateTime($endDateTimeString);
         $formattedEndDateTime = $endDateTime->format('Y-m-d H:i:s'); // Format for SQL timestamp
+        $status=$request->input('status');
 
+        if( ($request->input('recommendation_item')) &&   $request->input('recommendation_item')[0] ==null || $request->input('meeting_agenda_item')[0] ==null )
+          {   $status=0;   }
+        else{
+            $status=1;
+        }
         $form = meetings::create([
             'committees_and_teams_id'=>$request->input('committees_and_teams_id'),
             'Number_of_attendees' => (int) $request->input('Number_of_attendees'),
             'title' => $request->input('title'),
             'Target_group' => $request->input('Target_group'),
-            'status' => $request->input('status'),
+            'status' =>  $status,
             'location' => $request->input('location'),
             'start_date' => $formattedStartDateTime,
             'type' => $request->input('type'),
             'end_time' => $formattedEndDateTime,
             'Semester' => $request->input('Semester'),
         ]);
+
         foreach ($request->input('recommendation_item') as $index=>$item) {
             if ($item){
                 $meetingRecommendation = new meeting_recommendations;
