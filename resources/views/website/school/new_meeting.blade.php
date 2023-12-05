@@ -77,7 +77,7 @@
                                                             </div>
                                                             <div class="col-md-9">
 
-                                                                <select required name="type" id="type" class="form-control custom-select">
+                                                                <select  name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
                                                                     @foreach ([1=>'طارئ', 0=>'دوري'] as $index=>$value)
                                                                         <option value="{{ $index }}"
