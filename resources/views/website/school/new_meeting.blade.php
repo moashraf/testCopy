@@ -16,8 +16,8 @@
     $action = isset($item_val['id']) ? route('school_route.meetings.update', $item_val['id']) : route('school_route.meetings.store');
     $method = isset($item_val['id']) ? 'PUT' : 'POST';
 @endphp
-@section('title', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
-@section('topbar', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
+@section('title', 'انشاء اجتماع لجنة/ فرقه | منصة لام')
+@section('topbar', 'انشاء اجتماع لجنة/ فرقه | منصة لام')
 
 <!-- css insert -->
 @section('css')
@@ -62,7 +62,7 @@
                             <div class="container form-container">
                                 <div class="card custom-card">
                                     <div class="Committees_and_teams_meetings_create_title">
-                                        إنشاء اجتماع اللجنة الإدارية
+                                        إنشاء {{$Committees_and_teams['title']}}
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
@@ -74,10 +74,10 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-3 align-self-center">
-                                                                <label for="type" class="form-label">نوع الاجتماع</label>
+                                                                <label for="type" class="form-label"> نوع الاجتماع <span class="required-asterisk">*</span></label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <select  name="type" id="type" class="form-control custom-select">
+                                                                <select required  name="type" id="type" class="form-control custom-select">
                                                                     <option value="">اختر نوع الاجتماع</option>
                                                                     @foreach ([1=>'طارئ', 0=>'دوري'] as $index=>$value)
                                                                         <option value="{{ $index }}"
@@ -91,13 +91,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="  form-group">
+                                                    <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-3 align-self-center ">
-                                                                <label  for="committee" class="form-label  ">تاريخ الاجتماع </label>
+                                                                <label  for="committee" class="form-label"> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
+                                                                <input required type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-3 align-self-center ">
+                                                                <label  for="committee" class="form-label" >عنوان  الاجتماع <span class="required-asterisk">*</span> </label>
+                                                            </div>
+                                                            <div class="col-md-9">
+
+                                                                <input   required type="text" id="title"  name="title" value="{{ isset($item_val)  ?$item_val['title']:''}}" class="form-control">
 
                                                             </div>
                                                         </div>
@@ -107,13 +121,10 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <div class="col-md-3 align-self-center ">
-                                                                <label  for="committee" class="form-label" >عنوان  الاجتماع </label>
+                                                                <label  for="committee" class="form-label">موعد الاجتماع<span class="required-asterisk">*</span> </label>
                                                             </div>
                                                             <div class="col-md-9">
-
-                                                                <input   required type="text" id="title" name="title" value="{{ isset($item_val)  ?$item_val['title']:''}}" class="  form-control">
-
-
+                                                                <input type="time" id="time" required name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,22 +133,10 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <div class="col-md-3 align-self-center ">
-                                                                <label  for="committee" class="form-label  ">موعد الاجتماع </label>
+                                                                <label  for="committee" class="form-label">مكان  الاجتماع<span class="required-asterisk">*</span> </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="time" id="time" name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="  form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-3 align-self-center ">
-                                                                <label  for="committee" class="form-label">مكان  الاجتماع </label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <input type="text" name="location" class="form-control" value="{{ isset($item_val) ?$item_val['location']:''}}">
+                                                                <input type="text" name="location" class="form-control" required  value="{{ isset($item_val) ?$item_val['location']:''}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -147,10 +146,10 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <div class="col-md-3 align-self-center ">
-                                                                <label  for="committee" class="form-label  "> الفصل الدراسي    </label>
+                                                                <label  for="committee" class="form-label"> الفصل الدراسي <span class="required-asterisk">*</span>   </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text"  name="Semester" value="{{ isset($item_val) ? $item_val['Semester']: ''}}" class="  form-control">
+                                                                <input type="text"  required name="Semester" value="{{ isset($item_val) ? $item_val['Semester']: ''}}" class="  form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -178,9 +177,8 @@
                                 <div class="card custom-card">
                                     <div class="row">
                                         <div class="col-md-9">
-                                            <div id="meeting_title" class="   Committees_and_teams_meetings_create_title ">
-                                                إنشاء اجتماع اللجنة الإدارية
-                                            </div>
+                                            <div  class="Committees_and_teams_meetings_create_title ">
+                                                إنشاء {{$Committees_and_teams['title']}}                                            </div>
                                         </div>
                                         <div class="col-md-3">
                                             <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit"
@@ -363,7 +361,24 @@
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#pills-profile-tab').on('click', function(e) {
+                var isValid = true;
+                $('#pills-home input').each(function() {
+                    if (!this.checkValidity()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid'); // Add error class for styling
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
 
+                if (!isValid) {
+                    e.preventDefault(); // Prevent switching to tab2
+                    e.stopPropagation();
+                    $('#pills-home-tab').tab('show');
+                    return false;
+                }
+            });
             // Function to go to the next tab
             $('#nextButton').click(function() {
                 $('.nav-pills .active').parent().next('li').find('button').trigger('click');

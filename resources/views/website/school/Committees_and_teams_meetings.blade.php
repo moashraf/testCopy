@@ -1,7 +1,7 @@
 @extends('website.school.layouts.master', ['no_header' => true, 'no_transparent_header' => false])
 
-@section('title', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
-@section('topbar', 'الصفحة الرئيسية لمدرستك في منصة لام | منصة لام')
+@section('title', 'اللجان والفرق | منصة لام')
+@section('topbar', 'اللجان والفرق | منصة لام')
 
 <!-- css insert -->
 @section('css')
@@ -278,7 +278,11 @@
                                                                         {{ $item_val->Semester   }}
                                                                     </td>
                                                                     <td class="">
-                                                                        {{ $item_val->status   }}
+                                                                        @if($item_val->status)
+                                                                            مكتمل
+                                                                        @else
+                                                                            غير مكتمل
+                                                                        @endif
                                                                     </td>
                                                                     <td class="">
                                                                         {{ $item_val->created_at   }}
@@ -313,6 +317,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     @endif
                                 @endforeach
                             </div>
