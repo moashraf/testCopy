@@ -261,10 +261,13 @@ class meeting extends Controller
         if ($meeting_id){
             $id =$meeting_id;
         }
-        $meeting = meetings::findOrFail($id);
-        $meeting->delete();
 
-        return redirect()->back()->with('success', 'لقد تم حذف الاجتماع بتجاح');
+        $meeting = meetings::findOrFail($id);
+        if ($meeting) {
+            $meeting->delete();
+            return redirect()->back()->with('success', 'لقد تم حذف الاجتماع بتجاح');
+        }
+        return redirect()->back()->with('error', 'عذرا نواجه مشكله في حذف هذا الاجتماع');
     }
 
 
