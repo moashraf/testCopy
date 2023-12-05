@@ -1,5 +1,6 @@
 @extends('website.school.layouts.master', ['no_header' => true, 'no_transparent_header' => false])
 @php
+
     $initialTab = 'pills-home'; // Replace 'pills-home' with the actual tab ID you want to set from the backend
     $tabs = [
         [
@@ -161,7 +162,7 @@
                                                             <button style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="reset" class="col-md-3 btn btn-default custom-reset-button">إنهاء</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button id="nextButton" style="background-color: #0A3A81; width: 50%;" type="button" class="btn btn-primary custom-submit-button">التالي</button>
+                                                            <button id="nextButton" style=" float:left ;background-color: #0A3A81; width: 50%;" type="button" class="btn btn-primary custom-submit-button">التالي</button>
                                                         </div>
                                                     </div>
 
@@ -230,14 +231,14 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label" >    جدول اعمل الاجتماع  </label>
-                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
+                                                            @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                             @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
                                                                     <div class="col-md-1 add-padding-bottom">
                                                                         <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
                                                                     </div>
                                                                     <div class="col-md-8 add-padding-bottom">
-                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda->Item }}">
-                                                                    <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda->id }}">
+                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                                                                    <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
 
                                                                 </div>
                                                                     <div class="col-md-3  align-self-center ">
@@ -269,13 +270,13 @@
                                                     <div class="  form-group">
                                                         <div class="row">
                                                             <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @if(!$item_val['meeting_recommendations']->isEmpty())
+                                                            @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
-                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation->Item }}">
-                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation->id }}">
-                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation->status }}">
-                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation->reason }}">
+                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
+                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
+                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation['status'] }}">
+                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation['reason'] }}">
                                                                 </div>
                                                             @endforeach
                                                                   @else
@@ -338,6 +339,7 @@
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+
             // Function to go to the next tab
             $('#nextButton').click(function() {
                 $('.nav-pills .active').parent().next('li').find('button').trigger('click');

@@ -166,6 +166,7 @@ class meeting extends Controller
             $Time = new DateTime($item_val->end_time);
             $item_val->end_time = $Time->format('H:i:s');
         }
+        $item_val = $item_val->toArray();
         return view('website.school.new_meeting',
             compact('current_school', 'school','item_val', 'sliders', 'video_tutorial'));
     }
@@ -212,41 +213,46 @@ class meeting extends Controller
         }
         return redirect()->back()->with('success', 'تم تعديل الاجتماع بنجاح');
     }    /**
-
-
-    public function downloadPDF($id)
-    {
-        $meeting = meetings::findOrFail($id);
-
-        $pdf = new Mpdf();
-        $current_school = Auth::guard('school')->user()->current_working_school_id;
-
-        $school = School::find($current_school);
-
-
-        $sliders = Slider::where('type', 1)->get();
-        $item_val = meetings::find($id);
-
-        // video tutorial
-        $video_tutorial = Video_tutorial::where('type', 2)->first();
-        // Load a view for the PDF content and convert it to HTML
-        $html =view('website.school.new_meeting',
-            compact('current_school', 'school', 'sliders', 'video_tutorial'))->render();
-
-        $pdf->WriteHTML($html);
-
-        // Output the PDF as download
-        return $pdf->Output('meeting_'.$id.'.pdf', 'D');
-    }
-
-    /**
+ *
+*
+* public function downloadPDF($id)
+    * {
+        * $meeting = meetings::findOrFail($id);
+ *
+* $pdf = new Mpdf();
+        * $current_school = Auth::guard('school')->user()->current_working_school_id;
+ *
+* $school = School::find($current_school);
+ *
+*
+* $sliders = Slider::where('type', 1)->get();
+        * $item_val = meetings::find($id);
+ *
+* // video tutorial
+        * $video_tutorial = Video_tutorial::where('type', 2)->first();
+        * // Load a view for the PDF content and convert it to HTML
+        * $html =view('website.school.new_meeting',
+            * compact('current_school', 'school', 'sliders', 'video_tutorial'))->render();
+ *
+* $pdf->WriteHTML($html);
+ *
+* // Output the PDF as download
+        * return $pdf->Output('meeting_'.$id.'.pdf', 'D');
+    * }
+ *
+* /**
      * Remove the specified resource from storage.
      *
      * @param int $id
+    *  @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
+        $meeting_id = $request->input('meeting_id');
+        if ($meeting_id){
+            $id =$meeting_id;
+        }
         $meeting = meetings::findOrFail($id);
         $meeting->delete();
 
