@@ -17,8 +17,8 @@
     $method = isset($item_val['id']) ? 'PUT' : 'POST';
     $text = isset($item_val['id']) ? 'تعديل' : 'إنشاء';
 @endphp
-@section('title', 'انشاء اجتماع لجنة/ فرقه | منصة لام')
-@section('topbar', 'انشاء اجتماع لجنة/ فرقه | منصة لام')
+@section('title', $text .' ' .$Committees_and_teams['title'])
+@section('topbar', $text .' ' .$Committees_and_teams['title'])
 
 <!-- css insert -->
 @section('css')
@@ -38,9 +38,14 @@
         <div class="row">
             <div class="row main_cot_bg p-2 align-items-center mb-4" style=" font-size: .9rem;  background-color: #0A3A81;">
                 <div class="col-12 col-xl-12">
-                    <h5 class="  text-s2" style="     margin-top: 0.5rem;   color: white;">
-                        إجتماعات اللجان والفرق
-                    </h5>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-s2 active"  style="color: white;" aria-current="page">المدرسه</li>
+                            <li class="breadcrumb-item text-s2" style="color: white;">اللجان</li>
+                            <li class="breadcrumb-item text-s2" style="color: white;">{{$text}} {{$Committees_and_teams['title']}}</li>
+                        </ol>
+                    </nav>
+
                 </div>
             </div>
             <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="custom-form">

@@ -54,6 +54,24 @@ body {
 .text-red {
     color: #CF637F !important;
 }
+.breadcrumb-item::after{
+    content: '>';
+    padding-right: 2px;
+    position: absolute;
+}
+.breadcrumb-item+.breadcrumb-item::before{
+    content: '';
+}
+
+/* Remove the arrow from the last item */
+.breadcrumb-item:last-child::after {
+    content: '';
+}
+/* Remove the arrow from the last item */
+.breadcrumb-item {
+   padding-left: 5px;!important;
+   padding-right: 2px;!important;
+}
 .required-asterisk {
     color: red;
 }
