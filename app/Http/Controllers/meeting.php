@@ -119,8 +119,10 @@ class meeting extends Controller
                 $meetingRecommendation = new meeting_recommendations;
                 $meetingRecommendation->meeting_id = $form->id;
                 $meetingRecommendation->item = $item; // item from the array
-                $meetingRecommendation->status = $request->input('recommendation_status')[$index];
-                $meetingRecommendation->reason = $request->input('recommendation_reason')[$index];
+                $meetingRecommendation->Implementation_period = $request->input('Implementation_period')[$index];
+                $meetingRecommendation->entity_responsible_implementation = $request->input('entity_responsible_implementation')[$index];
+                $meetingRecommendation->entity_responsible_implementation_related = $request->input('entity_responsible_implementation_related')[$index];
+                $meetingRecommendation->status =1;
                 $meetingRecommendation->save();
             }
         }

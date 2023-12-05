@@ -281,21 +281,46 @@
                                                         <div class="row">
                                                              @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
-                                                                <div class="col-md-3 add-padding-bottom">
-                                                                    <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
-                                                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
-                                                                    <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation['status'] }}">
-                                                                    <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation['reason'] }}">
-                                                                </div>
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
+                                                                        <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
+                                                                    </div>
+
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" autocomplete="off" name="entity_responsible_implementation[]" class="form-control" value="{{ $recommendation['entity_responsible_implementation'] }}">
+                                                                    </div>
+
+
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" autocomplete="off" name="Implementation_period[]" class="form-control" value="{{ $recommendation['Implementation_period'] }}">
+                                                                    </div>
+
+
+                                                                    <div class="col-md-3 add-padding-bottom">
+                                                                        <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control" value="{{ $recommendation['entity_responsible_implementation_related'] }}">
+                                                                    </div>
+
+
                                                             @endforeach
                                                                   @else
-                                                                @for ($i = 0; $i < 4; $i++)
-                                                                    <div class="col-md-3 add-padding-bottom">
-                                                                        <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="">
-                                                                        <input type="hidden" name="recommendation_status[]" class="form-control" value="1">
-                                                                        <input type="hidden" name="recommendation_reason[]" class="form-control" value="">
-                                                                    </div>
-                                                                @endfor
+
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="">
+                                                                </div>
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" autocomplete="off" name="entity_responsible_implementation[]" class="form-control" value="">
+                                                                </div>
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" autocomplete="off" name="Implementation_period[]" class="form-control" value="">
+                                                                </div>
+                                                                <div class="col-md-3 add-padding-bottom">
+                                                                    <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control" value="">
+                                                                </div>
+
+
+
+
+
                                                          @endif
                                                         </div>
                                                     </div>
