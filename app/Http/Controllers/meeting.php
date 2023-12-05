@@ -113,7 +113,7 @@ class meeting extends Controller
             'end_time' => $formattedEndDateTime,
             'Semester' => $request->input('Semester'),
         ]);
-
+        if ($request->input('recommendation_item') !=null) {
         foreach ($request->input('recommendation_item') as $index=>$item) {
             if ($item){
                 $meetingRecommendation = new meeting_recommendations;
@@ -126,6 +126,18 @@ class meeting extends Controller
                 $meetingRecommendation->save();
             }
         }
+        }
+
+        foreach ($request->input('meeting_recommendations_not_completed') as $index=>$item) {
+            if ($item){
+                $meetingRecommendation = new meeting_recommendations;
+                $meetingRecommendation->meeting_id = $form->id;
+                $meetingRecommendation->Item = $item; // item from the array
+                $meetingRecommendation->status =0;
+                $meetingRecommendation->save();
+            }
+        }
+
         foreach ($request->input('meeting_agenda_item') as $item) {
             if ($item){
                 $meeting_agenda = new meeting_agenda;
@@ -207,25 +219,43 @@ class meeting extends Controller
         meeting_recommendations::where('meeting_id', $meeting_id)->delete();
 // Delete existing meeting agendas
         meeting_agenda::where('meeting_id', $meeting_id)->delete();
-        foreach ($request->input('recommendation_item') as $index =>$item) {
-            if ($item){
-                $meetingRecommendation = new meeting_recommendations;
-                $meetingRecommendation->meeting_id = $meeting_id;
-                $meetingRecommendation->item = $item; // item from the array
-                $meetingRecommendation->status = $request->input('recommendation_status')[$index];
-                $meetingRecommendation->reason = $request->input('recommendation_reason')[$index];
-                $meetingRecommendation->save();
+        if ($request->input('recommendation_item') !=null) {
+            foreach ($request->input('recommendation_item') as $index => $item) {
+                if ($item) {
+                    $meetingRecommendation = new meeting_recommendations;
+                    $meetingRecommendation->meeting_id = $meeting_id;
+                    $meetingRecommendation->status = 1;
+                    $meetingRecommendation->item = $item; // item from the array
+                    $meetingRecommendation->Implementation_period = $request->input('Implementation_period')[$index];
+                    $meetingRecommendation->entity_responsible_implementation = $request->input('entity_responsible_implementation')[$index];
+                    $meetingRecommendation->entity_responsible_implementation_related = $request->input('entity_responsible_implementation_related')[$index];
+                    $meetingRecommendation->save();
+                }
             }
         }
 
-        foreach ($request->input('meeting_agenda_item') as $index =>$item) {
-            if ($item){
-                $meeting_agenda = new meeting_agenda;
-                $meeting_agenda->item = $item; // item from the array
-                $meeting_agenda->meeting_id = $meeting_id;
-                $meeting_agenda->save();
+        if ($request->input('meeting_recommendations_not_completed') !=null) {
+            foreach ($request->input('meeting_recommendations_not_completed') as $index => $item) {
+                if ($item) {
+                    $meetingRecommendation = new meeting_recommendations;
+                    $meetingRecommendation->meeting_id = $meeting_id;
+                    $meetingRecommendation->status = 0;
+                    $meetingRecommendation->item = $item; // item from the array
+                    $meetingRecommendation->save();
+                }
             }
+        }
 
+        if ($request->input('meeting_agenda_item') !=null) {
+            foreach ($request->input('meeting_agenda_item') as $index => $item) {
+                if ($item) {
+                    $meeting_agenda = new meeting_agenda;
+                    $meeting_agenda->item = $item; // item from the array
+                    $meeting_agenda->meeting_id = $meeting_id;
+                    $meeting_agenda->save();
+                }
+
+            }
         }
         return redirect()->back()->with('success', 'تم تعديل الاجتماع بنجاح');
     }    /**

@@ -257,7 +257,7 @@
 
                            </div>
                                <div class="col-md-3  align-self-center ">
-                                   <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                   <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                    </a>
                                    <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
@@ -289,6 +289,7 @@
                    <div class="row">
                         @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                        @foreach ($item_val['meeting_recommendations'] as $recommendation)
+                           @if ($recommendation['status'] ==1)
                                <div class="col-md-3 add-padding-bottom">
                                    <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
                                    <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
@@ -298,17 +299,14 @@
                                    <input type="text" autocomplete="off" name="entity_responsible_implementation[]" class="form-control" value="{{ $recommendation['entity_responsible_implementation'] }}">
                                </div>
 
-
                                <div class="col-md-3 add-padding-bottom">
                                    <input type="text" autocomplete="off" name="Implementation_period[]" class="form-control" value="{{ $recommendation['Implementation_period'] }}">
                                </div>
 
-
                                <div class="col-md-3 add-padding-bottom">
                                    <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control" value="{{ $recommendation['entity_responsible_implementation_related'] }}">
                                </div>
-
-
+                              @endif
                        @endforeach
                              @else
 
@@ -341,18 +339,18 @@
                        <label  for="committee" class="form-label  meeting_recommendations_not_side_title  ">    ما  لم ينفذ من  التوصيات واسباب عدم التنفيذ  </label>
                    </div>
                    <div class="col-md-9 add-padding-bottom " id="container_of_all_meeting_recommendations_not" >
-                       <div class="row"   >
+
 
                    @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
-                       @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
-
+                       @foreach  ($item_val['meeting_recommendations'] as $key => $recommendation_val)
+                                   @if ($recommendation_val['status'] == 0)
+                                   <div class="row add_meeting_recommendations_not_div "   >
                            <div class="col-md-8 add-padding-bottom">
-                               <input type="text" autocomplete="off"  name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
-                               <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
-
-                           </div>
+                               <input type="text" autocomplete="off"  name="meeting_recommendations_not_completed[]" class="form-control"
+                                      value="{{ $recommendation_val['Item'] }}">
+                            </div>
                            <div class="col-md-3  align-self-center ">
-                               <a href="#" onclick="delete_meeting_agenda(this)"  >
+                               <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
                                    <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                </a>
                                <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"  >
@@ -361,13 +359,14 @@
 
 
                            </div>
-
+                                   </div>
+                            @endif
                        @endforeach
                    @else
 
                        <div  id="container_of_all_meeting_recommendations_not">    </div>
                    @endif
-                   </div>
+
                    </div>
                </div>
            </div>
@@ -504,10 +503,10 @@ $(document).ready(function() {
                 event.preventDefault();
             }
             var datacount=  $(".add_meeting_recommendations_not_div").length+1
-            var newElement=   ` <div   class=" row add_meeting_recommendations_not_div" id="add_meeting_recommendations_not_div">
+            var newElement=   ` <div   class=" row add_meeting_recommendations_not_div"  >
 
                 <div class="col-md-9 add-padding-bottom">
-                <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                <input type="text"  autocomplete="off" name="meeting_recommendations_not_completed[]" class="form-control meeting_recommendations_not_completed " value="">
                 </div>
 
                 <div class="col-md-3  align-self-center ">
@@ -539,6 +538,7 @@ $(document).ready(function() {
         }
 
         function delete_parentElement(this_this,div_class){
+            debugger
         event.preventDefault();
         var datacount=  $("."+div_class).length
         if (datacount > 1){
