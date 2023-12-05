@@ -109,14 +109,13 @@
                                         {{ $item->title   }}
                                     </button>
                                 </div>
-                                <div class="col-2   ">
-
-                              <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                                <div class="col-2">
+                                      <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
                                          style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
                                         <span class="no_show_on_map">
                                         انشاء اجتماع جديد
                                         </span>
-                                    </a>
+                                      </a>
                                 </div>
                                 <div class="col-2">
                                     <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
@@ -209,13 +208,38 @@
                             <div style="    margin-top: 10%;" class="accordion" id="accordionExample">
                                 @foreach ($Committees_and_teams as $key => $item)
                                     @if($item->classification ==2 )
-                                        <div class="accordion-item">
+                                        <div class="accordion-item" style=" margin-bottom: 35px; ">
+
                                             <h2 class="accordion-header">
-                                                <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
-                                                        aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
-                                                    {{ $item->title   }}
-                                                </button>
+
+                                                <div class="row background_button_body no-margin-left-right ">
+                                                    <div class="col-8 no_arrows_data_to_show ">
+                                                        <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
+                                                                aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
+                                                            {{ $item->title   }}
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                                                            style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
+                                                            <span class="no_show_on_map">
+                                        انشاء اجتماع جديد
+                                        </span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
+                                                                aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
+
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
+
                                             </h2>
+
+
                                             <div id="collapse_{{$item->id}}" class="accordion-collapse collapse  @if($key ==0 )  show @endif  "
                                                  data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
@@ -263,13 +287,14 @@
                                                                             </a>
                                                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                                                  aria-labelledby="dropdownMenuLink">
-                                                                                <a class="dropdown-item text-green update_admin" href="#"><i
-                                                                                        class="fas fa-trash-alt me-1"></i>
-                                                                                    تعديل</a>
-                                                                                <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>
-                                                                                    حذف</a>
+                                                                                <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
+
+                                                                                <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>حذف</a>
+                                                                                <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
+                                                                                <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
                                                                             </div>
                                                                         </div>
+
 
 
                                                                     </td>

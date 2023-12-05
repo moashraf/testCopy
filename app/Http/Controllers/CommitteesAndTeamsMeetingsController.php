@@ -49,6 +49,7 @@ class CommitteesAndTeamsMeetingsController extends Controller
 
 
         $current_school = Auth::guard('school')->user()->current_working_school_id;
+        $current_user_id = Auth::guard('school')->user()->id;
         $school = School::find($current_school);
         $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->with('get_meetings')->get();
         Carbon::setLocale('ar');
@@ -57,9 +58,8 @@ class CommitteesAndTeamsMeetingsController extends Controller
         $video_tutorial = Video_tutorial::where('type', 2)->first();
 
 
-
-        return view('website.school.new_meeting',
-            compact('current_school', 'school', 'today_date_ar','Committees_and_teams','video_tutorial'));
+        return view('website.school.new_committee',
+            compact('current_school', 'school','current_user_id', 'today_date_ar','Committees_and_teams','video_tutorial'));
 
 
 
@@ -77,15 +77,17 @@ class CommitteesAndTeamsMeetingsController extends Controller
 
          $this->validate($request, [
             'title' => 'required',
-            'school_id' => 'required',
+            'classification' => 'required',
         ]);
 
         $form = Committees_and_teams::create([
-            'meeting_id'=>$request->input('meeting_id'),
-            'Item'=>$request->input('Item'),
+            'author'=>$request->input('author'),
+            'title'=>$request->input('title'),
+            'school_id'=>$request->input('school_id'),
+            'classification'=>$request->input('classification'),
         ]);
 
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
+        return redirect()->route('school_route.Committees_and_teams_meetings.index')->with('success', 'تم انشاء اللجنة/ الفرقه بنجاح');
     }
 
     /**
@@ -108,18 +110,19 @@ class CommitteesAndTeamsMeetingsController extends Controller
     public function edit($id)
     {
         $current_school = Auth::guard('school')->user()->current_working_school_id;
+        $current_user_id = Auth::guard('school')->user()->id;
+        $Committees_and_teams = Committees_and_teams::where('school_id',$school->id)->with('get_meetings')->get();
 
         $school = School::find($current_school);
 
 
         $sliders = Slider::where('type', 1)->get();
-        $commite_and_team = Committees_and_teams::find($id);
-
+        $item_val = Committees_and_teams::find($id);
+        $item_val = $item_val->toArray();
         // video tutorial
         $video_tutorial = Video_tutorial::where('type', 2)->first();
-
-        return view('website.school.new_meeting',
-            compact('current_school', 'school','commite_and_team', 'sliders', 'video_tutorial'));
+        return view('website.school.new_committee',
+            compact('current_school', 'school','current_user_id','Committees_and_teams','item_val', 'sliders', 'video_tutorial'));
     }
 
     /**
@@ -134,13 +137,16 @@ class CommitteesAndTeamsMeetingsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'school_id' => 'required',
+            'classification' => 'required',
         ]);
-        $commite_and_team = Committees_and_teams::find($id);
-        $commite_and_team->meeting_id = $request->input('meeting_id');
-        $commite_and_team->Item = $request->input('Item');
+
+        $commite_and_team = Committees_and_teams::findOrFail($id);
+        $commite_and_team->author = $request->input('author');
+        $commite_and_team->title = $request->input('title');
+        $commite_and_team->school_id = $request->input('school_id');
+        $commite_and_team->classification = $request->input('classification');
         $commite_and_team->save();
-        return redirect()->back()->with('success', 'Your form has been sent successfully');
+        return redirect()->route('school_route.Committees_and_teams_meetings.index')->with('success', 'تم تعديل اللجنه/الفرقه بنجاح');
     }
 
     /**
@@ -155,9 +161,8 @@ class CommitteesAndTeamsMeetingsController extends Controller
 
         if ($committee_and_team) {
             $committee_and_team->delete();
-            return redirect()->back()->with('success', 'Record has been deleted successfully');
+            return redirect()->back()->with('success', 'لقد تم حذف اللجنة/الفرقه بتجاح');
         }
-
-        return redirect()->back()->with('error', 'Record not found');
+        return redirect()->back()->with('error', 'عذرا نواجه مشكله في حذف هذا اللجنة/الفرقه');
     }
 }
