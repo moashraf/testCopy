@@ -245,7 +245,7 @@
                                                                         <a href="#" onclick="delete_meeting_agenda(this)"  >
                                                                             <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                                         </a>
-                                                                        <a href="#" onclick="add_meeting_agenda()" >
+                                                                        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
                                                                             <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                                         </a>
 
@@ -257,7 +257,7 @@
                                                             @endforeach
                                                             @else
 
-                                                        <div  id="myDiv">
+                                                        <div  id="container_of_all_meeting_agenda">
 
 
                                                         </div>
@@ -338,58 +338,57 @@
 
         add_meeting_agenda();
         function add_meeting_agenda(){
-        if(typeof event != "undefined"){ event.preventDefault();}
-          // var newElement=  $(".add_meeting_agenda_div").first();
-            let styles_val="display: inline-block ;";
-            var datacount=  $(".add_meeting_agenda_div").length+1
-             //
-            // if ( $(".add_meeting_agenda_div").length == datacount+1)
-            // {
-            //     styles_val="display: none;";
-            // }
+            debugger
+        if(typeof event != "undefined")
+        {
+            event.preventDefault();
+        }
+             var datacount=  $(".add_meeting_agenda_div").length+1
+           var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
+                                <div class="col-md-1 add-padding-bottom">
+                                      <span class="add_meeting_agenda_span_num"> ${datacount} </span>
+                                </div>
+                               <div class="col-md-8 add-padding-bottom">
 
-            var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
-                                                                <div class="col-md-1 add-padding-bottom">
-                                                                      <span class="add_meeting_agenda_span_num"> ${datacount} </span>
-                                                                </div>
-                                                               <div class="col-md-8 add-padding-bottom">
+                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
 
-                                                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
-
-                                                                    </div>
+                                    </div>
 
 
-                                                                <div class="col-md-3  align-self-center ">
-                                                                    <a href="#" onclick="delete_meeting_agenda(this)"  >
-                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                    </a>
+                                <div class="col-md-3  align-self-center ">
+                                    <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                    </a>
 
-                                                                    <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add" style=" ${styles_val}" >
-                                                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                     </a>
-
-
-                                                                </div>
-                                                            </div>` ;
+                                    <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
+                                        <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                     </a>
 
 
+                                </div>
+                            </div>` ;
 
-                $('#myDiv').append(newElement);
 
-            let elements = document.querySelectorAll('.add_meeting_agenda_class_add');
+                $('#container_of_all_meeting_agenda').append(newElement);
+            let add_meeting_agenda_class_add_elements = document.querySelectorAll('.add_meeting_agenda_class_add');
 
-            // Remove all but the last element
-            if (elements.length > 1) {
-                for (let i = 0; i < elements.length - 1; i++) {
-                    elements[i].remove();
-                }
-            }
+            Remove_all_but_the_last_element(add_meeting_agenda_class_add_elements);
+
+            // var newElement=  $(".add_meeting_agenda_div").first();
             //  $('#myDiv').append(newElement.clone());
             //  $('#myDiv').prepend(newElement.clone());
           //  newElement.find('input').val("");
            // newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
          }
 
+        function Remove_all_but_the_last_element(vla){
+            // Remove all but the last element
+            if (vla.length > 1) {
+                for (let i = 0; i < vla.length - 1; i++) {
+                    vla[i].remove();
+                }
+            }
+        }
 
         function delete_meeting_agenda(this_this){
             event.preventDefault();
