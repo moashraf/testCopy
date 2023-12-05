@@ -177,9 +177,19 @@
                             <!-- Second tab content goes here -->
                             <div class="container form-container">
                                 <div class="card custom-card">
-                                    <div id="meeting_title" class="   Committees_and_teams_meetings_create_title ">
-                                        إنشاء اجتماع اللجنة الإدارية
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div id="meeting_title" class="   Committees_and_teams_meetings_create_title ">
+                                                إنشاء اجتماع اللجنة الإدارية
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit"
+                                                    class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ  كمسوده </button>
+
+                                        </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12" >
                                             <div class="card-body custom-card-body">
