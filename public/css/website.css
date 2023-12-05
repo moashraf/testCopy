@@ -5610,6 +5610,15 @@ body.sidebar-toggled footer.sticky-footer {
 .add-padding-bottom{
     padding-bottom: 10px;
 }
+.meeting_recommendations_not_side_title {
+    text-align: center;
+    color: #0a3a81;
+    font-weight: bold;
+    background: #eab977;
+    border-radius: 6px;
+    padding: 51px;
+}
+
 
 .meeting_recommendations_header_div{
     margin-bottom: 20px;

@@ -54,7 +54,7 @@
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         @foreach ($tabs as $tab)
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link{{ $tab['id'] === $initialTab ? ' active tabcontent_active' : '' }}" id="{{ $tab['id'] }}-tab" data-bs-toggle="pill" data-bs-target="#{{ $tab['id'] }}" type="button" role="tab" aria-controls="{{ $tab['id'] }}" aria-selected="{{ $tab['id'] === $initialTab ? 'true' : 'false' }}">
+                                <button class="nav-link {{ $tab['id'] === $initialTab ? ' active tabcontent_active' : '' }}" id="{{ $tab['id'] }}-tab" data-bs-toggle="pill" data-bs-target="#{{ $tab['id'] }}" type="button" role="tab" aria-controls="{{ $tab['id'] }}" aria-selected="{{ $tab['id'] === $initialTab ? 'true' : 'false' }}">
                                     {{ $tab['label'] }}
                                 </button>
                             </li>
@@ -62,7 +62,7 @@
                     </ul>
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade  show active " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="tab-pane fade   " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="container form-container">
                                 <div class="card custom-card">
                                     <div class="Committees_and_teams_meetings_create_title">
@@ -175,7 +175,7 @@
 </div>
 </div>
 </div>
-<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+<div class="tab-pane fade show active " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 <!-- Second tab content goes here -->
 <div class="container form-container">
 <div class="card custom-card">
@@ -274,7 +274,7 @@
                </div>
 
 
-               <div class="  form-group">
+               <div class="  form-group meeting_recommendations ">
                    <div class="row meeting_recommendations_header_div ">
                        <div class="col-md-3" style=" text-align: center; " >التوصيه</div>
                        <div class="col-md-3"  style=" text-align: center; "  >الجهه المكلفه بالتنفيذ</div>
@@ -329,20 +329,47 @@
                </div>
 
 
-           <div class="  form-group">
-               <div class="row">
-                   <div class="col-md-3 align-self-center ">
-                       <label  for="committee" class="form-label  ">       ما لم يتم تنفيذه  </label>
+
+           <div class="  form-group meeting_recommendations_not ">
+               <div class="row"  >
+                   <div class="col-md-3 add-padding-bottom meeting_recommendations_not_side_div ">
+                       <label  for="committee" class="form-label  meeting_recommendations_not_side_title  ">    ما  لم ينفذ من  التوصيات واسباب عدم التنفيذ  </label>
                    </div>
-                   <div class="col-md-9">
-                   1
+                   <div class="col-md-9 add-padding-bottom " id="container_of_all_meeting_recommendations_not" >
+                       <div class="row"   >
+
+                   @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
+                       @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
+
+                           <div class="col-md-8 add-padding-bottom">
+                               <input type="text" autocomplete="off"  name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                               <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
+
+                           </div>
+                           <div class="col-md-3  align-self-center ">
+                               <a href="#" onclick="delete_meeting_agenda(this)"  >
+                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                               </a>
+                               <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"  >
+                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                               </a>
+
+
+                           </div>
+
+                       @endforeach
+                   @else
+
+                       <div  id="container_of_all_meeting_recommendations_not">    </div>
+                   @endif
+                   </div>
                    </div>
                </div>
            </div>
 
 
 
-               <div class="  form-group">
+           <div class="  form-group end_time ">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
                            <label  for="committee" class="form-label  ">  موعد انتهاء الاجتماع  </label>
@@ -428,64 +455,92 @@ $('.nav-pills .active').parent().prev('li').find('button').trigger('click');
 });
 });
 
+$(document).ready(function() {
+    add_meeting_agenda();
+    add_meeting_recommendations_not();
+});
 
-add_meeting_agenda();
-function add_meeting_agenda(){
-if(typeof event != "undefined")
-{
-event.preventDefault();
-}
-var datacount=  $(".add_meeting_agenda_div").length+1
-var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
-<div class="col-md-1 add-padding-bottom">
- <span class="add_meeting_agenda_span_num"> ${datacount} </span>
-</div>
-<div class="col-md-8 add-padding-bottom">
-<input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
-</div>
+        function add_meeting_agenda(){
+        if(typeof event != "undefined")
+        {
+        event.preventDefault();
+        }
+        var datacount=  $(".add_meeting_agenda_div").length+1
+        var newElement=   ` <div   class=" row add_meeting_agenda_div" id="add_meeting_agenda_div">
+        <div class="col-md-1 add-padding-bottom">
+         <span class="add_meeting_agenda_span_num"> ${datacount} </span>
+        </div>
+        <div class="col-md-8 add-padding-bottom">
+        <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+        </div>
 
-<div class="col-md-3  align-self-center ">
-<a href="#" onclick="delete_meeting_agenda(this)"  >
-   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-</a>
+        <div class="col-md-3  align-self-center ">
+        <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
+           <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+        </a>
 
-<a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
-   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-</a>
-</div>
-</div>` ;
+        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
+           <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+        </a>
+        </div>
+        </div>` ;
 
 
-$('#container_of_all_meeting_agenda').append(newElement);
-let add_meeting_agenda_class_add_elements = document.querySelectorAll('.add_meeting_agenda_class_add');
+        $('#container_of_all_meeting_agenda').append(newElement);
+        let add_meeting_agenda_class_add_elements = document.querySelectorAll('.add_meeting_agenda_class_add');
 
-Remove_all_but_the_last_element(add_meeting_agenda_class_add_elements);
+        Remove_all_but_the_last_element(add_meeting_agenda_class_add_elements);
 
-// var newElement=  $(".add_meeting_agenda_div").first();
-//  $('#myDiv').append(newElement.clone());
-//  $('#myDiv').prepend(newElement.clone());
-//  newElement.find('input').val("");
-// newElement.find('.add_meeting_agenda_span_num').text(datacount+1);
-}
+        }
 
-function Remove_all_but_the_last_element(vla){
-// Remove all but the last element
-if (vla.length > 1) {
-for (let i = 0; i < vla.length - 1; i++) {
-vla[i].remove();
-}
-}
-}
+        function add_meeting_recommendations_not(){
+            if(typeof event != "undefined")
+            {
+                event.preventDefault();
+            }
+            var datacount=  $(".add_meeting_recommendations_not_div").length+1
+            var newElement=   ` <div   class=" row add_meeting_recommendations_not_div" id="add_meeting_recommendations_not_div">
 
-function delete_meeting_agenda(this_this){
-event.preventDefault();
+                <div class="col-md-9 add-padding-bottom">
+                <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                </div>
 
-var datacount=  $(".add_meeting_agenda_div").length
-if (datacount > 1){
-this_this.parentElement.parentElement.remove();
-}
+                <div class="col-md-3  align-self-center ">
+                <a href="#" onclick="delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
+                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                </a>
 
-}
+                <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"   >
+                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                </a>
+                </div>
+                </div>` ;
+
+
+            $('#container_of_all_meeting_recommendations_not').append(newElement);
+            let meeting_recommendations_not_elements = document.querySelectorAll('.add_meeting_recommendations_not_class_add');
+
+            Remove_all_but_the_last_element(meeting_recommendations_not_elements);
+
+        }
+
+        function Remove_all_but_the_last_element(vla){
+        // Remove all but the last element
+        if (vla.length > 1) {
+        for (let i = 0; i < vla.length - 1; i++) {
+        vla[i].remove();
+        }
+        }
+        }
+
+        function delete_parentElement(this_this,div_class){
+        event.preventDefault();
+        var datacount=  $("."+div_class).length
+        if (datacount > 1){
+        this_this.parentElement.parentElement.remove();
+        }
+
+        }
 
 
 
