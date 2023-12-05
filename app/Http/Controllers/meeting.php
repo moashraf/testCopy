@@ -170,8 +170,8 @@ class meeting extends Controller
             ->first();
         // video tutorial
         $Committee_id =$item_val->committees_and_teams_id;
-        $Committees_and_teams = new Committees_and_teams;
-        $Committees_and_teams->findOrFail($Committee_id);
+        $Committees_and_teams_model = new Committees_and_teams;
+        $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
         $video_tutorial = Video_tutorial::where('type', 2)->first();
         if ($item_val->start_date){
             $dateTime = new DateTime($item_val->start_date);
@@ -305,6 +305,7 @@ class meeting extends Controller
         $meetings->location = $request->input('location');
         $meetings->start_date = $formattedStartDateTime;
         $meetings->type = $request->input('type');
+        $meetings->Semester = $request->input('Semester');
         $meetings->end_time = $formattedEndDateTime;
         $meetings->save();
     }
