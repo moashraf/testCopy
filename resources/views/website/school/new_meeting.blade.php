@@ -162,7 +162,7 @@
                                                             <button style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="reset" class="col-md-3 btn btn-default custom-reset-button">إنهاء</button>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button id="nextButton" style=" float:left ;background-color: #0A3A81; width: 50%;" type="button" class="btn btn-primary custom-submit-button">التالي</button>
+                                                            <button style="background-color: #0A3A81; width: 50%;" type="button" class="col-md-3 float-end btn btn-primary custom-submit-button" onclick="goToSecondTab()">التالي</button>
                                                         </div>
                                                     </div>
 
@@ -229,7 +229,7 @@
 
 
                                                     <div class="  form-group">
-                                                        <div class="row">
+                                                        <div class="row" id="container_of_all_meeting_agenda" >
                                                             <label  for="committee" class="form-label" >    جدول اعمل الاجتماع  </label>
                                                             @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                             @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
@@ -250,17 +250,14 @@
                                                                         </a>
 
 
-                                                                    </div>
+                                                                        </div>
 
 
 
                                                             @endforeach
                                                             @else
 
-                                                        <div  id="container_of_all_meeting_agenda">
-
-
-                                                        </div>
+                                                        <div  id="container_of_all_meeting_agenda">    </div>
                                                             @endif
 
                                                         </div>
@@ -364,11 +361,8 @@
                                       <span class="add_meeting_agenda_span_num"> ${datacount} </span>
                                 </div>
                                <div class="col-md-8 add-padding-bottom">
-
                                      <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
-
                                     </div>
-
 
                                 <div class="col-md-3  align-self-center ">
                                     <a href="#" onclick="delete_meeting_agenda(this)"  >
@@ -378,8 +372,6 @@
                                     <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
                                         <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                      </a>
-
-
                                 </div>
                             </div>` ;
 
