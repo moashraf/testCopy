@@ -250,17 +250,14 @@ class meeting extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id): \Illuminate\Http\RedirectResponse
+    public function destroy($id)
     {
-        $meetings = meetings::find($id);
+        $meeting = meetings::findOrFail($id);
+        $meeting->delete();
 
-        if ($meetings) {
-            $meetings->delete();
-            return redirect()->back()->with('success', 'Record has been deleted successfully');
-        }
-
-        return redirect()->back()->with('error', 'Record not found');
+        return redirect()->back()->with('success', 'لقد تم حذف الاجتماع بتجاح');
     }
+
 
     /**
      * @param int $id
