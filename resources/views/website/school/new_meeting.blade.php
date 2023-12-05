@@ -247,7 +247,7 @@
                                                                         <span class="add_meeting_agenda_span_num"> {{ $key+1 }} </span>
                                                                     </div>
                                                                     <div class="col-md-8 add-padding-bottom">
-                                                                    <input type="text" name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                                                                    <input type="text" autocomplete="off"  name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
                                                                     <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
 
                                                                 </div>
@@ -285,7 +285,7 @@
                                                              @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
-                                                                    <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
+                                                                    <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
                                                                     <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
                                                                     <input type="hidden" name="recommendation_status[]" class="form-control" value="{{ $recommendation['status'] }}">
                                                                     <input type="hidden" name="recommendation_reason[]" class="form-control" value="{{ $recommendation['reason'] }}">
@@ -376,7 +376,7 @@
                                       <span class="add_meeting_agenda_span_num"> ${datacount} </span>
                                 </div>
                                <div class="col-md-8 add-padding-bottom">
-                                     <input type="text" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                                     <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
                                     </div>
 
                                 <div class="col-md-3  align-self-center ">
