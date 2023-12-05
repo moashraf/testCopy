@@ -5606,6 +5606,16 @@ body.sidebar-toggled footer.sticky-footer {
 .add-padding-bottom{
     padding-bottom: 10px;
 }
+
+.meeting_recommendations_header_div{
+    margin-bottom: 20px;
+    background: #eab977;
+    padding: 10px;
+    border-radius: 7px;
+    text-align: center;
+    color: #0a3a81;
+    font-weight: bold;
+}
 @media only screen and (max-width: 600px) {
     .no_show_on_map {     display: none; }
 }

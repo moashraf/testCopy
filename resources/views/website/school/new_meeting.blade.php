@@ -265,9 +265,14 @@
 
 
                                                     <div class="  form-group">
+                                                        <div class="row meeting_recommendations_header_div ">
+                                                            <div class="col-md-3" style=" text-align: center; " >التوصيه</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >الجهه المكلفه بالتنفيذ</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >مده التنفيذ</div>
+                                                            <div class="col-md-3"  style=" text-align: center; "  >الجهه التابعه للتنفيذ</div>
+                                                        </div>
                                                         <div class="row">
-                                                            <label  for="committee" class="form-label  "> التوصيات    </label>
-                                                            @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
+                                                             @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations'] as $recommendation)
                                                                 <div class="col-md-3 add-padding-bottom">
                                                                     <input type="text" name="recommendation_item[]" class="form-control" value="{{ $recommendation['Item'] }}">
@@ -277,9 +282,9 @@
                                                                 </div>
                                                             @endforeach
                                                                   @else
-                                                                @for ($i = 0; $i < 3; $i++)
+                                                                @for ($i = 0; $i < 4; $i++)
                                                                     <div class="col-md-3 add-padding-bottom">
-                                                                        <input type="text" name="recommendation_item[]" class="form-control" value="">
+                                                                        <input type="text" autocomplete="off" name="recommendation_item[]" class="form-control" value="">
                                                                         <input type="hidden" name="recommendation_status[]" class="form-control" value="1">
                                                                         <input type="hidden" name="recommendation_reason[]" class="form-control" value="">
                                                                     </div>
