@@ -5658,6 +5658,7 @@ body.sidebar-toggled footer.sticky-footer {
 select2_background_color{
     background-color: #f3f3f380!important;
 }
+.plus_minus_class{ width: 40px; height: 45px; }
 @media only screen and (max-width: 600px) {
     .no_show_on_map {     display: none; }
 }

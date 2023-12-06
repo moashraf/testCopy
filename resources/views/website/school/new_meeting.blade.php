@@ -263,10 +263,10 @@
                                         </div>
                                        <div class="col-md-3  align-self-center ">
                                            <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
-                                               <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                               <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                            </a>
                                            <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
-                                               <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                               <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                            </a>
 
 
@@ -325,10 +325,10 @@
                                            </div>
                                            <div class="col-md-2  align-self-center ">
                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
-                                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                </a>
                                                <a href="#" onclick="add_meeting_recommendations_finished()" class="add_meeting_recommendations_finished_class_add"  >
-                                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                </a>
 
 
@@ -369,10 +369,10 @@
                                             </div>
                                            <div class="col-md-3  align-self-center ">
                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
-                                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                </a>
                                                <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"  >
-                                                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                </a>
 
 
@@ -498,10 +498,10 @@ $(document).ready(function() {
                                    </div>
                                    <div class="col-md-3  align-self-center ">
                                        <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
-                                           <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                           <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                        </a>
                                        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
-                                           <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                           <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                        </a>
                                    </div>
                                </div>` ;
@@ -528,11 +528,11 @@ $(document).ready(function() {
 
                 <div class="col-md-3  align-self-center ">
                 <a href="#" onclick="delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
-                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                 </a>
 
                 <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"   >
-                   <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                   <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                 </a>
                 </div>
                 </div>` ;
@@ -572,10 +572,10 @@ $(document).ready(function() {
                                            </div>
                                             <div class="col-md-2  align-self-center ">
                                                 <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
-                                                    <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                 </a>
                                                 <a href="#" onclick="add_meeting_recommendations_finished()" class="add_meeting_recommendations_finished_class_add"  >
-                                                    <img style=" width: 45px; height: 50px; "  class="me-2" alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                 </a>
 
 
