@@ -5637,7 +5637,11 @@ body.sidebar-toggled footer.sticky-footer {
     padding: 51px;
 }
 
-
+.side_number_div{    margin-left: 14px;
+    font-weight: bold;
+}
+.meeting_recommendations_table{     margin-left: 30px;
+    text-align: center;}
 .meeting_recommendations_header_div{
     margin-bottom: 20px;
     background: #eab977;
