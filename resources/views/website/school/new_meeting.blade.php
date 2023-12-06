@@ -83,7 +83,7 @@
                <div class="form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center">
-                           <label for="type" class="form-label"> نوع الاجتماع <span class="required-asterisk">*</span></label>
+                           <label for="type" class="form-label bold_form_label "> نوع الاجتماع <span class="required-asterisk">*</span></label>
                        </div>
                        <div class="col-md-9">
                            <select required  name="type" id="type" class="form-control custom-select js-example-basic-single  select2-hidden-accessible">
@@ -103,7 +103,7 @@
                <div class="form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label"> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
+                           <label  for="committee" class="form-label bold_form_label "> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
                            <input required type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
@@ -116,7 +116,7 @@
                <div class="form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label" >عنوان  الاجتماع <span class="required-asterisk">*</span> </label>
+                           <label  for="committee" class="form-label bold_form_label " >عنوان  الاجتماع <span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
 
@@ -130,7 +130,7 @@
                <div class="  form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label">موعد الاجتماع<span class="required-asterisk">*</span> </label>
+                           <label  for="committee" class="form-label bold_form_label ">موعد الاجتماع<span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
                            <input type="time" id="time" required name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
@@ -142,7 +142,7 @@
                <div class="  form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label">مكان  الاجتماع<span class="required-asterisk">*</span> </label>
+                           <label  for="committee" class="form-label bold_form_label ">مكان  الاجتماع<span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
                            <input type="text" name="location" class="form-control" required  value="{{ isset($item_val) ?$item_val['location']:''}}">
@@ -155,7 +155,7 @@
                <div class="  form-group">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label"> الفصل الدراسي <span class="required-asterisk">*</span>   </label>
+                           <label  for="committee" class="form-label bold_form_label "> الفصل الدراسي <span class="required-asterisk">*</span>   </label>
                        </div>
                        <div class="col-md-9">
                            <input type="text"  required name="Semester" value="{{ isset($item_val) ? $item_val['Semester']: ''}}" class="  form-control">
@@ -202,10 +202,10 @@
                <div class="  form-group">
                    <div class="row">
                        <div class="col-md-2 align-self-center ">
-                           <label  for="committee" class="form-label  ">   الفئه المستهدفه </label>
+                           <label  for="committee" class="form-label bold_form_label ">   الفئه المستهدفه </label>
                        </div>
                        <div class="col-md-6">
-                           <select  name="Target_group" id="Target_group" class="form-control custom-select js-example-basic-single  select2-hidden-accessible">
+                           <select  name="Target_group" id="Target_group" class="form-control custom-select js-example-basic-single  select2-hidden-accessible ">
                                <option value="">اختر نوع الفئه</option>
                                @foreach ([1=>'المصريين', 2=>'الاجانب'] as $index=>$value)
                                    <option value="{{ $index }}"
@@ -225,7 +225,7 @@
                <div class="  form-group Number_of_attendees22">
                    <div class="row">
                        <div class="col-md-2 align-self-center ">
-                           <label  for="committee" class="form-label  "> عدد الحاضرين    </label>
+                           <label  for="committee" class="form-label bold_form_label "> عدد الحاضرين    </label>
                        </div>
                        <div class="col-md-6">
                            <select  id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select js-example-basic-single  select2-hidden-accessible">
@@ -247,7 +247,7 @@
 
                <div class="  form-group meeting_agenda">
                    <div class="row" id="container_of_all_meeting_agenda" >
-                       <label  for="committee" class="form-label" >    جدول اعمل الاجتماع  </label>
+                       <label  for="committee" class="form-label bold_form_label " >    جدول اعمل الاجتماع  </label>
                        @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                        @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
 
@@ -385,7 +385,7 @@
            <div class="  form-group end_time ">
                    <div class="row">
                        <div class="col-md-3 align-self-center ">
-                           <label  for="committee" class="form-label  ">  موعد انتهاء الاجتماع  </label>
+                           <label  for="committee" class="form-label bold_form_label ">  موعد انتهاء الاجتماع  </label>
                        </div>
                        <div class="col-md-9">
                            <input type="time"  name="end_time"  value="{{ isset($item_val) ?$item_val['end_time']:''}}" class="  form-control">

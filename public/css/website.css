@@ -5640,8 +5640,12 @@ body.sidebar-toggled footer.sticky-footer {
 .side_number_div{    margin-left: 14px;
     font-weight: bold;
 }
-.meeting_recommendations_table{     margin-left: 30px;
+.meeting_recommendations_table{
+    font-size: 14px;
+    margin-left: 30px;
     text-align: center;}
+
+.bold_form_label{font-weight: bold;}
 .meeting_recommendations_header_div{
     margin-bottom: 20px;
     background: #eab977;
@@ -5650,6 +5654,9 @@ body.sidebar-toggled footer.sticky-footer {
     text-align: center;
     color: #0a3a81;
     font-weight: bold;
+}
+select2_background_color{
+    background-color: #f3f3f380!important;
 }
 @media only screen and (max-width: 600px) {
     .no_show_on_map {     display: none; }
