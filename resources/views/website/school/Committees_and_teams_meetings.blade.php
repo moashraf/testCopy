@@ -189,7 +189,7 @@
                                                                 <div style="min-width: unset; " class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash me-1 text-red"></i>حذف</a>
                                                                     <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-edit me-1 text-green"></i>تعديل</a>
-                                                                    <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1 text-blue-400" ></i>طباعه </a>
+                                                                    <a class="dropdown-item update_admin" onclick="printMeeting({{$item_val->id}})"  target="_blank"><i class="fas fa-print me-1 text-blue-400" ></i>طباعه </a>
                                                                     <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-file-download me-1 text-yellow"></i>تحميل </a>
                                                                 </div>
                                                             </div>
@@ -305,7 +305,7 @@
                                                                                 <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
 
                                                                                 <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>حذف</a>
-                                                                                <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
+                                                                                <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/print-pdf')}}"  target="_blank"><i class="fas fa-print me-1"></i>طباعه </a>
                                                                                 <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
                                                                             </div>
                                                                         </div>
@@ -389,6 +389,23 @@
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>
+        // JavaScript Function to Print Meeting
+        function printMeeting(meetingId) {
+            // Open the meeting detail page in a new window/tab
+            var printWindow = window.open('meetings/'+meetingId+'/print-pdf');
+
+            // Wait for the page to load
+            printWindow.onload = function() {
+                // Trigger the print dialog
+                printWindow.print();
+
+                // Optional: Close the new window/tab after a delay
+                setTimeout(function() {
+                    printWindow.close();
+                }, 1000);
+            };
+        }
+
         var full_height_width_slider_swiper_weekly = new Swiper(".full_height_width_slider_swiper_weekly", {
             pagination: {
                 el: ".swiper-pagination",
