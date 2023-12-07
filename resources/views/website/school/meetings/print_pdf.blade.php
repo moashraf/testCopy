@@ -309,3 +309,28 @@
       integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
 <link href="{{ URL::asset('css/website.css') }}" rel="stylesheet">
 
+<style>
+    @media print {
+        @page {
+            size: landscape;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+    }
+
+</style>
