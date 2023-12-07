@@ -108,8 +108,16 @@
                                                                 <label  for="committee" class="form-label bold_form_label "> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input required type="text" id="date" name="start_date"
-                                                                       value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" hasdatetimepicker form-control">
+                                                                <div class=" input-group">
+
+                                                                    <input name="start_date" type="text" style="border-left: 0px;"
+                                                                           class="form-control hasdatetimepicker clickable-item-pointer @error('start_date') is-invalid @enderror"
+                                                                           placeholder="  تاريخ الاجتماع"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                            src="{{ URL::asset('img/icons/calendar.svg') }}"> </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,8 +143,18 @@
                                                                 <label  for="committee" class="form-label bold_form_label ">موعد الاجتماع<span class="required-asterisk">*</span> </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" id="time" required name="start_time"
-                                                                       value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class=" hasdatetimepicker form-control">                                                            </div>
+                                                                <div class=" input-group">
+
+                                                                    <input name="start_time" type="text" style="border-left: 0px;"
+                                                                           class="form-control hasdatetimepicker clickable-item-pointer @error('start_time') is-invalid @enderror"
+                                                                           placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" required>
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                            src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
 
