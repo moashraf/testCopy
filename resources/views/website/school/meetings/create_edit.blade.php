@@ -211,7 +211,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-3 float-end">
-                                                <button style="background-color: #0A3A81; width: 50%; display: flex; align-items: center; justify-content: center;" type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">
+                                                <button  type="submit" class=" Save_as_draft col-md-3 float-end btn btn-primary custom-submit-button">
                                                     <i class="fas fa-save" style="margin-left: 5px;"></i>
                                                     <span>حفظ كمسوده</span>
                                                 </button>
@@ -473,11 +473,26 @@
     <!-- jquery ui datepicker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
+        // $.fn.datepicker.dates['ar'] = {
+        //     days: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
+        //     daysShort: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
+        //   //  daysMin: ["ح", "ن", "ث", "ع", "خ", "ج", "س", "ح"],
+        //     daysMin: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
+        //
+        //     //daysMin: ["ح", "ن", "ث", "ع", "خ", "ج", "س", "ح"],
+        //     months: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+        //     monthsShort: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+        //     today: "هذا اليوم",
+        //     rtl: true
+        // };
+
         $(function() {
             $('.hasdatetimepicker').datepicker({
                 todayHighlight: true,
                 format: "dd-mm-yyyy",
                 viewMode: "time",
+                language:'ar',
+
                 minViewMode: "time"
             });
         });
