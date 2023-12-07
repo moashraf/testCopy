@@ -106,7 +106,8 @@
                            <label  for="committee" class="form-label bold_form_label "> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
-                           <input required type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
+                           <input required type="text" id="date" name="start_date"
+                                  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" hasdatetimepicker form-control">
 
                        </div>
                    </div>
@@ -120,7 +121,8 @@
                        </div>
                        <div class="col-md-9">
 
-                           <input   required type="text" id="title"  name="title" value="{{ isset($item_val)  ?$item_val['title']:''}}" class="form-control">
+                           <input   required type="text" id="title"  name="title" value="{{ isset($item_val)  ?$item_val['title']:''}}"
+                                    class="form-control">
 
                        </div>
                    </div>
@@ -133,7 +135,8 @@
                            <label  for="committee" class="form-label bold_form_label ">موعد الاجتماع<span class="required-asterisk">*</span> </label>
                        </div>
                        <div class="col-md-9">
-                           <input type="time" id="time" required name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
+                           <input type="text" id="time" required name="start_time"
+                                  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class=" hasdatetimepicker form-control">
                        </div>
                    </div>
                </div>
@@ -654,4 +657,32 @@ var year = $(this).data('year');
 fetchCalander(month, year);
 });
 </script>
+
+
+<!-- jquery ui datepicker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(function() {
+        $('.hasdatetimepicker').datepicker({
+            todayHighlight: true,
+            format: "dd-mm-yyyy",
+            viewMode: "time",
+            minViewMode: "time"
+        });
+    });
+
+    $(document).ready(function() {
+        $(document).on('change', '#calendar-date-input', function() {
+            var date = $(this).val();
+
+            var url = "<?php echo e(route('school_route.dashboard', ':date')); ?>";
+            url = url.replace(':date', date);
+
+            window.location.href = url;
+        });
+    })
+</script>
+
+
+
 @endsection
