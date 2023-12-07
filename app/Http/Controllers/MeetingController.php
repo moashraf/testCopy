@@ -13,9 +13,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Dompdf\Dompdf;
 use PDF;
-
 // Assuming you have the Dompdf alias set up
 
 
@@ -26,7 +24,7 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():void
     {
         //
     }
@@ -287,39 +285,41 @@ class MeetingController extends Controller
             }
         }
         return redirect()->back()->with('success', 'تم تعديل الاجتماع بنجاح');
-    }    /**
- *
-*
-* public function downloadPDF($id)
-    * {
-        * $meeting = meetings::findOrFail($id);
- *
-* $pdf = new Mpdf();
-        * $current_school = Auth::guard('school')->user()->current_working_school_id;
- *
-* $school = School::find($current_school);
- *
-*
-* $sliders = Slider::where('type', 1)->get();
-        * $item_val = meetings::find($id);
- *
-* // video tutorial
-        * $video_tutorial = Video_tutorial::where('type', 2)->first();
-        * // Load a view for the PDF content and convert it to HTML
-        * $html =view('website.school.meetings.create_edit',
-            * compact('current_school', 'school', 'sliders', 'video_tutorial'))->render();
- *
-* $pdf->WriteHTML($html);
- *
-* // Output the PDF as download
-        * return $pdf->Output('meeting_'.$id.'.pdf', 'D');
-    * }
- *
-* /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-    *  @param \Illuminate\Http\Request $request
+    }
+
+
+
+ public function downloadPDF($id)
+     {
+
+         $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
+             ->where('id', $id)
+             ->first();
+         // video tutorial
+         $Committee_id =$item_val->committees_and_teams_id;
+         $Committees_and_teams_model = new Committees_and_teams;
+         $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
+         if ($item_val->start_date){
+             $dateTime = new DateTime($item_val->start_date);
+             $item_val->start_date = $dateTime->format('Y-m-d');
+             $item_val->start_time = $dateTime->format('H:i:s');
+         }
+         if ($item_val->end_time){
+             $Time = new DateTime($item_val->end_time);
+             $item_val->end_time = $Time->format('H:i:s');
+         }
+         $item_val = $item_val->toArray();
+         $pdf = PDF::loadView('website.school.meetings.print_pdf',['item_val'=>$item_val,'Committees_and_teams'=>$Committees_and_teams]);
+ // video tutorial
+         // Load a view for the PDF content and convert it to HTML
+    return $pdf->download('meeting-details.pdf');
+
+     }
+/**
+      Remove the specified resource from storage.
+
+      @param int $id
+      @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id,Request $request)
