@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\School\Meetings\meeting_agenda;
+use App\Models\School\Meetings\meeting_recommendations;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class meetingAgenda extends Controller
+class MeetingRecommendationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +24,6 @@ class meetingAgenda extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -39,12 +37,14 @@ class meetingAgenda extends Controller
     {
         $this->validate($request, [
             'meeting_id' => 'required',
-            'Item' => 'required',
         ]);
 
-        $form = meeting_agenda::create([
+        $form = meeting_recommendations::create([
             'meeting_id'=>$request->input('meeting_id'),
             'Item'=>$request->input('Item'),
+            'status'=>$request->input('status'),
+            'reason'=>$request->input('reason'),
+
         ]);
 
         return redirect()->back()->with('success', 'Your form has been sent successfully');
@@ -80,16 +80,17 @@ class meetingAgenda extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws ValidationException
      */
-    public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'meeting_id' => 'required',
-            'item' => 'required',
         ]);
-        $meeting_agenda = meeting_agenda::find($id);
-        $meeting_agenda->meeting_id = $request->input('meeting_id');
-        $meeting_agenda->Item = $request->input('Item');
-        $meeting_agenda->save();
+        $meeting_recommendations = meeting_recommendations::find($id);
+        $meeting_recommendations->meeting_id = $request->input('meeting_id');
+        $meeting_recommendations->Item = $request->input('Item');
+        $meeting_recommendations->status = $request->input('status');
+        $meeting_recommendations->reason = $request->input('reason');
+        $meeting_recommendations->save();
         return redirect()->back()->with('success', 'Your form has been sent successfully');
     }
 
@@ -99,12 +100,12 @@ class meetingAgenda extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id): \Illuminate\Http\RedirectResponse
+    public function destroy($id)
     {
-        $meeting_agenda = meeting_agenda::find($id);
+        $meeting_recommendations = meeting_recommendations::find($id);
 
-        if ($meeting_agenda) {
-            $meeting_agenda->delete();
+        if ($meeting_recommendations) {
+            $meeting_recommendations->delete();
             return redirect()->back()->with('success', 'Record has been deleted successfully');
         }
 

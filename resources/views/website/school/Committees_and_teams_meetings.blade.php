@@ -141,6 +141,7 @@
                                                 <table class="table display datatable-modal"   id="p_3-table" width="100%"  cellspacing="0">
                                                     <thead>
                                                     <tr>
+                                                        <th  class=" table_title_color text-xs fw-bold">م</th>
                                                         <th  class=" table_title_color text-xs fw-bold">الاجتماع  </th>
                                                         <th class="table_title_color  text-xs fw-bold">   تاريخ الاجتماع </th>
                                                         <th class=" table_title_color  text-xs fw-bold">   نوع الاجتماع </th>
@@ -153,15 +154,18 @@
 
                                                     <tbody id="admin_table_cont_tr">
                                                     @foreach ($item->get_meetings as $key_val => $item_val)
-                                                    <tr id="row_cod11">
+                                                    <tr  style="border-bottom: 1px solid #eeeeee" id="row_cod11">
+                                                        <td class="">
+                                                            {{ $key_val+1   }}
+                                                        </td>
                                                         <td class="">
                                                             {{ $item_val->title   }}
                                                         </td>
                                                         <td class="">
-                                                            {{ $item_val->start_date   }}
+                                                           {{ \Carbon\Carbon::parse($item_val->start_date)->format('Y/m/d') }}
                                                         </td>
                                                         <td class="">
-                                                            {{ $item_val->type   }}
+                                                            {{ $item_val->type?'طارئ':'دوري'   }}
                                                         </td>
                                                         <td class="">
                                                             {{ $item_val->Semester   }}
@@ -174,23 +178,23 @@
                                                             @endif
                                                         </td>
                                                         <td class="">
-                                                            {{ $item_val->created_at   }}
+                                                            {{ \Carbon\Carbon::parse($item_val->created_at)->format('Y/m/d') }}
                                                         </td>
                                                         <td>
                                                             <div class="dropdown no-arrow">
                                                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-700"></i>
+                                                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-popper-placement="bottom-start">
+                                                                    <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-400"></i>
                                                                 </a>
-                                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                                     aria-labelledby="dropdownMenuLink">
-                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
-
-                                                                    <a class="dropdown-item text-red" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash-alt me-1"></i>حذف</a>
-                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1"></i>طباعه </a>
-                                                                    <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-download me-1"></i>تحميل </a>
+                                                                <div style="min-width: unset; " class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash me-1 text-red"></i>حذف</a>
+                                                                    <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-edit me-1 text-green"></i>تعديل</a>
+                                                                    <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/PrintPdf')}}"><i class="fas fa-print me-1 text-blue-400" ></i>طباعه </a>
+                                                                    <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/download-pdf')}}"><i class="fas fa-file-download me-1 text-yellow"></i>تحميل </a>
                                                                 </div>
                                                             </div>
+
+
 
 
 
@@ -254,7 +258,7 @@
                                                     <div class=" add_border_radius table-responsive" id="admin_table_cont" style="display: block"   >
                                                         <table class="table display datatable-modal"   id="p_3-table" width="100%"  cellspacing="0">
                                                             <thead>
-                                                            <tr>
+                                                            <tr style="border-bottom: 1px solid #eee">
                                                                 <th  class=" table_title_color text-xs fw-bold">الاجتماع  </th>
                                                                 <th class="table_title_color  text-xs fw-bold">   تاريخ الاجتماع </th>
                                                                 <th class=" table_title_color  text-xs fw-bold">   نوع الاجتماع </th>
@@ -275,7 +279,7 @@
                                                                         {{ $item_val->start_date   }}
                                                                     </td>
                                                                     <td class="">
-                                                                        {{ $item_val->type   }}
+                                                                        {{ $item_val->type?'طارئ':'دوري'   }}
                                                                     </td>
                                                                     <td class="">
                                                                         {{ $item_val->Semester   }}
@@ -294,9 +298,9 @@
                                                                         <div class="dropdown no-arrow">
                                                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-700"></i>
+                                                                                <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-400"></i>
                                                                             </a>
-                                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" style="min-width: unset"
                                                                                  aria-labelledby="dropdownMenuLink">
                                                                                 <a class="dropdown-item text-green update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-trash-alt me-1"></i>تعديل</a>
 

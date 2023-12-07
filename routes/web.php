@@ -104,9 +104,9 @@ use App\Http\Controllers\School\TripWebController;
 use App\Http\Controllers\School\AirlineWebController;
 use App\Http\Controllers\School\DashboardCont;
 use App\Http\Controllers\CommitteesAndTeamsMeetingsController;
-use App\Http\Controllers\meetingRecommendations;
-use App\Http\Controllers\meetingAgenda;
-use App\Http\Controllers\meeting;
+use App\Http\Controllers\MeetingRecommendationsController;
+use App\Http\Controllers\MeetingAgendaController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\School\RoadmapCont;
 use App\Http\Controllers\School\Teacher\School_jobsCont;
 use App\Http\Controllers\School\Teacher\Teacher_specialityCont;
@@ -247,10 +247,10 @@ Route::name('school_route.')->group(function () {
                     Route::get('/choose_school', [DashboardCont::class, 'choose_school'])->name('choose_school');
                     Route::post('/choose_school_start_store', [DashboardCont::class, 'choose_school_start_store'])->name('choose_school_start_store');
                     Route::resource('/Committees_and_teams_meetings',CommitteesAndTeamsMeetingsController::class);
-                    Route::resource('/meeting_recommendations',meetingRecommendations::class);
-                    Route::resource('/meeting_agenda',meetingAgenda::class);
-                    Route::resource('/meetings',meeting::class);
-                    Route::get('/meetings/{id}/download-pdf', [meeting::class,'downloadPDF'])->name('meetings_downloadPDF');
+                    Route::resource('/meeting_recommendations',MeetingRecommendationsController::class);
+                    Route::resource('/meeting_agenda',MeetingAgendaController::class);
+                    Route::resource('/meetings',MeetingController::class);
+                    Route::get('/meetings/{id}/download-pdf', [MeetingController::class,'downloadPDF'])->name('meetings_downloadPDF');
 
                     // Change school
                     Route::post('/change_school_sidebar', [DashboardCont::class, 'change_school_sidebar'])->name('change_school_sidebar');

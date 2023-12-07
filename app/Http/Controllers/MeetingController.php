@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Mpdf\Mpdf;
 
-class meeting extends Controller
+class MeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
