@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css"
           integrity="sha512-aD9ophpFQ61nFZP6hXYu4Q/b/USW7rpLCQLX6Bi0WJHXNO7Js/fUENpBQf/+P4NtpzNX0jSgR5zVvPOJp+W2Kg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="{{ URL::asset('css/higry/bootstrap-datetimepicker.min.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/hijry/bootstrap-datetimepicker.min.css') }}" />
 
 @endsection
 
@@ -460,8 +460,8 @@
 
 <!-- js insert -->
 @section('js')
-    <script src="{{ URL::asset('js/higry/bootstrap-hijri-datepicker.min.js') }}"></script>
-    <script src="{{ URL::asset('js/higry/bootstrap-hijri-datetimepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('js/hijry/bootstrap-hijri-datepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('js/hijry/bootstrap-hijri-datetimepicker.min.js') }}"></script>
 
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -486,16 +486,21 @@
         //     rtl: true
         // };
 
+        // $(function() {
+        //     $('.hasdatetimepicker').datepicker({
+        //         todayHighlight: true,
+        //         format: "dd-mm-yyyy",
+        //         viewMode: "time",
+        //         language:'ar',
+        //
+        //         minViewMode: "time"
+        //     });
+        // });
         $(function() {
-            $('.hasdatetimepicker').datepicker({
-                todayHighlight: true,
-                format: "dd-mm-yyyy",
-                viewMode: "time",
-                language:'ar',
-
-                minViewMode: "time"
-            });
+            $(".hijri-date-input").hijriDatePicker();
         });
+
+
         $(document).ready(function() {
             $(document).on('change', '#calendar-date-input', function() {
                 var date = $(this).val();
