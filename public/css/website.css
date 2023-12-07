@@ -55,9 +55,11 @@ body {
     color: #CF637F !important;
 }
 .breadcrumb-item::after{
-    content: '>';
-    padding-right: 2px;
+    content: '\25C0';
+    padding-right: 10px;
     position: absolute;
+    font-size: 0.9rem;
+    padding-top: .4rem;
 }
 .breadcrumb-item+.breadcrumb-item::before{
     content: '';
@@ -69,8 +71,8 @@ body {
 }
 /* Remove the arrow from the last item */
 .breadcrumb-item {
-   padding-left: 5px;!important;
-   padding-right: 2px;!important;
+   padding-left: 15px;!important;
+   padding-right: 15px;!important;
 }
 .required-asterisk {
     color: red;
