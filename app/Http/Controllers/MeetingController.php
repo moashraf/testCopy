@@ -13,7 +13,11 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Mpdf\Mpdf;
+use Dompdf\Dompdf;
+use PDF;
+
+// Assuming you have the Dompdf alias set up
+
 
 class MeetingController extends Controller
 {
@@ -67,7 +71,7 @@ class MeetingController extends Controller
         // video tutorial
         $video_tutorial = Video_tutorial::where('type', 2)->first();
 
-        return view('website.school.new_meeting',
+        return view('website.school.meetings.create_edit',
             compact('current_school', 'school', 'Committees_and_teams','sliders','item_val', 'video_tutorial'));
     }
 
@@ -160,7 +164,32 @@ class MeetingController extends Controller
      */
     public function show(int $id)
     {
-        //
+//        $current_school = Auth::guard('school')->user()->current_working_school_id;
+//
+//        $school = School::find($current_school);
+//
+//
+//        $sliders = Slider::where('type', 1)->get();
+//        $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
+//            ->where('id', $id)
+//            ->first();
+//        // video tutorial
+//        $Committee_id =$item_val->committees_and_teams_id;
+//        $Committees_and_teams_model = new Committees_and_teams;
+//        $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
+//        $video_tutorial = Video_tutorial::where('type', 2)->first();
+//        if ($item_val->start_date){
+//            $dateTime = new DateTime($item_val->start_date);
+//            $item_val->start_date = $dateTime->format('Y-m-d');
+//            $item_val->start_time = $dateTime->format('H:i:s');
+//        }
+//        if ($item_val->end_time){
+//            $Time = new DateTime($item_val->end_time);
+//            $item_val->end_time = $Time->format('H:i:s');
+//        }
+//        $item_val = $item_val->toArray();
+//        return view('website.school.meetings.show',
+//            compact('current_school', 'school','Committees_and_teams','item_val', 'sliders', 'video_tutorial'));
     }
 
     /**
@@ -195,7 +224,7 @@ class MeetingController extends Controller
             $item_val->end_time = $Time->format('H:i:s');
         }
         $item_val = $item_val->toArray();
-        return view('website.school.new_meeting',
+        return view('website.school.meetings.create_edit',
             compact('current_school', 'school','Committees_and_teams','item_val', 'sliders', 'video_tutorial'));
     }
 
@@ -277,7 +306,7 @@ class MeetingController extends Controller
 * // video tutorial
         * $video_tutorial = Video_tutorial::where('type', 2)->first();
         * // Load a view for the PDF content and convert it to HTML
-        * $html =view('website.school.new_meeting',
+        * $html =view('website.school.meetings.create_edit',
             * compact('current_school', 'school', 'sliders', 'video_tutorial'))->render();
  *
 * $pdf->WriteHTML($html);
@@ -339,4 +368,30 @@ class MeetingController extends Controller
         $meetings->end_time = $formattedEndDateTime;
         $meetings->save();
     }
+    public function printPdf($id)
+    {
+
+
+
+        $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
+            ->where('id', $id)
+            ->first();
+        // video tutorial
+        $Committee_id =$item_val->committees_and_teams_id;
+        $Committees_and_teams_model = new Committees_and_teams;
+        $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
+        if ($item_val->start_date){
+            $dateTime = new DateTime($item_val->start_date);
+            $item_val->start_date = $dateTime->format('Y-m-d');
+            $item_val->start_time = $dateTime->format('H:i:s');
+        }
+        if ($item_val->end_time){
+            $Time = new DateTime($item_val->end_time);
+            $item_val->end_time = $Time->format('H:i:s');
+        }
+        $item_val = $item_val->toArray();
+        return view('website.school.meetings.print_pdf',compact('Committees_and_teams','item_val'));
+
+    }
+
 }
