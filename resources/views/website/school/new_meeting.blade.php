@@ -191,7 +191,11 @@
        </div>
    </div>
     <div class="col-md-3 float-end">
-        <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ  كمسوده </button>
+        <button style="background-color: #0A3A81; width: 50%; display: flex; align-items: center; justify-content: center;" type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">
+            <i class="fas fa-save" style="margin-left: 5px;"></i>
+            <span>حفظ كمسوده</span>
+        </button>
+
     </div>
 </div>
 
@@ -462,7 +466,7 @@ $(this).removeClass('is-invalid');
 if (!isValid) {
 e.preventDefault(); // Prevent switching to tab2
 e.stopPropagation();
-$('#pills-home-tab').tab('show');
+// $('#pills-home-tab').tab('show');
 return false;
 }
 });
