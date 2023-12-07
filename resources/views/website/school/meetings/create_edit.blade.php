@@ -42,9 +42,9 @@
                 <div class="col-12 col-xl-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item text-s2 active"  style="color: white;" aria-current="page">المدرسه</li>
-                            <li class="breadcrumb-item text-s2" style="color: white;">اللجان</li>
-                            <li class="breadcrumb-item text-s2" style="color: white;">{{$text}} {{$Committees_and_teams['title']}}</li>
+                            <li class="breadcrumb-item text-s2 active"  style="padding-left:20px; color: white;" aria-current="page">المدرسه</li>
+                            <li class="breadcrumb-item text-s2" style="padding-left:20px; color: white;">اللجان</li>
+                            <li class="breadcrumb-item text-s2" style="padding-left:20px; color: white;">{{$text}} {{$Committees_and_teams['title']}}</li>
                         </ol>
                     </nav>
 
@@ -508,8 +508,14 @@
                 if (!isValid) {
                     e.preventDefault(); // Prevent switching to tab2
                     e.stopPropagation();
-// $('#pills-home-tab').tab('show');
+$('#pills-home-tab').tab('show');
                     return false;
+                }
+            });
+            // Remove the 'is-invalid' class when the user corrects the input
+            $('#pills-home input').on('input change', function() {
+                if (this.checkValidity()) {
+                    $(this).removeClass('is-invalid');
                 }
             });
 // Function to go to the next tab

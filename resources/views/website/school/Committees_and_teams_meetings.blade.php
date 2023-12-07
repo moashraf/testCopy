@@ -64,8 +64,8 @@
                 <div class="col-12 col-xl-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item text-s2 active"  style="color: white;" aria-current="page">المدرسه</li>
-                            <li class="breadcrumb-item text-s2" style="color: white;">اللجان والفرق</li>
+                            <li class="breadcrumb-item text-s2 active"  style="padding-left:20px;color: white;" aria-current="page">المدرسه</li>
+                            <li class="breadcrumb-item text-s2" style="padding-left:20px;color: white;">اللجان والفرق</li>
                         </ol>
                     </nav>
 
