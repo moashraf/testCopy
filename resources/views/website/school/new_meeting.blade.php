@@ -662,16 +662,34 @@ fetchCalander(month, year);
 <!-- jquery ui datepicker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <script>
+
+    $.fn.datepicker.dates['ar'] = {
+        days: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
+        daysMin: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
+        daysShort: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
+       // daysMin: ["ح", "ن", "ث", "ع", "خ", "ج", "س", "ح"],
+        months: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+        monthsShort: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+        today: "هذا اليوم",
+        rtl: true
+    };
+
     $(function() {
         $('.hasdatetimepicker').datepicker({
             todayHighlight: true,
             format: "dd-mm-yyyy",
-            viewMode: "time",
-            minViewMode: "time"
+            viewMode: "days",
+            regional: "ar",
+            language:'ar',
+            minViewMode: "days"
         });
     });
 
+
+
     $(document).ready(function() {
+
+
         $(document).on('change', '#calendar-date-input', function() {
             var date = $(this).val();
 
