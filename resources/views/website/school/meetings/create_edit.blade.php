@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css"
           integrity="sha512-aD9ophpFQ61nFZP6hXYu4Q/b/USW7rpLCQLX6Bi0WJHXNO7Js/fUENpBQf/+P4NtpzNX0jSgR5zVvPOJp+W2Kg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link rel="stylesheet" href="{{ URL::asset('css/higry/bootstrap-datetimepicker.min.css') }}" />
 
 @endsection
 
@@ -111,7 +111,7 @@
                                                                 <div class=" input-group">
 
                                                                     <input name="start_date" type="text" style="border-left: 0px;"
-                                                                           class="form-control hasdatetimepicker clickable-item-pointer @error('start_date') is-invalid @enderror"
+                                                                           class=" hijri-date-input form-control hasdatetimepicker clickable-item-pointer @error('start_date') is-invalid @enderror"
                                                                            placeholder="  تاريخ الاجتماع"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text"> <img class="platform_icon" alt="school"
@@ -460,6 +460,9 @@
 
 <!-- js insert -->
 @section('js')
+    <script src="{{ URL::asset('js/higry/bootstrap-hijri-datepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('js/higry/bootstrap-hijri-datetimepicker.min.js') }}"></script>
+
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <!-- select 2 -->
@@ -508,7 +511,7 @@
                 if (!isValid) {
                     e.preventDefault(); // Prevent switching to tab2
                     e.stopPropagation();
-$('#pills-home-tab').tab('show');
+                $('#pills-home-tab').tab('show');
                     return false;
                 }
             });
