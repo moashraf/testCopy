@@ -253,7 +253,7 @@
 
                                                     <div class="  form-group meeting_agenda">
                                                         <div class="row" id="container_of_all_meeting_agenda" >
-                                                            <label  for="committee" class="form-label bold_form_label "  style="padding-bottom: 10px;">    جدول اعمل الاجتماع  </label>
+                                                            <label  for="committee" class="form-label bold_form_label "  style="padding-bottom: 10px;">    جدول اعمال الاجتماع  </label>
                                                             @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                                 @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
 
