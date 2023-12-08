@@ -111,8 +111,8 @@
                                                                 <div class=" input-group">
 
                                                                     <input name="start_date" type="text" style="border-left: 0px;"
-                                                                           class=" hijri-date-input form-control hasdatetimepicker clickable-item-pointer @error('start_date') is-invalid @enderror"
-                                                                           placeholder="  تاريخ الاجتماع"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
+                                                                           class="  hijri-date-input   form-control   clickable-item-pointer @error('start_date') is-invalid @enderror"
+                                                                           placeholder="  تاريخ الاجتماع"   value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text"> <img class="platform_icon" alt="school"
                                                                                                             src="{{ URL::asset('img/icons/calendar.svg') }}"> </div>
@@ -473,45 +473,38 @@
     <!-- jquery ui datepicker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
-        // $.fn.datepicker.dates['ar'] = {
-        //     days: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"],
-        //     daysShort: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
-        //   //  daysMin: ["ح", "ن", "ث", "ع", "خ", "ج", "س", "ح"],
-        //     daysMin: ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت", "أحد"],
-        //
-        //     //daysMin: ["ح", "ن", "ث", "ع", "خ", "ج", "س", "ح"],
-        //     months: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-        //     monthsShort: ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
-        //     today: "هذا اليوم",
-        //     rtl: true
-        // };
 
-        // $(function() {
-        //     $('.hasdatetimepicker').datepicker({
-        //         todayHighlight: true,
-        //         format: "dd-mm-yyyy",
-        //         viewMode: "time",
-        //         language:'ar',
-        //
-        //         minViewMode: "time"
-        //     });
-        // });
         $(function() {
-            $(".hijri-date-input").hijriDatePicker();
-        });
-
-
-        $(document).ready(function() {
-            $(document).on('change', '#calendar-date-input', function() {
-                var date = $(this).val();
-                var url = "<?php echo e(route('school_route.dashboard', ':date')); ?>";
-                url = url.replace(':date', date);
-                window.location.href = url;
+            $(".hijri-date-input").hijriDatePicker({
+                locale: "ar-sa",
+                  format: "YYYY-MM-DD",
+                hijriFormat:"iYYYY-iMM-iDD",
+                dayViewHeaderFormat: "MMMM YYYY",
+                hijriDayViewHeaderFormat: "iMMMM iYYYY",
+               //  showSwitcher: true,
+               //  allowInputToggle: true,
+               //  showTodayButton: false,
+               //  useCurrent: true,
+               // isRTL: false,
+               //  viewMode:'months',
+               //  keepOpen: false,
+                //hijri: true,
+               //  debug: true,
+               //  showClear: true,
+               //  showTodayButton: true,
+               //  showClose: true
             });
-        })
-    </script>
-    <script>
-        $(document).ready(function() {
+
+        });
+        /** indicator on hijri date **/
+        var indicator_on_hijri_date =  new Date(document.getElementsByClassName("hijri-date-input")[0].value).getFullYear();
+        if (indicator_on_hijri_date < 2000 ){
+            $(".hijri-date-input").hijriDatePicker({
+                hijri: true
+            });
+        }
+
+         $(document).ready(function() {
             $('.js-example-basic-single').select2();
             // //hide search
             // $('.select2-no-search').select2({
@@ -687,8 +680,6 @@
 
         }
 
-
-
         // Call saveInputValues() before switching tabs
         // Call restoreInputValues() after switching back to the tab
 
@@ -703,26 +694,6 @@
             touchEventsTarget: 'container',
         });
 
-        // Calendar
-        fetchCalander();
 
-        function fetchCalander(month = {{ date('m') }}, year = {{ date('Y') }}) {
-            var url = "{{ route('school_route.calander_tasks_ajax', [':month', ':year']) }}";
-            url = url.replace(':month', month).replace(':year', year);
-            $.ajax({
-                url: url,
-                type: "GET",
-                success: function (data) {
-                    $("#calander_cont").html(data);
-                }
-            });
-        }
-
-        // Reinsert the calendar when the month arrows are clicked
-        $(document).on('click', '#change_month', function () {
-            var month = $(this).data('month');
-            var year = $(this).data('year');
-            fetchCalander(month, year);
-        });
     </script>
 @endsection
