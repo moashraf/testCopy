@@ -145,7 +145,7 @@
                                                             <div class="col-md-9">
                                                                 <div class=" input-group">
 
-                                                                    <input name="start_time" type="time" style="border-left: 0px;"
+                                                                    <input name="start_time" type="text" style="border-left: 0px;"
                                                                            class="form-control   clickable-item-pointer @error('start_time') is-invalid @enderror"
                                                                            placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" required>
                                                                     <div class="input-group-prepend">
@@ -415,9 +415,17 @@
                                                             <div class="col-md-3 align-self-center ">
                                                                 <label  for="committee" class="form-label bold_form_label ">  موعد انتهاء الاجتماع  </label>
                                                             </div>
-                                                            <div class="col-md-5">
-                                                                <input type="time"  name="end_time"  value="{{ isset($item_val) ?$item_val['end_time']:''}}" class="  form-control">
+                                                            <div class=" input-group">
+
+                                                                <input name="start_time" type="text" style="border-left: 0px;"
+                                                                       class="form-control   clickable-item-pointer @error('end_time') is-invalid @enderror"
+                                                                       placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}" required>
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                        src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
 

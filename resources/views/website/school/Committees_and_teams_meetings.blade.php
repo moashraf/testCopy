@@ -305,8 +305,9 @@ if ( request()->teams){
 
                 // Optional: Close the new window/tab after a delay
                 setTimeout(function() {
+                    printWindow.print();
                     printWindow.close();
-                }, 1000);
+                }, 2000);
             };
         }
 
