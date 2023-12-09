@@ -52,8 +52,16 @@
                                                             <label  for="committee" class="form-label bold_form_label "> تاريخ الاجتماع<span class="required-asterisk">*</span> </label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input required type="date" id="date" name="start_date"  value="{{ isset($item_val) ? $item_val['start_date']: ''}}" class=" form-control">
+                                                            <div class=" input-group">
 
+                                                                <input name="start_date" type="text" style="border-left: 0px;"
+                                                                       class="  hijri-date-input   form-control   clickable-item-pointer @error('start_date') is-invalid @enderror"
+                                                                       placeholder="  تاريخ الاجتماع"   value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                        src="{{ URL::asset('img/icons/calendar.svg') }}"> </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,7 +87,17 @@
                                                             <label  for="committee" class="form-label bold_form_label ">موعد الاجتماع<span class="required-asterisk">*</span> </label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="time" id="time" required name="start_time" value="{{ isset($item_val) ? $item_val['start_time']: ''}}" class="  form-control">
+                                                            <div class=" input-group">
+
+                                                                <input name="start_time" type="text" style="border-left: 0px;"
+                                                                       class="form-control   clickable-item-pointer @error('start_time') is-invalid @enderror"
+                                                                       placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" required>
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                        src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,7 +129,6 @@
                                                 <!-- Add more form fields here -->
 
 
-
                                                 <div class="  form-group">
                                                     <div class="row">
                                                         <div class="col-md-3 align-self-center ">
@@ -133,12 +150,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="  form-group Number_of_attendees22">
+
+                                                <div class="  form-group Number_of_attendees">
                                                     <div class="row">
                                                         <div class="col-md-3 align-self-center ">
                                                             <label  for="committee" class="form-label bold_form_label "> عدد الحاضرين    </label>
                                                         </div>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-6">
                                                             <select  id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select js-example-basic-single  select2-hidden-accessible">
                                                                 <option value="">عدد الحاضرين</option>
                                                                 @foreach ([5, 10, 15, 20, 30] as $value)
@@ -158,7 +176,7 @@
 
                                                 <div class="  form-group meeting_agenda">
                                                     <div class="row" id="container_of_all_meeting_agenda" >
-                                                        <label  for="committee" class="form-label bold_form_label "  style="    padding-bottom: 10px;">    جدول اعمال الاجتماع  </label>
+                                                        <label  for="committee" class="form-label bold_form_label "  style="padding-bottom: 10px;">    جدول اعمال الاجتماع  </label>
                                                         @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                             @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
 
@@ -167,28 +185,28 @@
                                                                         <div class="input-group">
                                                                             <label for="name1" class="add_meeting_agenda_span_num align-self-center  side_number_div ">  {{ $key+1 }} </label>
                                                                             <input type="text" autocomplete="off"  name="meeting_agenda_item[]" class="form-control" value="{{ $agenda['Item'] }}">
+                                                                            <input type="hidden" name="meeting_agenda_id[]" class="form-control" value="{{ $agenda['id'] }}">
 
                                                                         </div>
 
                                                                     </div>
+                                                                    <div class="col-md-3  align-self-center ">
+                                                                        <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
+                                                                            <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                        </a>
+                                                                        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
+                                                                            <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                        </a>
 
+
+                                                                    </div>
 
                                                                 </div>
 
                                                             @endforeach
                                                         @else
 
-
-                                                                <div class="row add_meeting_agenda_div "   >
-                                                                    <div class="col-md-9 add-padding-bottom ">
-                                                                        <span>  لم يتم انشاء جدول اعمال</span>
-
-                                                                    </div>
-
-
-                                                                </div>
-
-
+                                                            <div  id="container_of_all_meeting_agenda">    </div>
                                                         @endif
 
                                                     </div>
@@ -203,12 +221,14 @@
                                                         <div class="col-md-2 meeting_recommendations_table "     >الجهه التابعه للتنفيذ</div>
                                                     </div>
                                                     <div class="row" id="container_of_all_add_meeting_recommendations_finished"  >
-                                                        @if( (is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
+                                                        @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                             @foreach ($item_val['meeting_recommendations']   as $key => $recommendation)
                                                                 @if ($recommendation['status'] ==1)
 
 
                                                                     <div class="row add_meeting_recommendations_finished_div ">
+                                                                        <input type="hidden" name="recommendation_id[]" class="form-control" value="{{ $recommendation['id'] }}">
+
                                                                         <div class="input-group">
                                                                             <label for="name1" class="align-self-center add-padding-bottom side_number_div "> {{ $key+1 }} </label>
 
@@ -224,6 +244,17 @@
                                                                             <div class="col-md-2 add-padding-bottom meeting_recommendations_table "  >
                                                                                 <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control"  value="{{ $recommendation['entity_responsible_implementation_related'] }}" >
                                                                             </div>
+                                                                            <div class="col-md-2  align-self-center ">
+                                                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
+                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                                </a>
+                                                                                <a href="#" onclick="add_meeting_recommendations_finished()" class="add_meeting_recommendations_finished_class_add"  >
+                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                                </a>
+
+
+                                                                            </div>
+
 
                                                                         </div>
                                                                     </div>
@@ -234,7 +265,7 @@
                                                             @endforeach
                                                         @else
                                                             <div  id="container_of_all_add_meeting_recommendations_finished">    </div>
-                                                            لم يتم انشاء توصيات
+
 
                                                         @endif
                                                     </div>
@@ -249,7 +280,7 @@
                                                         </div>
                                                         <div class="col-md-9 add-padding-bottom " id="container_of_all_meeting_recommendations_not" >
 
-                                                            @if($hasStatusZero && (is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
+                                                            @if((is_array($item_val['meeting_recommendations']) && !empty($item_val['meeting_recommendations'])))
                                                                 @foreach  ($item_val['meeting_recommendations'] as $key => $recommendation_val)
                                                                     @if ($recommendation_val['status'] == 0)
                                                                         <div class="row add_meeting_recommendations_not_div "   >
@@ -257,14 +288,22 @@
                                                                                 <input type="text" autocomplete="off"  name="meeting_recommendations_not_completed[]" class="form-control"
                                                                                        value="{{ $recommendation_val['Item'] }}">
                                                                             </div>
+                                                                            <div class="col-md-3  align-self-center ">
+                                                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
+                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
+                                                                                </a>
+                                                                                <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"  >
+                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                                                                </a>
+
+
+                                                                            </div>
                                                                         </div>
-                                                                     @endif
+                                                                    @endif
                                                                 @endforeach
                                                             @else
 
-                                                                <div  style="padding: 15%;" id="container_of_all_meeting_recommendations_not">
-                                                                        <span style="font-size: 40px">لايوجد</span>
-                                                                </div>
+                                                                <div  id="container_of_all_meeting_recommendations_not">    </div>
                                                             @endif
 
                                                         </div>
@@ -278,14 +317,19 @@
                                                         <div class="col-md-3 align-self-center ">
                                                             <label  for="committee" class="form-label bold_form_label ">  موعد انتهاء الاجتماع  </label>
                                                         </div>
-                                                        <div class="col-md-9">
-                                                            <input type="time"  name="end_time"  value="{{ isset($item_val) ?$item_val['end_time']:''}}" class="  form-control">
+                                                        <div class=" input-group">
+
+                                                            <input name="start_time" type="text" style="border-left: 0px;"
+                                                                   class="form-control   clickable-item-pointer @error('end_time') is-invalid @enderror"
+                                                                   placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}" required>
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text"> <img class="platform_icon" alt="school"
+                                                                                                    src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
+                                                            </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
-
-
-                                                <!-- Repeat for other fields with appropriate classes -->
 
                                             </div>
 
@@ -307,29 +351,23 @@
 <!-- bootstrap style -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css"
       integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
-<link href="{{ URL::asset('css/website.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/website.css') }}" rel="stylesheet">
 
 <style>
+
     @media print {
+
         @page {
             size: landscape;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
 
-        th, td {
-            border: 1px solid black;
-            padding: 5px;
+        #container_of_all_meeting_recommendations_not{
+            padding-left: 0;
+            padding-right: 10%;
         }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr {
-            page-break-inside: avoid;
+        * {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
     }
 

@@ -380,6 +380,9 @@ class MeetingController extends Controller
         $Committee_id =$item_val->committees_and_teams_id;
         $Committees_and_teams_model = new Committees_and_teams;
         $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
+        if ($item_val->start_date==="0000-00-00 00:00:00"){
+            $item_val->start_date = null;
+        }
         if ($item_val->start_date){
             $dateTime = new DateTime($item_val->start_date);
             $item_val->start_date = $dateTime->format('Y-m-d');
