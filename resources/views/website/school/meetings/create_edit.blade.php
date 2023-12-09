@@ -145,8 +145,8 @@
                                                             <div class="col-md-9">
                                                                 <div class=" input-group">
 
-                                                                    <input name="start_time" type="text" style="border-left: 0px;"
-                                                                           class="form-control hasdatetimepicker clickable-item-pointer @error('start_time') is-invalid @enderror"
+                                                                    <input name="start_time" type="time" style="border-left: 0px;"
+                                                                           class="form-control   clickable-item-pointer @error('start_time') is-invalid @enderror"
                                                                            placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" required>
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text"> <img class="platform_icon" alt="school"
@@ -184,13 +184,16 @@
                                                     </div>
                                                     <!-- Add more form fields here -->
 
-                                                    <div class="row form-group" style="padding-top: 51px;">
-                                                        <div class="col-md-6">
-                                                            <button style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="submit" class="col-md-3 btn btn-default custom-reset-button">إنهاء</button>
+                                                    <div class=" form-group" style="padding-top: 51px;">
+                                                        <div class="row">
+                                                            <div class=" col col-md-6">
+                                                                <button  type="submit" class=" meetings_button_next_wi   btn btn-default custom-reset-button">إنهاء</button>
+                                                            </div>
+                                                            <div class=" col col-md-6">
+                                                                <button id="nextButton" type="button" class=" meetings_button_next btn btn-primary custom-submit-button">التالي</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <button id="nextButton" style=" float:left ;background-color: #0A3A81; width: 50%;" type="button" class="btn btn-primary custom-submit-button">التالي</button>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>
@@ -297,14 +300,6 @@
                                                                         </div>
 
                                                                     </div>
-
-
-
-
-
-
-
-
 
                                                                 @endforeach
                                                             @else
@@ -430,11 +425,11 @@
                                                     <!-- Repeat for other fields with appropriate classes -->
 
                                                     <div class="row form-group " style="padding-top: 51px;" >
-                                                        <div class="col-md-6">
-                                                            <button id="prevButton" style="color: #0A3A81; border: 1px solid #e6a935; width: 50%;" type="button" class="btn btn-default custom-reset-button">السابق</button>
+                                                        <div class="col col-md-6">
+                                                            <button id="prevButton"  type="button" class=" meetings_button_next_wi btn btn-default custom-reset-button">السابق</button>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <button style=" background-color: #0A3A81;  width: 50%;  "  type="submit" class="col-md-3 float-end btn btn-primary custom-submit-button">حفظ وانهاء </button>
+                                                        <div class=" col col-md-6">
+                                                            <button   type="submit" class=" meetings_button_next   float-end btn btn-primary custom-submit-button">حفظ وانهاء </button>
                                                         </div>
                                                     </div>
 
@@ -494,7 +489,6 @@
                //  showTodayButton: true,
                //  showClose: true
             });
-
         });
         /** indicator on hijri date **/
         var indicator_on_hijri_date =  new Date(document.getElementsByClassName("hijri-date-input")[0].value).getFullYear();

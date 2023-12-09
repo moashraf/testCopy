@@ -113,7 +113,7 @@
                                     </button>
                                 </div>
                                 <div class="col-2">
-                                      <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                                      <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10  clickable-item-pointer text-xs"
                                          style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
                                         <span class="no_show_on_map">
                                         انشاء اجتماع جديد
@@ -231,7 +231,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="col-2">
-                                                        <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10 px-4 clickable-item-pointer text-xs"
+                                                        <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10  clickable-item-pointer text-xs"
                                                             style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
                                                             <span class="no_show_on_map">
                                         انشاء اجتماع جديد

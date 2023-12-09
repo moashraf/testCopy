@@ -5620,7 +5620,7 @@ body.sidebar-toggled footer.sticky-footer {
 .add_border_radius{border-radius: 7px!important;}
 .no_arrows_data_to_show >.accordion-button::after{    width: 0!important;}
 
-.background_button_body{background-color: #e9e9e9; }
+.background_button_body{background-color: #e9e9e9;     padding-left: 10px;}
 .no-margin-left-right{margin-left: 0;  margin-right: 0;}
 .no-padding-left-right{padding-left: 0!important; padding-right: 0!important;}
 .Committees_and_teams_meetings_create_title{
@@ -5670,8 +5670,19 @@ select2_background_color{
     align-items: center;
     justify-content: center;
 }
+.meetings_button_next{
+   float:left ;background-color: #0A3A81;    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.meetings_button_next_wi{ color: #0A3A81; border: 1px solid #e6a935; padding-right: 50px;
+    padding-left: 50px;}
 .plus_minus_class{ width: 40px; height: 45px; }
 @media only screen and (max-width: 600px) {
     .no_show_on_map {     display: none; }
+    .meetings_button_next_wi   {    padding-right: 20px;  padding-left: 20px;}
+    .meetings_button_next   {    padding-right: 20px;  padding-left: 20px;}
+    .Save_as_draft   {   width: 100%;}
+    .meeting_recommendations_table{ margin-left: 0px; }
 }
 
