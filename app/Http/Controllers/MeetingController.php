@@ -13,7 +13,9 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Mpdf\Mpdf;
 use PDF;
+use DOMPDF;
 // Assuming you have the Dompdf alias set up
 
 
@@ -212,16 +214,7 @@ class MeetingController extends Controller
         $Committees_and_teams_model = new Committees_and_teams;
         $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
         $video_tutorial = Video_tutorial::where('type', 2)->first();
-        if ($item_val->start_date){
-            $dateTime = new DateTime($item_val->start_date);
-            $item_val->start_date = $dateTime->format('Y-m-d');
-            $item_val->start_time = $dateTime->format('H:i:s');
-        }
-        if ($item_val->end_time){
-            $Time = new DateTime($item_val->end_time);
-            $item_val->end_time = $Time->format('H:i:s');
-        }
-        $item_val = $item_val->toArray();
+        $item_val = $this->updateDateValues($item_val);
         return view('website.school.meetings.create_edit',
             compact('current_school', 'school','Committees_and_teams','item_val', 'sliders', 'video_tutorial'));
     }
@@ -288,10 +281,11 @@ class MeetingController extends Controller
     }
 
 
-
- public function downloadPDF($id)
-     {
-
+    /**
+     * @throws \Exception
+     */
+    public function downloadPDF($id): ?string
+    {
          $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
              ->where('id', $id)
              ->first();
@@ -299,20 +293,18 @@ class MeetingController extends Controller
          $Committee_id =$item_val->committees_and_teams_id;
          $Committees_and_teams_model = new Committees_and_teams;
          $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
-         if ($item_val->start_date){
-             $dateTime = new DateTime($item_val->start_date);
-             $item_val->start_date = $dateTime->format('Y-m-d');
-             $item_val->start_time = $dateTime->format('H:i:s');
-         }
-         if ($item_val->end_time){
-             $Time = new DateTime($item_val->end_time);
-             $item_val->end_time = $Time->format('H:i:s');
-         }
-         $item_val = $item_val->toArray();
-         $pdf = PDF::loadView('website.school.meetings.print_pdf',['item_val'=>$item_val,'Committees_and_teams'=>$Committees_and_teams]);
- // video tutorial
+         $Committees_and_teams = $Committees_and_teams->toArray();
+         $item_val = $this->updateDateValues($item_val);
+
+        $mpdf = new Mpdf();
+         $html = View('website.school.meetings.print_pdf',['item_val'=>$item_val,'Committees_and_teams'=>$Committees_and_teams])->render();
+
+         $mpdf->WriteHTML($html);
+
+         return $mpdf->Output('meeting-details.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+         // video tutorial
          // Load a view for the PDF content and convert it to HTML
-    return $pdf->download('meeting-details.pdf');
+//    return $pdf->download('meeting-details.pdf');
 
      }
 /**
@@ -383,18 +375,28 @@ class MeetingController extends Controller
         if ($item_val->start_date==="0000-00-00 00:00:00"){
             $item_val->start_date = null;
         }
-        if ($item_val->start_date){
+        $item_val = $this->updateDateValues($item_val);
+        return view('website.school.meetings.print_pdf',compact('Committees_and_teams','item_val'));
+
+    }
+
+    /**
+     * @param $item_val
+     * @return mixed
+     * @throws \Exception
+     */
+    public function updateDateValues($item_val)
+    {
+        if ($item_val->start_date) {
             $dateTime = new DateTime($item_val->start_date);
             $item_val->start_date = $dateTime->format('Y-m-d');
             $item_val->start_time = $dateTime->format('H:i:s');
         }
-        if ($item_val->end_time){
+        if ($item_val->end_time) {
             $Time = new DateTime($item_val->end_time);
             $item_val->end_time = $Time->format('H:i:s');
         }
-        $item_val = $item_val->toArray();
-        return view('website.school.meetings.print_pdf',compact('Committees_and_teams','item_val'));
-
+        return $item_val->toArray();
     }
 
 }

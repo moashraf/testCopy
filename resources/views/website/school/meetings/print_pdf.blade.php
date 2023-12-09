@@ -6,10 +6,27 @@
             break;
         }
     }
+
 @endphp
+    <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Meeting Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" crossorigin="anonymous">
+    <link href="{{ URL::asset('css/website_minified.css') }}" rel="stylesheet">
+    <style>
+        @media print {
+            @page { size: landscape; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            #container_of_all_meeting_recommendations_not { padding-left: 0; padding-right: 10%; }
+        }
+        body {font-family: 'DejaVu Sans', sans-serif;}
+        /* Additional custom styles can be added here */
+    </style>
+</head>
+<body>
 <div class="print-section" style=" direction: rtl; text-align: right;">
-
-
 <div class="container-fluid px-4 px-md-5 py-3 py-md-4">
     <div class="row">
             <div class="col-12 mb-3 mb-md-0">
@@ -190,16 +207,6 @@
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="col-md-3  align-self-center ">
-                                                                        <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
-                                                                            <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                        </a>
-                                                                        <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
-                                                                            <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                        </a>
-
-
-                                                                    </div>
 
                                                                 </div>
 
@@ -244,16 +251,7 @@
                                                                             <div class="col-md-2 add-padding-bottom meeting_recommendations_table "  >
                                                                                 <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control"  value="{{ $recommendation['entity_responsible_implementation_related'] }}" >
                                                                             </div>
-                                                                            <div class="col-md-2  align-self-center ">
-                                                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
-                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                                </a>
-                                                                                <a href="#" onclick="add_meeting_recommendations_finished()" class="add_meeting_recommendations_finished_class_add"  >
-                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                                </a>
 
-
-                                                                            </div>
 
 
                                                                         </div>
@@ -288,16 +286,6 @@
                                                                                 <input type="text" autocomplete="off"  name="meeting_recommendations_not_completed[]" class="form-control"
                                                                                        value="{{ $recommendation_val['Item'] }}">
                                                                             </div>
-                                                                            <div class="col-md-3  align-self-center ">
-                                                                                <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
-                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
-                                                                                </a>
-                                                                                <a href="#" onclick="add_meeting_recommendations_not()" class="add_meeting_recommendations_not_class_add"  >
-                                                                                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                                                                </a>
-
-
-                                                                            </div>
                                                                         </div>
                                                                     @endif
                                                                 @endforeach
@@ -324,7 +312,7 @@
                                                                    placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}" required>
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text"> <img class="platform_icon" alt="school"
-                                                                                                    src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
+                                                                                                    src="{{URL::asset('img/icons/clock.svg') }}"> </div>
                                                             </div>
                                                         </div>
 
@@ -345,30 +333,8 @@
             </div>
 
     </div>
-
 </div>
+</body>
+</html>
 
-<!-- bootstrap style -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css"
-      integrity="sha384-nU14brUcp6StFntEOOEBvcJm4huWjB0OcIeQ3fltAfSmuZFrkAif0T+UtNGlKKQv" crossorigin="anonymous">
-    <link href="{{ URL::asset('css/website.css') }}" rel="stylesheet">
 
-<style>
-
-    @media print {
-
-        @page {
-            size: landscape;
-        }
-
-        #container_of_all_meeting_recommendations_not{
-            padding-left: 0;
-            padding-right: 10%;
-        }
-        * {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-    }
-
-</style>
