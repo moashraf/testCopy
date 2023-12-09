@@ -104,7 +104,7 @@
                     <div class="icon_square" style="background-color:#BCD7F5;"></div>
                     إجتماعات اللجان
                 </a>
-                <a class="collapse-item" href="{{ url('school\Committees_and_teams_meetings') }}">
+                <a class="collapse-item" href="{{ url('school\Committees_and_teams_meetings?teams=1') }}">
                     <div class="icon_square" style="background-color:#F5CBBC;"></div>
                     إجتماعات الفرق
                 </a>
