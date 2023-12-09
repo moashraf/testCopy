@@ -200,12 +200,12 @@ if ( request()->teams){
                                                                             {{ \Carbon\Carbon::parse($item_val->created_at)->format('Y/m/d') }}
                                                                         </td>
                                                                         <td>
-                                                                            <div class="dropdown no-arrow">
+                                                                            <div class="dropdown no-arrow" style="position: absolute;z-index: 99999">
                                                                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-popper-placement="bottom-start">
                                                                                     <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-400"></i>
                                                                                 </a>
-                                                                                <div style="min-width: unset; " class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                                                <div style="min-width: unset; margin: 10px" class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><i class="fas fa-trash me-1 text-red"></i>حذف</a>
                                                                                     <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><i class="fas fa-edit me-1 text-green"></i>تعديل</a>
                                                                                     <a class="dropdown-item update_admin" onclick="printMeeting({{$item_val->id}})"  target="_blank"><i class="fas fa-print me-1 text-blue-400" ></i>طباعه </a>
