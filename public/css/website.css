@@ -5678,6 +5678,7 @@ select2_background_color{
 .meetings_button_next_wi{ color: #0A3A81; border: 1px solid #e6a935; padding-right: 50px;
     padding-left: 50px;}
 .plus_minus_class{ width: 40px; height: 45px; }
+.meetings_button_next_wi:hover {  background-color: #e6a935;}
 @media only screen and (max-width: 600px) {
     .no_show_on_map {     display: none; }
     .meetings_button_next_wi   {    padding-right: 20px;  padding-left: 20px;}

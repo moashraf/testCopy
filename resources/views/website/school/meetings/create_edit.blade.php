@@ -415,7 +415,7 @@
                                                             <div class="col-md-3 align-self-center ">
                                                                 <label  for="committee" class="form-label bold_form_label ">  موعد انتهاء الاجتماع  </label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-5">
                                                                 <input type="time"  name="end_time"  value="{{ isset($item_val) ?$item_val['end_time']:''}}" class="  form-control">
                                                             </div>
                                                         </div>
