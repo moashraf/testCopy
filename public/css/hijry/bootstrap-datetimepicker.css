@@ -98,13 +98,6 @@
     margin: 0;
 }
 
-.bootstrap-datetimepicker-widget a[data-action] {
-    padding: 6px 0;
-}
-
-    .bootstrap-datetimepicker-widget a[data-action]:active {
-        box-shadow: none;
-    }
 
 .bootstrap-datetimepicker-widget .timepicker-hour,
 .bootstrap-datetimepicker-widget .timepicker-minute,
@@ -234,8 +227,8 @@
     /* additional styles for the arrows */
 }
 .bootstrap-datetimepicker-widget .picker-switch {
-    background-color:none; /* white background */
-    color: #007bff;
+    background-color:unset; /* white background */
+    color: #4d4f50;
     text-align: center;
     font-size: var(--font-size);
 }
@@ -281,7 +274,7 @@
     .bootstrap-datetimepicker-widget table th {
         height: 20px;
         line-height: 20px;
-        width: 20px;
+        width: 0;
     }
 
         .bootstrap-datetimepicker-widget table th.picker-switch {
@@ -497,7 +490,7 @@
 
         .hijry-datepicker thead th.prev, .hijry-datepicker thead th.datepicker-switch, .hijry-datepicker thead th.next {
             font-weight: 500;
-            color: #a7abc3;
+            color:#1532e3;
         }
 
             .hijry-datepicker thead th.prev i, .hijry-datepicker thead th.datepicker-switch i, .hijry-datepicker thead th.next i {
@@ -531,7 +524,7 @@
         }
 
         .hijry-datepicker tbody tr > td.day.selected, .hijry-datepicker tbody tr > td.day.selected:hover, .hijry-datepicker tbody tr > td.day.active, .hijry-datepicker tbody tr > td.day.active:hover {
-            background: #5867dd;
+            background: #0A3A81;
             color: #ffffff;
             border-radius: 50%;
         }
@@ -581,7 +574,7 @@
         .hijry-datepicker tbody tr > td span.month.active:hover,
         .hijry-datepicker tbody tr > td span.month.active.focused:hover,
         .hijry-datepicker tbody tr > td span.month.active {
-            background: #5867dd;
+            background: #0A3A81;
             color: #ffffff;
         }
 
@@ -597,3 +590,27 @@
     .hijry-datepicker.datepicker-inline {
         border: 1px solid #ebedf2;
     }
+.calendar-switcher {
+    text-align: center;
+    padding: 5px;
+    display: inline-block;
+}
+
+.calendar-switcher a {
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.calendar-switcher a.switch-hijri.active,
+.calendar-switcher a.switch-gregorian.active {
+    background-color: #0A3A81; /* Active state background */
+    color: #fff; /* Active state text color */
+}
+
+.calendar-switcher a:not(.active) {
+    background-color: #f9f9f9; /* Inactive state background */
+    color: #333; /* Inactive state text color */
+}

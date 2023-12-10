@@ -12296,7 +12296,7 @@
                         .append($('<th>').addClass('prev').attr('data-action', 'previous')
                             .append($('<span>').html(options.icons.previous))
                         )
-                        .append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '6' : '5')))
+                        .append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '8' : '7')))
                         .append($('<th>').addClass('next').attr('data-action', 'next')
                             .append($('<span>').html(options.icons.next))
                         )
@@ -12305,6 +12305,19 @@
                         .append($('<tr>')
                             .append($('<td>').attr('colspan', (options.calendarWeeks ? '8' : '7')))
                         );
+                if (options.showSwitcher) {
+                    var switcherRow = $('<tr>')
+                        .append($('<th>').attr('colspan', (options.calendarWeeks ? '8' : '7'))
+                            .append($('<div>').attr({'class':'calendar-switcher'})
+                                .append($('<a>').attr({'data-action':'switchDateGregorian', 'class':'switch-gregorian active', 'href':'#'}).html('ميلادي'))
+                                .append($('<a>').attr({'data-action':'switchDateHijri', 'class':'switch-hijri', 'href':'#'}).html('هجري'))
+
+                            )
+                        );
+                    headTemplate.append(switcherRow);
+                }
+
+
 
                 return [
                     $('<div>').addClass('datepicker-days')
@@ -12425,9 +12438,9 @@
                     row.push($('<td>').append($('<a>').attr({ 'data-action': 'close', 'title': options.tooltips.close }).append($('<span>').html(options.icons.close))));
                 }
 
-                if (options.showSwitcher) {
-                    row.push($('<td>').append($('<a>').attr({ 'data-action': 'switchDate', 'title': options.tooltips.close }).append($('<span>').html('هجري/ميلادي'))));
-                }
+                // if (options.showSwitcher) {
+                //     row.push($('<td>').append($('<a>').attr({ 'data-action': 'switchDate', 'title': options.tooltips.close }).append($('<span>').html('هجري/ميلادي'))));
+                // }
                 return $('<table>').addClass('table-condensed').append($('<tbody>').append($('<tr>').append(row)));
             },
 
@@ -13499,20 +13512,28 @@
 
                 close: hide,
 
-                switchDate: function () {
+                switchDateHijri: function () {
+
+                    if (!options.hijri) {
+                        options.hijri = true;
+                        fillHijriDate();
+                        fillHijriMonths();
+                        initFormatting();
+                        // Update the visual state of the switch
+                        $('.switch-hijri').addClass('active');
+                        $('.switch-gregorian').removeClass('active');
+                    }
+                },
+                switchDateGregorian: function () {
 
                     if (options.hijri) {
 
                         options.hijri = false;
                         fillDate();
                         fillMonths();
-
-                        initFormatting();
-                    }
-                    else {
-                        options.hijri = true;
-                        fillHijriDate();
-                        fillHijriMonths();
+                        // Update the visual state of the switch
+                        $('.switch-gregorian').addClass('active');
+                        $('.switch-hijri').removeClass('active');
                         initFormatting();
                     }
 
