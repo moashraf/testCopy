@@ -8,7 +8,6 @@
 :root{
 
     --font-size:13px;
-    --container-width:300px;
     --text-color:#000000;
     --text-muted:#c1c1c1;
     --hover--bg-color:#e2e2e2;
@@ -228,10 +227,17 @@
     content: "Set the date to today";
 }
 
+
+.bootstrap-datetimepicker-widget .prev,
+.bootstrap-datetimepicker-widget .next {
+    color: #007bff; /* blue color for the arrow icons */
+    /* additional styles for the arrows */
+}
 .bootstrap-datetimepicker-widget .picker-switch {
+    background-color:none; /* white background */
+    color: #007bff;
     text-align: center;
     font-size: var(--font-size);
-    color: #000000;
 }
 
     .bootstrap-datetimepicker-widget .picker-switch::after {
@@ -261,6 +267,7 @@
         }
 
 .bootstrap-datetimepicker-widget table {
+    background-color: var(--weekend-bg-color);
     width: 100%;
     margin: 0;
 }
@@ -315,8 +322,13 @@
     .bootstrap-datetimepicker-widget table thead tr:first-child th {
         cursor: pointer;
     }
+.bootstrap-datetimepicker-widget table thead tr {
+    background-color: var(--weekend-bg-color);
+    color: black;
+}
 
-        .bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+
+    .bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
             background: #eeeeee;
         }
 
@@ -357,28 +369,14 @@
             position: relative;
         }
 
-            .bootstrap-datetimepicker-widget table td.today:before {
-                content: '';
-                display: inline-block;
-                border: solid transparent;
-                border-width: 0 0 7px 7px;
-                border-bottom-color: #337ab7;
-                border-top-color: rgba(0, 0, 0, 0.2);
-                position: absolute;
-                bottom: 4px;
-            }
+
 
         .bootstrap-datetimepicker-widget table td.active,
         .bootstrap-datetimepicker-widget table td.active:hover {
-            background-color: #337ab7;
+            background-color: var(--weekend-bg-color);
             color: #fff;
             text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
         }
-
-            .bootstrap-datetimepicker-widget table td.active.today:before {
-                border-bottom-color: #fff;
-            }
-
         .bootstrap-datetimepicker-widget table td.disabled,
         .bootstrap-datetimepicker-widget table td.disabled:hover {
             background: none;
@@ -401,7 +399,7 @@
             }
 
             .bootstrap-datetimepicker-widget table td span.active {
-                background-color: #337ab7;
+                background-color: var(--weekend-bg-color);
                 color: #fff;
                 text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
             }
@@ -450,7 +448,7 @@
     width: 85px;
 }
 
-.bootstrap-datetimepicker-widget table td.weekend {
+.bootstrap-datetimepicker-widget table td.day {
     background-color: var(--weekend-bg-color);
     border-radius: 0px;
 }
@@ -460,155 +458,142 @@
 }
 
 
-.datepicker tbody tr > td.day {
+.hijry-datepicker tbody tr > td.day {
     color:var(--text-color);
     padding: 5px 12px;
 }
 
-    .datepicker tbody tr > td.day.old {
+    .hijry-datepicker tbody tr > td.day.old {
         color: var(--text-muted);
     }
 
-    .datepicker tbody tr > td.day.new {
+    .hijry-datepicker tbody tr > td.day.new {
         color:var(--text-muted);
     }
 
-.datepicker {
-    width: var(--container-width);
-    padding: 10px;
-}
+
 
 /*===================================================================================== Custom ========*/
 
-    .datepicker.datepicker-orient-top {
+    .hijry-datepicker.datepicker-orient-top {
         margin-top: 8px;
     }
 
-    .datepicker table {
+    .hijry-datepicker table {
         width: 100%;
     }
 
-    .datepicker td,
-    .datepicker th {
+    .hijry-datepicker td,
+    .hijry-datepicker th {
         font-weight: regular;
         width: 35px;
         height: 35px;
         border-radius: 3px;
     }
 
-    .datepicker thead th {
+    .hijry-datepicker thead th {
         color: #a7abc3;
     }
 
-        .datepicker thead th.prev, .datepicker thead th.datepicker-switch, .datepicker thead th.next {
+        .hijry-datepicker thead th.prev, .hijry-datepicker thead th.datepicker-switch, .hijry-datepicker thead th.next {
             font-weight: 500;
             color: #a7abc3;
         }
 
-            .datepicker thead th.prev i, .datepicker thead th.datepicker-switch i, .datepicker thead th.next i {
+            .hijry-datepicker thead th.prev i, .hijry-datepicker thead th.datepicker-switch i, .hijry-datepicker thead th.next i {
                 font-size: 1.2rem;
                 color: #a7abc3;
             }
 
-                .datepicker thead th.prev i:before, .datepicker thead th.datepicker-switch i:before, .datepicker thead th.next i:before {
+                .hijry-datepicker thead th.prev i:before, .hijry-datepicker thead th.datepicker-switch i:before, .hijry-datepicker thead th.next i:before {
                     line-height: 0;
                     vertical-align: middle;
                 }
 
-            .datepicker thead th.prev:hover, .datepicker thead th.datepicker-switch:hover, .datepicker thead th.next:hover {
+            .hijry-datepicker thead th.prev:hover, .hijry-datepicker thead th.datepicker-switch:hover, .hijry-datepicker thead th.next:hover {
                 background: #f7f8fa !important;
             }
 
-        .datepicker thead th.dow {
+        .hijry-datepicker thead th.dow {
             color: #000000;
             font-weight: 500;
+            padding: 10px;
             font-size: var(--font-size);
         }
 
-    .datepicker tbody tr > td.day {
+    .hijry-datepicker tbody tr > td.day {
         color:var(--text-color);
     }
 
-        .datepicker tbody tr > td.day:hover {
+        .hijry-datepicker tbody tr > td.day:hover {
             background:var(--hover--bg-color);
             color: #6c7293;
         }
 
-        .datepicker tbody tr > td.day.selected, .datepicker tbody tr > td.day.selected:hover, .datepicker tbody tr > td.day.active, .datepicker tbody tr > td.day.active:hover {
+        .hijry-datepicker tbody tr > td.day.selected, .hijry-datepicker tbody tr > td.day.selected:hover, .hijry-datepicker tbody tr > td.day.active, .hijry-datepicker tbody tr > td.day.active:hover {
             background: #5867dd;
             color: #ffffff;
+            border-radius: 50%;
         }
 
-        .datepicker tbody tr > td.day.today {
+        .hijry-datepicker tbody tr > td.day.today {
             position: relative;
-            background: rgba(93, 120, 255, 0.7) !important;
-            color: #ffffff !important;
+            border-radius: 50%;
         }
 
-            .datepicker tbody tr > td.day.today:before {
-                content: '';
-                display: inline-block;
-                border: solid transparent;
-                border-width: 0 0 7px 7px;
-                border-bottom-color: #ffffff;
-                border-top-color: #ebedf2;
-                position: absolute;
-                bottom: 4px;
-                right: 4px;
-            }
 
-        .datepicker tbody tr > td.day.range {
+        .hijry-datepicker tbody tr > td.day.range {
             background: #f7f8fa;
         }
 
-    .datepicker tbody tr > td span.year,
-    .datepicker tbody tr > td span.hour,
-    .datepicker tbody tr > td span.minute,
-    .datepicker tbody tr > td span.month {
+    .hijry-datepicker tbody tr > td span.year,
+    .hijry-datepicker tbody tr > td span.hour,
+    .hijry-datepicker tbody tr > td span.minute,
+    .hijry-datepicker tbody tr > td span.month {
         color:var(--text-color);
         font-size: var(--font-size);
     }
 
-    .datepicker tbody tr > td span.year{
+    .hijry-datepicker tbody tr > td span.year{
         width: 65px;
     }
 
-        .datepicker tbody tr > td span.year:hover,
-        .datepicker tbody tr > td span.hour:hover,
-        .datepicker tbody tr > td span.minute:hover,
-        .datepicker tbody tr > td span.month:hover {
+        .hijry-datepicker tbody tr > td span.year:hover,
+        .hijry-datepicker tbody tr > td span.hour:hover,
+        .hijry-datepicker tbody tr > td span.minute:hover,
+        .hijry-datepicker tbody tr > td span.month:hover {
             background:var(--hover--bg-color);
         }
 
-        .datepicker tbody tr > td span.year.focused, .datepicker tbody tr > td span.year.focused:hover, .datepicker tbody tr > td span.year.active:hover, .datepicker tbody tr > td span.year.active.focused:hover, .datepicker tbody tr > td span.year.active,
-        .datepicker tbody tr > td span.hour.focused,
-        .datepicker tbody tr > td span.hour.focused:hover,
-        .datepicker tbody tr > td span.hour.active:hover,
-        .datepicker tbody tr > td span.hour.active.focused:hover,
-        .datepicker tbody tr > td span.hour.active,
-        .datepicker tbody tr > td span.minute.focused,
-        .datepicker tbody tr > td span.minute.focused:hover,
-        .datepicker tbody tr > td span.minute.active:hover,
-        .datepicker tbody tr > td span.minute.active.focused:hover,
-        .datepicker tbody tr > td span.minute.active,
-        .datepicker tbody tr > td span.month.focused,
-        .datepicker tbody tr > td span.month.focused:hover,
-        .datepicker tbody tr > td span.month.active:hover,
-        .datepicker tbody tr > td span.month.active.focused:hover,
-        .datepicker tbody tr > td span.month.active {
+        .hijry-datepicker tbody tr > td span.year.focused, .hijry-datepicker tbody tr > td span.year.focused:hover, .hijry-datepicker tbody tr > td span.year.active:hover, .hijry-datepicker tbody tr > td span.year.active.focused:hover, .hijry-datepicker tbody tr > td span.year.active,
+        .hijry-datepicker tbody tr > td span.hour.focused,
+        .hijry-datepicker tbody tr > td span.hour.focused:hover,
+        .hijry-datepicker tbody tr > td span.hour.active:hover,
+        .hijry-datepicker tbody tr > td span.hour.active.focused:hover,
+        .hijry-datepicker tbody tr > td span.hour.active,
+        .hijry-datepicker tbody tr > td span.minute.focused,
+        .hijry-datepicker tbody tr > td span.minute.focused:hover,
+        .hijry-datepicker tbody tr > td span.minute.active:hover,
+        .hijry-datepicker tbody tr > td span.minute.active.focused:hover,
+        .hijry-datepicker tbody tr > td span.minute.active,
+        .hijry-datepicker tbody tr > td span.month.focused,
+        .hijry-datepicker tbody tr > td span.month.focused:hover,
+        .hijry-datepicker tbody tr > td span.month.active:hover,
+        .hijry-datepicker tbody tr > td span.month.active.focused:hover,
+        .hijry-datepicker tbody tr > td span.month.active {
             background: #5867dd;
             color: #ffffff;
         }
 
-    .datepicker tfoot tr > th.today, .datepicker tfoot tr > th.clear {
+    .hijry-datepicker tfoot tr > th.today, .hijry-datepicker tfoot tr > th.clear {
         border-radius: 3px;
         font-weight: 500;
     }
 
-        .datepicker tfoot tr > th.today:hover, .datepicker tfoot tr > th.clear:hover {
+        .hijry-datepicker tfoot tr > th.today:hover, .hijry-datepicker tfoot tr > th.clear:hover {
             background: #ebedf2;
         }
 
-    .datepicker.datepicker-inline {
+    .hijry-datepicker.datepicker-inline {
         border: 1px solid #ebedf2;
     }

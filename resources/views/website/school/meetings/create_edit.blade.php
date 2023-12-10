@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css"
           integrity="sha512-aD9ophpFQ61nFZP6hXYu4Q/b/USW7rpLCQLX6Bi0WJHXNO7Js/fUENpBQf/+P4NtpzNX0jSgR5zVvPOJp+W2Kg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="{{ URL::asset('css/hijry/bootstrap-datetimepicker.min.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/hijry/bootstrap-datetimepicker.css') }}" />
 
 @endsection
 
@@ -467,8 +467,7 @@
 
 <!-- js insert -->
 @section('js')
-    <script src="{{ URL::asset('js/hijry/bootstrap-hijri-datepicker.min.js') }}"></script>
-    <script src="{{ URL::asset('js/hijry/bootstrap-hijri-datetimepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('js/hijry/bootstrap-hijri-datepicker.js') }}"></script>
 
     {{-- swiper --}}
     <script src="https://fastly.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -484,22 +483,20 @@
         $(function() {
             $(".hijri-date-input").hijriDatePicker({
                 locale: "ar-sa",
-                  format: "YYYY-MM-DD",
+                format: "YYYY-MM-DD",
                 hijriFormat:"iYYYY-iMM-iDD",
                 dayViewHeaderFormat: "MMMM YYYY",
                 hijriDayViewHeaderFormat: "iMMMM iYYYY",
-               //  showSwitcher: true,
-               //  allowInputToggle: true,
-               //  showTodayButton: false,
-               //  useCurrent: true,
-               // isRTL: false,
-               //  viewMode:'months',
-               //  keepOpen: false,
-                //hijri: true,
-               //  debug: true,
-               //  showClear: true,
-               //  showTodayButton: true,
-               //  showClose: true
+                showSwitcher: true,
+                allowInputToggle: false,
+                showTodayButton: false,
+                useCurrent: true,
+               isRTL: true,
+                keepOpen: true,
+                hijri: true,
+                debug: true,
+                showClear: false,
+                showClose: false
             });
         });
         /** indicator on hijri date **/

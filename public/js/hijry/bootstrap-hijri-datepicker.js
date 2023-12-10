@@ -3745,7 +3745,9 @@
         monthsShort : 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_'),
         weekdays : 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
         weekdaysShort : 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
-        weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+        // weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+        weekdaysMin : 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+
         longDateFormat : {
             LT : 'HH:mm',
             LTS : 'HH:mm:ss',
@@ -12111,11 +12113,11 @@
 /*! version : 4.17.37
  =========================================================
  bootstrap-datetimejs
- 
+
  https://github.com/Eonasdan/bootstrap-datetimepicker
 
  Modified by: @balbarak
- 
+
  Copyright (c) 2015 Jonathan Peterson
  =========================================================
  */
@@ -12431,7 +12433,7 @@
 
             getTemplate = function () {
                 var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
-                    dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
+                    dateView = $('<div>').addClass('hijry-datepicker').append(getDatePickerTemplate()),
                     timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
                     toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
@@ -12575,7 +12577,7 @@
             },
 
             notifyEvent = function (e) {
-                
+
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
                 }
@@ -12587,7 +12589,7 @@
                 if (e === 'y') {
                     e = 'YYYY';
                 }
-                
+
                 if (e === 'M') {
                     e = 'YYYY MMMM';
                 }
@@ -12606,7 +12608,7 @@
                 if (dir) {
                     currentViewMode = Math.max(minViewModeNumber, Math.min(2, currentViewMode + dir));
                 }
-                widget.find('.datepicker > div').hide().filter('.datepicker-' + datePickerModes[currentViewMode].clsName).show();
+                widget.find('.hijry-datepicker > div').hide().filter('.datepicker-' + datePickerModes[currentViewMode].clsName).show();
             },
 
             fillDow = function () {
@@ -12642,7 +12644,7 @@
 
             isValid = function (targetMoment, granularity) {
 
-                
+
                 if (!targetMoment.isValid()) {
                     return false;
                 }
@@ -12790,7 +12792,7 @@
                 yearsView.find('.disabled').removeClass('disabled');
 
                 if (options.minDate && options.minDate.isAfter(startYear, 'hy')) {
-                    
+
                     yearsViewHeader.eq(0).addClass('disabled');
                 }
 
@@ -12897,7 +12899,7 @@
                     return;
                 }
 
-                
+
                 var daysView = widget.find('.datepicker-days'),
                     daysViewHeader = daysView.find('th'),
                     currentDate,
@@ -13151,7 +13153,7 @@
                 }
 
                 if (isValid(targetMoment)) {
-                    
+
                     date = targetMoment;
                     viewDate = date.clone();
                     input.val(date.format(actualFormat));
@@ -13488,7 +13490,7 @@
                 clear: clear,
 
                 today: function () {
-                    
+
                     var todaysDate = getMoment();
                     if (isValid(todaysDate, 'd')) {
                         setValue(todaysDate);
@@ -13504,7 +13506,7 @@
                         options.hijri = false;
                         fillDate();
                         fillMonths();
-                        
+
                         initFormatting();
                     }
                     else {
@@ -13513,7 +13515,7 @@
                         fillHijriMonths();
                         initFormatting();
                     }
-                    
+
                 }
             },
 
@@ -13743,7 +13745,7 @@
             },
 
             initFormatting = function () {
-                
+
                 var format = options.format || 'L LT';
 
                 if (options.hijri) {
@@ -14200,8 +14202,8 @@
 
         picker.isRTL = function () {
             if (options.isRTL) {
-                options.icons.next = ">>";
-                options.icons.previous = "<<";
+                options.icons.next = ">";
+                options.icons.previous = "<";
             }
             return options.isRTL;
         };
@@ -14843,8 +14845,8 @@
             date: 'glyphicon glyphicon-calendar',
             up: 'fa fa-chevron-up text-primary',
             down: 'fa fa-chevron-down text-primary',
-            previous: '<<',
-            next: '>>',
+            previous: '<',
+            next: '>',
             today: 'اليوم',
             clear: 'مسح',
             close: 'اغلاق'
