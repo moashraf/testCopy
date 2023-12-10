@@ -281,32 +281,46 @@ class MeetingController extends Controller
     }
 
 
-    /**
-     * @throws \Exception
-     */
-    public function downloadPDF($id): ?string
+    public function downloadPDF($id)
     {
-         $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
-             ->where('id', $id)
-             ->first();
-         // video tutorial
-         $Committee_id =$item_val->committees_and_teams_id;
-         $Committees_and_teams_model = new Committees_and_teams;
-         $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id);
-         $Committees_and_teams = $Committees_and_teams->toArray();
-         $item_val = $this->updateDateValues($item_val);
+        try {
+            $item_val = meetings::with(['meeting_agenda', 'meeting_recommendations'])
+                ->where('id', $id)
+                ->firstOrFail();  // Use firstOrFail to automatically handle the case where $id is not found
 
-        $mpdf = new Mpdf();
-         $html = View('website.school.meetings.print_pdf',['item_val'=>$item_val,'Committees_and_teams'=>$Committees_and_teams])->render();
+            $Committee_id = $item_val->committees_and_teams_id;
+            $Committees_and_teams_model = new Committees_and_teams;
+            $Committees_and_teams = $Committees_and_teams_model->findOrFail($Committee_id); // This already throws an exception if not found
+            $Committees_and_teams = $Committees_and_teams->toArray();
 
-         $mpdf->WriteHTML($html);
+            $item_val = $this->updateDateValues($item_val);
 
-         return $mpdf->Output('meeting-details.pdf', \Mpdf\Output\Destination::DOWNLOAD);
-         // video tutorial
-         // Load a view for the PDF content and convert it to HTML
-//    return $pdf->download('meeting-details.pdf');
+            $mpdf = new \Mpdf\Mpdf([
+                'mode' => 'utf-8',
+                'format' => 'A4',
+                'orientation' => 'P',
+                'tempDir' => sys_get_temp_dir() // Optional: Specify a temp directory
+            ]);
+            $mpdf->debug = true; // Keep this for debugging, but remove or set to false in production
 
-     }
+            // Load your view and pass the data
+            $html = View('website.school.meetings.print_pdf', [
+                'item_val' => $item_val,
+                'Committees_and_teams' => $Committees_and_teams
+            ])->render();
+
+            // Write HTML to the PDF
+            $mpdf->WriteHTML($html);
+
+            // Output the PDF as a download
+            return $mpdf->Output('meeting-details.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+        } catch (\Exception $e) {
+            // Handle the exception, log it, or provide a user-friendly message
+            // This is a basic example, adjust error handling as needed for your application
+            return "An error occurred while generating the PDF: " . $e->getMessage();
+        }
+    }
+
 /**
       Remove the specified resource from storage.
 
