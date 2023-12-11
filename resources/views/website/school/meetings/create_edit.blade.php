@@ -261,7 +261,7 @@
                                                             <div class="col-md-6">
                                                                 <select  id="Number_of_attendees" name="Number_of_attendees" class="form-control custom-select js-example-basic-single  select2-hidden-accessible">
                                                                     <option value="">عدد الحاضرين</option>
-                                                                    @foreach ([5, 10, 15, 20, 30] as $value)
+                                                                    @foreach ([5, 10, 15, 20, 30,40,50] as $value)
                                                                         <option value="{{ $value }}"
                                                                                 @isset($item_val)
                                                                                     @if($item_val['Number_of_attendees'] == $value) selected @endif @endisset >
@@ -293,9 +293,11 @@
 
                                                                         </div>
                                                                         <div class="col-md-3  align-self-center ">
+                                                                            @if(!$loop->first)
                                                                             <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
                                                                                 <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                                             </a>
+                                                                            @endif
                                                                             <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"  >
                                                                                 <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
                                                                             </a>
@@ -560,6 +562,19 @@
             }
             var datacount=  $(".add_meeting_agenda_div").length+1
             var newElement=   ` <div   class=" row add_meeting_agenda_div"  >
+                                   <div class="col-md-9 add-padding-bottom">
+                                   <div class="input-group">
+                                       <label for="name1" class="add_meeting_agenda_span_num align-self-center  side_number_div ">   ${datacount} </label>
+                                       <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                                   </div>
+                                   </div>
+                                   <div class="col-md-3  align-self-center ">
+                                       <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
+                                           <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
+                                       </a>
+                                   </div>
+                               </div>
+                                <div   class=" row add_meeting_agenda_div"  >
                                    <div class="col-md-9 add-padding-bottom">
                                    <div class="input-group">
                                        <label for="name1" class="add_meeting_agenda_span_num align-self-center  side_number_div ">   ${datacount} </label>
