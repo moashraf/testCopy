@@ -425,7 +425,7 @@
 
                                                                 <input name="start_time" type="text" style="border-left: 0px;"
                                                                        class="form-control   clickable-item-pointer @error('end_time') is-invalid @enderror"
-                                                                       placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}" required>
+                                                                       placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}"  >
                                                                 <div class="input-group-prepend">
                                                                     <div class="input-group-text"> <img class="platform_icon" alt="school"
                                                                                                         src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
