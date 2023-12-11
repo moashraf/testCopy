@@ -102,7 +102,7 @@ if ( request()->teams){
                 <div class="main_cot_bg p-3 py-3 h-100">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         @foreach ($tabs as $tab)
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item tab-item" role="presentation">
                                 <button class="nav-link {{ $tab['id'] === $initialTab ? ' active tabcontent_active' : '' }}" id="{{ $tab['id'] }}-tab" data-bs-toggle="pill" data-bs-target="#{{ $tab['id'] }}" type="button" role="tab" aria-controls="{{ $tab['id'] }}" aria-selected="{{ $tab['id'] === $initialTab ? 'true' : 'false' }}">
                                     {{ $tab['label'] }}
                                 </button>
@@ -174,7 +174,7 @@ if ( request()->teams){
                                                                 <tbody id="admin_table_cont_tr">
                                                                 @foreach ($item->get_meetings as $key_val => $item_val)
                                                                     <tr  style="border-bottom: 1px solid #eeeeee" id="row_cod11">
-                                                                        <td class="">
+                                                                        <td style="padding-right: 10px">
                                                                             {{ $key_val+1   }}
                                                                         </td>
                                                                         <td class="">
@@ -199,8 +199,8 @@ if ( request()->teams){
                                                                         <td class="">
                                                                             {{ \Carbon\Carbon::parse($item_val->created_at)->format('Y/m/d') }}
                                                                         </td>
-                                                                        <td>
-                                                                            <div class="dropdown no-arrow" style="position: absolute;z-index: 99999">
+                                                                        <td style="padding-left: 20px">
+                                                                            <div class="dropdown no-arrow" style="position: absolute">
                                                                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-popper-placement="bottom-start">
                                                                                     <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-400"></i>

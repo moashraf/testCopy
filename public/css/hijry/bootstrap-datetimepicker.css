@@ -228,9 +228,8 @@
 }
 .bootstrap-datetimepicker-widget .picker-switch {
     background-color:unset; /* white background */
-    color: #4d4f50;
+    color: #050505DB;
     text-align: center;
-    font-size: var(--font-size);
 }
 
     .bootstrap-datetimepicker-widget .picker-switch::after {
@@ -339,7 +338,7 @@
         }
 
         .bootstrap-datetimepicker-widget table td.day {
-            height: 20px;
+            height: 40px;
             line-height: 20px;
             width: 20px;
             font-size: var(--font-size);
