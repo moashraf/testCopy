@@ -60,7 +60,7 @@
                     <div class="main_cot_bg p-3 py-3 h-100">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             @foreach ($tabs as $tab)
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item tab-item" role="presentation">
                                     <button class="nav-link {{ $tab['id'] === $initialTab ? ' active tabcontent_active' : '' }}" id="{{ $tab['id'] }}-tab" data-bs-toggle="pill" data-bs-target="#{{ $tab['id'] }}" type="button" role="tab" aria-controls="{{ $tab['id'] }}" aria-selected="{{ $tab['id'] === $initialTab ? 'true' : 'false' }}">
                                         {{ $tab['label'] }}
                                     </button>
@@ -492,8 +492,8 @@
                 showTodayButton: false,
                 useCurrent: true,
                 isRTL: true,
-                keepOpen: true,
-                debug: true,
+                keepOpen: false,
+                debug: false,
                 showClear: false,
                 showClose: false
             });

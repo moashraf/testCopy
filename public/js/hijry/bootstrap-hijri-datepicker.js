@@ -12291,17 +12291,34 @@
             },
 
             getDatePickerTemplate = function () {
+            // var headTemplate = $('<thead>')
+                //                     .append($('<tr>')
+                //                         .append($('<th>').addClass('prev').attr('data-action', 'previous')
+                //                             .append($('<span>').html(options.icons.previous))
+                //                         )
+                //                         .append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '8' : '7')))
+                //                         .append($('<th>').addClass('next').attr('data-action', 'next')
+                //                             .append($('<span>').html(options.icons.next))
+                //                         )
+                //                     ),
                 var headTemplate = $('<thead>')
                     .append($('<tr>')
-                        .append($('<th>').addClass('prev').attr('data-action', 'previous')
-                            .append($('<span>').html(options.icons.previous))
+                        .append($('<th colspan="8">')
+                         .append($('<div style="display: inline-flex;justify-content: flex-start;">')
+                            .append($('<div>').addClass('left padding-left-right-10 color-blue').attr('data-action', 'previous')
+                                .append($('<span>').html(options.icons.previous))
+                            )
+                            .append($('<div>').addClass('middle picker-switch middle-picker-switch').attr({'data-action': 'pickerSwitch','id':'middle-picker-switch'}).text(viewDate.format((options.hijri ?options.hijriDayViewHeaderFormat : options.dayViewHeaderFormat)))
+                                // Add any content or attributes you need for the picker switch here
+                            )
+                            .append($('<div>').addClass('right padding-left-right-10 color-blue').attr('data-action', 'next')
+                                .append($('<span>').html(options.icons.next))
+                            )
                         )
-                        .append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', (options.calendarWeeks ? '8' : '7')))
-                        .append($('<th>').addClass('next').attr('data-action', 'next')
-                            .append($('<span>').html(options.icons.next))
                         )
-                    ),
-                    contTemplate = $('<tbody>')
+                        ),
+
+                contTemplate = $('<tbody>')
                         .append($('<tr>')
                             .append($('<td>').attr('colspan', (options.calendarWeeks ? '8' : '7')))
                         );
@@ -12309,11 +12326,21 @@
                     var switcherRow = $('<tr>')
                         .append($('<th>').attr('colspan', (options.calendarWeeks ? '8' : '7'))
                             .append($('<div>').attr({'class':'calendar-switcher'})
-                                .append($('<a>').attr({'data-action':'switchDateGregorian', 'class':'switch-gregorian active', 'href':'#'}).html('ميلادي'))
-                                .append($('<a>').attr({'data-action':'switchDateHijri', 'class':'switch-hijri', 'href':'#'}).html('هجري'))
-
+                                .append($('<a>').attr({
+                                    'data-action': 'switchDateGregorian',
+                                    'class': 'switch-gregorian' + (options.hijri ? '' : ' active'),
+                                    'href': '#'
+                                }).html('ميلادي'))
+                                .append($('<a>').attr({
+                                    'data-action': 'switchDateHijri',
+                                    'class': 'switch-hijri' + (options.hijri ? ' active' : ''),
+                                    'href': '#'
+                                }).html('هجري'))
                             )
                         );
+
+// Assuming 'hijri' is a boolean variable
+
                     headTemplate.append(switcherRow);
                 }
 
@@ -12925,12 +12952,12 @@
                     return;
                 }
 
-                daysViewHeader.eq(0).find('span').attr('title', options.tooltips.prevMonth);
-                daysViewHeader.eq(1).attr('title', options.tooltips.selectMonth);
-                daysViewHeader.eq(2).find('span').attr('title', options.tooltips.nextMonth);
+                // daysViewHeader.eq(0).find('span').attr('title', options.tooltips.prevMonth);
+                // daysViewHeader.eq(1).attr('title', options.tooltips.selectMonth);
+                // daysViewHeader.eq(2).find('span').attr('title', options.tooltips.nextMonth);
 
                 daysView.find('.disabled').removeClass('disabled');
-                daysViewHeader.eq(1).text(viewDate.format(options.dayViewHeaderFormat));
+                $('#middle-picker-switch').text(viewDate.format(options.dayViewHeaderFormat));
 
                 if (!isValid(viewDate.clone().subtract(1, 'months'), 'months')) {
                     daysViewHeader.eq(0).addClass('disabled');
@@ -12995,12 +13022,12 @@
                     return;
                 }
 
-                daysViewHeader.eq(0).find('span').attr('title', options.tooltips.prevMonth);
-                daysViewHeader.eq(1).attr('title', options.tooltips.selectMonth);
-                daysViewHeader.eq(2).find('span').attr('title', options.tooltips.nextMonth);
+                // daysViewHeader.eq(0).find('span').attr('title', options.tooltips.prevMonth);
+                $('#middle-picker-switch').attr('title', options.tooltips.selectMonth);
+                // daysViewHeader.eq(2).find('span').attr('title', options.tooltips.nextMonth);
 
                 daysView.find('.disabled').removeClass('disabled');
-                daysViewHeader.eq(1).text(viewDate.format(options.hijriDayViewHeaderFormat));
+                $('#middle-picker-switch').text(viewDate.format(options.hijriDayViewHeaderFormat));
 
                 if (!isValid(viewDate.clone().subtract(1, 'iMonth'), 'iMonth')) {
                     daysViewHeader.eq(0).addClass('disabled');
