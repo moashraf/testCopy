@@ -5638,7 +5638,9 @@
         align-items: center;
         justify-content: center;
     }
-
+    #pills-tab{
+        margin-right: 7%;
+    }
     .meetings_button_next {
         width: 220px;
         float: left;
@@ -5663,7 +5665,7 @@
         background-color: #e6a935;
     }
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 750px) {
         .no_show_on_map {
             display: none;
         }

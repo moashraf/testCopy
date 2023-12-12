@@ -112,7 +112,7 @@ if ( request()->teams){
                     <div class="tab-content" id="pills-tabContent">
                         @foreach ($classifications as $classification)
                             <div class="tab-pane fade @if ($classification['label']===$initialTab) show active @endif" id="{{ $classification['label'] }}" role="tabpanel" aria-labelledby="{{ $classification['label'] }}-tab">
-                                <div style="margin-top: 10%;" class="accordion" id="accordionExample">
+                                <div style="margin: 10%;" class="accordion" id="accordionExample">
                                     @foreach ($Committees_and_teams as $key => $item)
                                         @if ($item->classification == $classification['id'])
                                             {{-- Accordion item content here --}}
@@ -121,7 +121,7 @@ if ( request()->teams){
                                                 <h2 class="accordion-header">
 
                                                     <div class="row background_button_body no-margin-left-right ">
-                                                        <div class="col-8 no_arrows_data_to_show ">
+                                                        <div class="col-9 no_arrows_data_to_show ">
                                                             <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
                                                                     aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
                                                                 {{ $item->title   }}
@@ -135,7 +135,7 @@ if ( request()->teams){
                                         </span>
                                                             </a>
                                                         </div>
-                                                        <div class="col-2">
+                                                        <div class="col-1">
                                                             <button class="accordion-button   " type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{$item->id}}"
                                                                     aria-expanded="true"     aria-controls="collapse_{{$item->id}}">
 
