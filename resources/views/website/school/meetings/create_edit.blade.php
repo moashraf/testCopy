@@ -220,7 +220,9 @@
                                             </div>
                                             <div class="col-md-3 float-end">
                                                 <button  type="submit" class=" Save_as_draft col-md-3 float-end btn btn-primary custom-submit-button">
-                                                    <i class="fas fa-save" style="margin-left: 5px;"></i>
+
+                                                    <img class="me-3" width="24px" src="{{ URL::asset('img/icons/save.svg') }}"
+                                                         alt="" />
                                                     <span>حفظ كمسوده</span>
                                                 </button>
 
