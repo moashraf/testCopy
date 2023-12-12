@@ -5286,7 +5286,19 @@
         width: 26px;
         height: 26px;
     }
-
+    .close-modal{
+        float: left;
+        font-size: 16px;
+        position: relative;
+        color: white !important;
+        opacity: 1;
+        background-color: #073374;
+        border-radius: 50px;
+        filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.10));
+        border: 0px;
+        width: 26px;
+        height: 26px;
+    }
     .modal-dialog-scrollable .modal-header button:hover {
         background-color: #052451;
     }
@@ -5648,7 +5660,13 @@
         padding-right: 50px;
         padding-left: 50px;
     }
-
+    .width-220{
+        width: 220px;
+    }
+    .default-blue-bg-color{
+        background-color: #0A3A81;
+        color: #ffffff;
+    }
     .meetings_button_next_wi {
         color: #0A3A81;
         border: 1px solid #e6a935;

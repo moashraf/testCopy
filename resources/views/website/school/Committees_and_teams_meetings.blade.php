@@ -246,14 +246,10 @@ if ( request()->teams){
         <!-- Delete Modal -->
         <div class="modal fade" id="delete_admin_modal" tabindex="-1"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable " style="max-width: 700px">
                 <div class="modal-content b-r-s-cont border-0">
-
-                    <div class="modal-header">
-                        <div class="modal-title" id="exampleModalLabel"><i
-                                class="fas fa-trash me-1"></i>
-                            حذف الاداري </div>
-                        <button type="button" data-bs-dismiss="modal"
+                    <div>
+                        <button type="button" class="close-modal" data-bs-dismiss="modal"
                                 aria-label="Close"><i class="fas fa-times"></i></button>
                     </div>
                     <form action="{{ route('school_route.meetings.destroy', $item_val['id']) }}" method="POST">
@@ -269,21 +265,19 @@ if ( request()->teams){
                             </div>
                         </div>
 
-                        <div class="modal-footer">
-                            <div class="right-side">
-                                <button type="submit" data-code="cod11" class="btn btn-default btn-link text-red fw-bold delete_admin_btn">حذف
+                        <div class="modal-footer" style="border: none;display: flex;align-items: center;justify-content: space-evenly;padding-bottom: 4%">
+
+                                <button type="submit"  class="btn btn-primary width-220 default-blue-bg-color">حذف
                                 </button>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="left-side">
-                                <button type="button" class="btn btn-default btn-link"
-                                        data-bs-dismiss="modal">غلق النافذة</button>
-                            </div>
+                                <button type="button" class="btn btn-primary width-220 default-blue-bg-color"
+                                        data-bs-dismiss="modal">الغاء الامر</button>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
