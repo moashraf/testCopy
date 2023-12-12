@@ -5640,8 +5640,9 @@
     }
 
     .meetings_button_next {
+        width: 220px;
         float: left;
-        background-color: #0A3A81;
+        background-color: #0A3A81 !important;
         padding-right: 50px;
         padding-left: 50px;
     }

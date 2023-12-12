@@ -27,6 +27,7 @@
           integrity="sha512-aD9ophpFQ61nFZP6hXYu4Q/b/USW7rpLCQLX6Bi0WJHXNO7Js/fUENpBQf/+P4NtpzNX0jSgR5zVvPOJp+W2Kg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="{{ URL::asset('css/hijry/bootstrap-datetimepicker.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/new_meeting.css') }}" />
 
 @endsection
 
@@ -423,9 +424,9 @@
                                                             </div>
                                                             <div class=" input-group">
 
-                                                                <input name="start_time" type="text" style="border-left: 0px;"
+                                                                <input name="end_time" type="text" style="border-left: 0px;"
                                                                        class="form-control   clickable-item-pointer @error('end_time') is-invalid @enderror"
-                                                                       placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}"  >
+                                                                       placeholder=" وقت انتهاء الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}"  >
                                                                 <div class="input-group-prepend">
                                                                     <div class="input-group-text"> <img class="platform_icon" alt="school"
                                                                                                         src="{{ URL::asset('img/icons/clock.svg') }}"> </div>
