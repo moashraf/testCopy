@@ -705,14 +705,12 @@
         }
 
         function delete_parentElement(this_this,div_class){
-debugger
-            event.preventDefault();
+             event.preventDefault();
 
             var datacount=  $("."+div_class).length
             let vale="."+div_class+" .add_or_delete_button_meeting";
            let add_or_delete_button_meeting = document.querySelectorAll(vale);
-            alert(add_or_delete_button_meeting.length)
-            if (add_or_delete_button_meeting.length > 1) {
+             if (add_or_delete_button_meeting.length > 1) {
                 if (datacount > 1){
                     this_this.parentElement.parentElement.remove();
                 }
