@@ -295,7 +295,7 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-md-3  align-self-center ">
+                                                                        <div class="col-md-3  align-self-center  add_or_delete_button_meeting"  >
                                                                             @if(!$loop->first)
                                                                             <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
                                                                                 <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
@@ -351,7 +351,7 @@
                                                                                 <div class="col-md-2 add-padding-bottom meeting_recommendations_table "  >
                                                                                     <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control"  value="{{ $recommendation['entity_responsible_implementation_related'] }}" >
                                                                                 </div>
-                                                                                <div class="col-md-2  align-self-center ">
+                                                                                <div class="col-md-2  align-self-center add_or_delete_button_meeting ">
                                                                                     <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
                                                                                         <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                                                     </a>
@@ -395,7 +395,7 @@
                                                                                     <input type="text" autocomplete="off"  name="meeting_recommendations_not_completed[]" class="form-control"
                                                                                            value="{{ $recommendation_val['Item'] }}">
                                                                                 </div>
-                                                                                <div class="col-md-3  align-self-center ">
+                                                                                <div class="col-md-3  align-self-center add_or_delete_button_meeting  ">
                                                                                     <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
                                                                                         <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                                                     </a>
@@ -541,19 +541,21 @@
                     $(this).removeClass('is-invalid');
                 }
             });
-// Function to go to the next tab
+            // Function to go to the next tab
             $('#nextButton').click(function() {
                 $('.nav-pills .active').parent().next('li').find('button').trigger('click');
             });
 
-// Function to go to the previous tab
+             // Function to go to the previous tab
             $('#prevButton').click(function() {
                 $('.nav-pills .active').parent().prev('li').find('button').trigger('click');
             });
         });
 
         $(document).ready(function() {
+            add_meeting_agenda_first_element();
             add_meeting_agenda();
+
             add_meeting_recommendations_not();
             add_meeting_recommendations_finished();
         });
@@ -564,19 +566,7 @@
                 event.preventDefault();
             }
             var datacount=  $(".add_meeting_agenda_div").length+1
-            var newElement=   ` <div   class=" row add_meeting_agenda_div"  >
-                                   <div class="col-md-9 add-padding-bottom">
-                                   <div class="input-group">
-                                       <label for="name1" class="add_meeting_agenda_span_num align-self-center  side_number_div ">   ${datacount} </label>
-                                       <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
-                                   </div>
-                                   </div>
-                                   <div class="col-md-3  align-self-center ">
-                                       <a href="#" onclick="add_meeting_agenda()" class="add_meeting_agenda_class_add"   >
-                                           <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/add.PNG') }}">
-                                       </a>
-                                   </div>
-                               </div>
+            var newElement=   `
                                 <div   class=" row add_meeting_agenda_div"  >
                                    <div class="col-md-9 add-padding-bottom">
                                    <div class="input-group">
@@ -584,7 +574,7 @@
                                        <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
                                    </div>
                                    </div>
-                                   <div class="col-md-3  align-self-center ">
+                                   <div class="col-md-3  align-self-center   add_or_delete_button_meeting "   >
                                        <a href="#" onclick="delete_parentElement(this,'add_meeting_agenda_div')"  >
                                            <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                        </a>
@@ -602,6 +592,30 @@
 
         }
 
+
+        function add_meeting_agenda_first_element(){
+            if(typeof event != "undefined")
+            {
+                event.preventDefault();
+            }
+            var datacount=  $(".add_meeting_agenda_div").length+1
+            var newElement=   `<div   class=" row add_meeting_agenda_div"  >
+                                   <div class="col-md-9 add-padding-bottom">
+                                   <div class="input-group">
+                                       <label for="name1" class="add_meeting_agenda_span_num align-self-center  side_number_div ">   ${datacount} </label>
+                                       <input type="text"  autocomplete="off" name="meeting_agenda_item[]" class="form-control input_meeting_agenda_item " value="">
+                                   </div>
+                                   </div>  </div>` ;
+
+
+            $('#container_of_all_meeting_agenda').append(newElement);
+            let add_meeting_agenda_class_add_elements = document.querySelectorAll('.add_meeting_agenda_class_add');
+
+            Remove_all_but_the_last_element(add_meeting_agenda_class_add_elements);
+
+        }
+
+
         function add_meeting_recommendations_not(){
             if(typeof event != "undefined")
             {
@@ -614,7 +628,7 @@
                 <input type="text"  autocomplete="off" name="meeting_recommendations_not_completed[]" class="form-control meeting_recommendations_not_completed " value="">
                 </div>
 
-                <div class="col-md-3  align-self-center ">
+                <div class="col-md-3  align-self-center   add_or_delete_button_meeting "  >
                 <a href="#" onclick="delete_parentElement(this,'add_meeting_recommendations_not_div')"  >
                    <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                 </a>
@@ -658,7 +672,7 @@
                                            <div class="col-md-2 add-padding-bottom meeting_recommendations_table "  >
                                                <input type="text" autocomplete="off" name="entity_responsible_implementation_related[]" class="form-control" value="">
                                            </div>
-                                            <div class="col-md-2  align-self-center ">
+                                            <div class="col-md-2  align-self-center  add_or_delete_button_meeting "   >
                                                 <a href="#" onclick=" delete_parentElement(this,'add_meeting_recommendations_finished_div')"  >
                                                     <img    class="  plus_minus_class " alt="school" src="{{ URL::asset('img/website/data/delete.PNG') }}">
                                                 </a>
@@ -691,12 +705,25 @@
         }
 
         function delete_parentElement(this_this,div_class){
-
+debugger
             event.preventDefault();
+
             var datacount=  $("."+div_class).length
-            if (datacount > 1){
-                this_this.parentElement.parentElement.remove();
+            let vale="."+div_class+" .add_or_delete_button_meeting";
+           let add_or_delete_button_meeting = document.querySelectorAll(vale);
+            alert(add_or_delete_button_meeting.length)
+            if (add_or_delete_button_meeting.length > 1) {
+                if (datacount > 1){
+                    this_this.parentElement.parentElement.remove();
+                }
+
+            } else {
+                console.log('No elements found with the class . ');
             }
+
+
+
+
 
         }
 

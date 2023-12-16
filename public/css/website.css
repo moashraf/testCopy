@@ -5683,7 +5683,7 @@
         background-color: #e6a935;
     }
 
-
+    .breadcrumb{     margin: 0px; }
 .bg_dot_data_timepicker{    float: right;}
 
 .display_up_hour ,.display_down_hour ,.display_up_minute,.display_down_minute  ,.display_up_meridiem ,.display_down_meridiem
