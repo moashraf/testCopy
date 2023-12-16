@@ -5683,6 +5683,13 @@
         background-color: #e6a935;
     }
 
+
+.bg_dot_data_timepicker{    float: right;}
+
+.display_up_hour ,.display_down_hour ,.display_up_minute,.display_down_minute  ,.display_up_meridiem ,.display_down_meridiem
+{ color: #576984ad;      font-size: 25px;
+    margin: 0px auto!important;}
+
     @media only screen and (max-width: 750px) {
         .no_show_on_map {
             display: none;

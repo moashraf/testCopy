@@ -1,11 +1,15 @@
 .form-container {
+    /**
     background-color: #f3f3f3;
     padding: 20px;
+    **/
+
 }
 
 .custom-card {
-    border: none;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  /** border: none;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    **/
 }
 
 .custom-card-header {

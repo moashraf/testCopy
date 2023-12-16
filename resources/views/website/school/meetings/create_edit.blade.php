@@ -769,7 +769,7 @@
             display: inline-block;
             text-align: center;
             width: 50%;
-            max-width: 75px;
+            max-width: 100px;
         }
         div[id^="tp_"].timepicker__wrapper > div .display {
             color: #0a3a81;
@@ -929,7 +929,7 @@
             this.buildTimepicker = function() {
 
                 var wrapper = document.createElement('div')
-                var elements = ['hour', 'minute', 'meridiem']
+                var elements = ['hour', 'minute', 'meridiem' ]
 
                 wrapper.className = 'timepicker__wrapper'
                 wrapper.setAttribute('id', 'tp_' + (Math.floor(Math.random() * 100) + 1))
@@ -946,7 +946,10 @@
 
 
                         var display = document.createElement('p')
+                        display.appendChild(document.createElement('div'))
+
                         var display_up_hour_data = document.createElement('p')
+                     //   var dot_data = document.createElement('p')
                         var display_down_hour_data = document.createElement('p')
                         var display_up_minute_data = document.createElement('p')
                         var display_down_minute_data = document.createElement('p')
@@ -957,6 +960,7 @@
 
                         up.className = 'timepicker__button timepicker__button__up'
                         display.className = 'display'
+                     //   dot_data.className = 'dot_data  timepicker__button   '
                         display_up_hour_data.className = 'display_up_hour  timepicker__button timepicker__button__up '
                         display_down_hour_data.className = 'display_down_hour timepicker__button timepicker__button__down'
                         display_up_minute_data.className = 'display_up_minute  timepicker__button timepicker__button__up '
@@ -975,7 +979,8 @@
                             this.elements[elements[e]].appendChild(display_up_hour_data)
                             this.elements[elements[e]].appendChild(up)
                             this.elements[elements[e]].appendChild(display)
-                            this.elements[elements[e]].appendChild(down)
+                           // this.elements[elements[e]].appendChild(dot_data)
+                             this.elements[elements[e]].appendChild(down)
                             this.elements[elements[e]].appendChild(display_down_hour_data)
                         }else if(elements[e]== 'minute'){
                             this.elements[elements[e]].appendChild(display_up_minute_data)
@@ -1022,11 +1027,24 @@
                     var key = Object.keys(this.elements)[e]
                     var element = this.elements[key]
                     var func = 'get' + key.charAt(0).toUpperCase() + key.slice(1)
+                    var dot_data = document.createElement('span')
+                    dot_data.classList.add('bg_dot_data_timepicker' );
+                    // ✅ Set ID attribute on the element
+                    dot_data.setAttribute('id', 'my-id');
+                    // ✅ Add text content to the element
+                    dot_data   .innerHTML +=
+                            "<svg width='9' height='31' viewBox='0 0 9 31' fill='none' xmlns='http://www.w3.org/2000/svg'>"+
+                            "<circle cx='4.5' cy='4.5' r='4.5' fill='#0A3A81'/>"+
+                       " <circle cx='4.5' cy='26.5' r='4.5' fill='#0A3A81'/> </svg>";
 
-                    element.querySelector('.display').innerText = this[func]()
+
+
+                    element.querySelector('.display').innerText = this[func]() ;
+
                     if (key == 'hour'){
                         element.querySelector('.display_up_hour').innerText = this[func]()+1;
                         element.querySelector('.display_down_hour').innerText = this[func]()-1;
+                        element.querySelector('.display').appendChild(dot_data)
                     }else if(key == 'minute'){
                         element.querySelector('.display_up_minute').innerText = parseInt(this[func]())+1;
                         element.querySelector('.display_down_minute').innerText =parseInt( this[func]() )-1 ;

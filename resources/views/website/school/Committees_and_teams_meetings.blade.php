@@ -112,7 +112,7 @@ if ( request()->teams){
                     <div class="tab-content" id="pills-tabContent">
                         @foreach ($classifications as $classification)
                             <div class="tab-pane fade @if ($classification['label']===$initialTab) show active @endif" id="{{ $classification['label'] }}" role="tabpanel" aria-labelledby="{{ $classification['label'] }}-tab">
-                                <div style="margin: 10%;" class="accordion" id="accordionExample">
+                                <div   class=" m-3 accordion" id="accordionExample">
                                     @foreach ($Committees_and_teams as $key => $item)
                                         @if ($item->classification == $classification['id'])
                                             {{-- Accordion item content here --}}
@@ -323,30 +323,7 @@ if ( request()->teams){
             var modal = $(this);
             modal.find('#modalMeetingId').val(meetingId);
         });
-        // Calendar
-        fetchCalander();
 
-        function fetchCalander(month = {{ date('m') }}, year = {{ date('Y') }}) {
-
-            var url =
-                "{{ route('school_route.calander_tasks_ajax', [':month', ':year']) }}";
-            url = url.replace(':month', month).replace(':year', year)
-            ;
-            $.ajax({
-                url: url,
-                type: "GET",
-                success: function(data) {
-                    $("#calander_cont").html(data);
-                }
-            });
-        }
-
-        //reinsert the calander when the month arrows are clicked
-        $(document).on('click', '#change_month', function() {
-            var month = $(this).data('month');
-            var year = $(this).data('year');
-            fetchCalander(month, year)
-        });
     </script>
 
 
