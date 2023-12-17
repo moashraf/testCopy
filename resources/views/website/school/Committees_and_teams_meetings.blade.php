@@ -82,13 +82,13 @@ if ( request()->teams){
 
         <div class="row">
 
-            <div class="row main_cot_bg p-2 align-items-center mb-4" style=" font-size: .9rem;  background-color: #0A3A81;">
+            <div class="row main_cot_bg p-2 align-items-center mb-4 main-color-bg text-s">
 
                 <div class="col-12 col-xl-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item text-s2 active"  style="padding-left:20px;color: white;" aria-current="page">المدرسه</li>
-                            <li class="breadcrumb-item text-s2" style="padding-left:20px;color: white;">اللجان والفرق</li>
+                            <li class="breadcrumb-item text-s2  padding-left-20 default-blue-bg-color"  aria-current="page">المدرسه</li>
+                            <li class="breadcrumb-item text-s2 padding-left-20 default-blue-bg-color" >اللجان والفرق</li>
                         </ol>
                     </nav>
 
@@ -116,7 +116,7 @@ if ( request()->teams){
                                     @foreach ($Committees_and_teams as $key => $item)
                                         @if ($item->classification == $classification['id'])
                                             {{-- Accordion item content here --}}
-                                            <div class="accordion-item" style=" margin-bottom: 35px; ">
+                                            <div class="accordion-item margin-bottom-35">
 
                                                 <h2 class="accordion-header">
 
@@ -128,8 +128,7 @@ if ( request()->teams){
                                                             </button>
                                                         </div>
                                                         <div class="col-2">
-                                                            <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10  clickable-item-pointer text-xs"
-                                                                style="  margin-top: 5px; "    > <i class="fas fa-plus"></i>
+                                                            <a  href="{{ route('school_route.meetings.create',  ['Committees_id'=>$item ->id]  ) }} " class="link-cust-text main_btn border_radius_10  clickable-item-pointer text-xs"> <i class="fas fa-plus"></i>
                                                                 <span class="no_show_on_map">
                                         انشاء اجتماع جديد
                                         </span>
@@ -156,7 +155,7 @@ if ( request()->teams){
                                                      data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
 
-                                                        <div class=" add_border_radius table-responsive" id="admin_table_cont" style="display: block"   >
+                                                        <div class=" add_border_radius table-responsive" id="admin_table_cont"    >
                                                             <table class="table display datatable-modal"   id="p_3-table" width="100%"  cellspacing="0">
                                                                 <thead>
                                                                 <tr>
@@ -173,8 +172,8 @@ if ( request()->teams){
 
                                                                 <tbody id="admin_table_cont_tr">
                                                                 @foreach ($item->get_meetings as $key_val => $item_val)
-                                                                    <tr  style="border-bottom: 1px solid #eeeeee" id="row_cod11">
-                                                                        <td style="padding-right: 10px">
+                                                                    <tr   class="meeting-row">
+                                                                        <td class="pd-r-5">
                                                                             {{ $key_val+1   }}
                                                                         </td>
                                                                         <td class="">
@@ -199,13 +198,13 @@ if ( request()->teams){
                                                                         <td class="">
                                                                             {{ \Carbon\Carbon::parse($item_val->created_at)->format('Y/m/d') }}
                                                                         </td>
-                                                                        <td style="padding-left: 20px">
-                                                                            <div class="dropdown no-arrow" style="position: absolute">
+                                                                        <td class="padding-left-20">
+                                                                            <div class="dropdown no-arrow position-absolute">
                                                                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-popper-placement="bottom-start">
                                                                                     <i class="fas fa-ellipsis-v fs-6 fa-fw text-gray-400"></i>
                                                                                 </a>
-                                                                                <div style="min-width: unset; margin: 10px" class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                                                <div  class="dropdown-menu edit-meeting-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-meeting-id="{{$item_val->id}}" data-bs-target="#delete_admin_modal"><img class="m-lg-1" width="16px" src="{{ URL::asset('img/icons/delete.svg') }}" alt="" />حذف</a>
                                                                                     <a class="dropdown-item update_admin" href="{{url('/school/meetings/'.$item_val->id.'/edit')}}"><img class="m-lg-1" width="16px" src="{{ URL::asset('img/icons/edit.svg') }}" alt="" /></i>تعديل</a>
                                                                                     <a class="dropdown-item update_admin" onclick="printMeeting({{$item_val->id}})"  target="_blank"><img class="m-lg-1" width="16px" src="{{ URL::asset('img/icons/print.svg') }}" alt="" />طباعه </a>
@@ -246,7 +245,7 @@ if ( request()->teams){
         <!-- Delete Modal -->
         <div class="modal fade" id="delete_admin_modal" tabindex="-1"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable " style="max-width: 700px">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable delete-meeting-modal">
                 <div class="modal-content b-r-s-cont border-0">
                     <div>
                         <button type="button" class="close-modal" data-bs-dismiss="modal"
@@ -265,7 +264,7 @@ if ( request()->teams){
                             </div>
                         </div>
 
-                        <div class="modal-footer" style="border: none;display: flex;align-items: center;justify-content: space-evenly;padding-bottom: 4%">
+                        <div class="modal-footer" >
 
                                 <button type="submit"  class="btn btn-primary width-220 default-blue-bg-color">حذف
                                 </button>

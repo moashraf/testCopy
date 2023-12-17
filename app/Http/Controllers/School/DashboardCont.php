@@ -3,13 +3,9 @@
 namespace App\Http\Controllers\School;
 
 use App\Http\Controllers\Controller;
-use App\Models\School\Meetings\Meetings;
-use App\Models\School\Meetings\meeting_recommendations;
-use App\Models\School\Meetings\meeting_agenda;
 use App\Models\Basic\Video_tutorial;
 use App\Models\Branch\Slider;
 use App\Models\School\Management\Edu_department;
-use App\Models\School\Meetings\Committees_and_teams;
 use App\Models\School\Management\Edu_department_office;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -154,6 +150,8 @@ class DashboardCont extends Controller
         $hijri_month = $responseBody['data']['hijri']['month']['ar'];
         $hijri_year = $responseBody['data']['hijri']['year'];
         $hijri_date = $hijri_day . " " . $hijri_month . " " . $hijri_year;
+
+
         $sliders = Slider::where('type', 1)->get();
 
         // video tutorial
@@ -161,6 +159,8 @@ class DashboardCont extends Controller
 
         return view('website.school.dashboard', compact('current_school', 'school', 'today_date_ar', 'hijri_date', 'sliders', 'video_tutorial'));
     }
+
+
 
     //select the calendar data and funcation via ajax in creating
     public function calander_tasks_ajax($month, $year)

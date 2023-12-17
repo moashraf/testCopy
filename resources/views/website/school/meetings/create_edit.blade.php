@@ -39,13 +39,13 @@
 @section('content')
     <div class="container-fluid px-4 px-md-5 py-3 py-md-4">
         <div class="row">
-            <div class="row main_cot_bg p-2 align-items-center mb-4" style=" font-size: .9rem;  background-color: #0A3A81;">
+            <div class="row main_cot_bg p-2 align-items-center mb-4 main-color-bg text-s">
                 <div class="col-12 col-xl-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item text-s2 active"  style="padding-left:20px; color: white;" aria-current="page">المدرسه</li>
-                            <li class="breadcrumb-item text-s2" style="padding-left:20px; color: white;">اللجان</li>
-                            <li class="breadcrumb-item text-s2" style="padding-left:20px; color: white;">{{$text}} {{$Committees_and_teams['title']}}</li>
+                            <li class="breadcrumb-item text-s2 padding-left-20 default-blue-bg-color"   aria-current="page">المدرسه</li>
+                            <li class="breadcrumb-item text-s2 padding-left-20 default-blue-bg-color" >اللجان</li>
+                            <li class="breadcrumb-item text-s2 padding-left-20 default-blue-bg-color" >{{$text}} {{$Committees_and_teams['title']}}</li>
                         </ol>
                     </nav>
 
@@ -111,8 +111,8 @@
                                                             <div class="col-md-9">
                                                                 <div class=" input-group">
 
-                                                                    <input name="start_date" type="text" style="border-left: 0px;"
-                                                                           class="  hijri-date-input   form-control   clickable-item-pointer @error('start_date') is-invalid @enderror"
+                                                                    <input name="start_date" type="text"
+                                                                           class="hijri-date-input form-control border-left-0 clickable-item-pointer @error('start_date') is-invalid @enderror"
                                                                            placeholder="  تاريخ الاجتماع"   value="{{ isset($item_val) ? $item_val['start_date']: ''}}" required>
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text"> <img class="platform_icon" alt="school"
@@ -148,8 +148,8 @@
 
                                                                 <div class=" input-group">
 
-                                                                    <input name="start_time" type="text" style="border-left: 0px;"
-                                                                           class="form-control   timepicker  clickable-item-pointer @error('start_time') is-invalid @enderror"
+                                                                    <input name="start_time" type="text"
+                                                                           class="form-control timepicker border-left-0 clickable-item-pointer @error('start_time') is-invalid @enderror"
                                                                            placeholder=" وقت الاجتماع"  value="{{ isset($item_val) ? $item_val['start_time']: ''}}" required>
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">
@@ -189,7 +189,7 @@
                                                     </div>
                                                     <!-- Add more form fields here -->
 
-                                                    <div class=" form-group" style="padding-top: 51px;">
+                                                    <div class=" form-group padding-top-50" >
                                                         <div class="row">
                                                             <div class=" col col-md-6">
                                                                 <button  type="submit" class=" meetings_button_next_wi   btn btn-default custom-reset-button">إنهاء</button>
@@ -281,7 +281,7 @@
 
                                                     <div class="  form-group meeting_agenda">
                                                         <div class="row" id="container_of_all_meeting_agenda" >
-                                                            <label  for="committee" class="form-label bold_form_label "  style="padding-bottom: 10px;">    جدول اعمال الاجتماع  </label>
+                                                            <label  for="committee" class="form-label bold_form_label ">    جدول اعمال الاجتماع  </label>
                                                             @if((is_array($item_val['meeting_agenda']) && !empty($item_val['meeting_agenda'])))
                                                                 @foreach  ($item_val['meeting_agenda'] as $key => $agenda)
 
@@ -380,7 +380,7 @@
 
 
 
-                                                    <div class="  form-group meeting_recommendations_not " style="padding-top: 25px;">
+                                                    <div class="  form-group meeting_recommendations_not ">
                                                         <div class="row"  >
                                                             <div class="col-md-3 add-padding-bottom meeting_recommendations_not_side_div ">
                                                                 <label  for="committee" class="form-label  meeting_recommendations_not_side_title  ">    ما  لم ينفذ من  التوصيات واسباب عدم التنفيذ  </label>
@@ -426,8 +426,8 @@
                                                             </div>
                                                             <div class=" input-group">
 
-                                                                <input name="end_time" type="text" style="border-left: 0px;"
-                                                                       class="form-control   clickable-item-pointer @error('end_time') is-invalid @enderror"
+                                                                <input name="end_time" type="text"
+                                                                       class="form-control border-left-0 clickable-item-pointer @error('end_time') is-invalid @enderror"
                                                                        placeholder=" وقت انتهاء الاجتماع"  value="{{ isset($item_val) ? $item_val['end_time']: ''}}"  >
                                                                 <div class="input-group-prepend">
                                                                     <div class="input-group-text"> <img class="platform_icon" alt="school"
@@ -441,7 +441,7 @@
 
                                                     <!-- Repeat for other fields with appropriate classes -->
 
-                                                    <div class="row form-group " style="padding-top: 51px;" >
+                                                    <div class="row form-group padding-top-50"  >
                                                         <div class="col col-md-6">
                                                             <button id="prevButton"  type="button" class=" meetings_button_next_wi btn btn-default custom-reset-button">السابق</button>
                                                         </div>
