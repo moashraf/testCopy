@@ -278,8 +278,6 @@
 
                             <div class="input-group">
 
-
-
                                 <input name="established_date" type="text" style="border-left: 0px;"
                                     class="form-control hasdatetimepicker clickable-item-pointer @error('established_date') is-invalid @enderror"
                                     placeholder="YYYY/MM/DD"
@@ -1522,9 +1520,6 @@
             بيانات الاداريين
         </h5>
 
-
-
-
         <div class="mb-4">
             <div class="d-flex align-items-center mb-3">
                 <h6 class="me-2 mb-0"> اضافة بيانات الاداريين</h6>
@@ -1576,10 +1571,6 @@
                             <p class=" text-gray-400">لم يتم اضافة اي اداري بعد</p>
                         </div>
                     </div>
-
-
-
-
 
                     <div class="table-responsive" id="admin_table_cont" @if(count($administrators)> 0 ) style="display:
                         block" @else style="display: none" @endif>
@@ -1692,11 +1683,6 @@
 
                         </table>
                     </div>
-
-
-
-
-
 
                 </div>
             </div>

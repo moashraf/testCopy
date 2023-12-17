@@ -61,8 +61,6 @@
         <div class="col-12 col-xl-3 calander-left-border mb-3 mb-xl-0">
             <div class="row">
                 <div class="col-6 col-md-12 d-flex align-items-center mb-0 mb-md-3">
-
-
                     <img class="me-2" alt="school" src="{{ URL::asset('img/icons/dashboard/dashboard_1.svg') }}">
                     <h6 class="fw-normal text-s mb-0">الفصل الدراسي: <span class="fw-bold">الاول</span></h6>
                 </div>
