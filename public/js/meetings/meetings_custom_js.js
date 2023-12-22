@@ -32,7 +32,17 @@
     *  Create a new timepicker for our input and pass it our args
     */
 
+<<<<<<< HEAD
     var tpicker = new timepicker(document.querySelector('input.timepicker'), args)
+=======
+  //  var tpicker = new timepicker(document.querySelector('input.timepicker'), args)
+
+    var tpicker = document.querySelectorAll('input.timepicker');
+    tpicker.forEach(function(tpickerElement) {
+        new timepicker(tpickerElement, args);
+    });
+
+>>>>>>> 8694b2303cfd286290bdf2905fbdaed8907abbb4
 
     /*
     *  Starts our Timepicker Functionality
